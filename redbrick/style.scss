@@ -97,6 +97,16 @@ $search-icon-height:    22px;
 
 $spacing-default: 10px;
 
+$showcase-peek: 60px;   // how much of the next item in a showcase can be seen
+$showcase-height: calc(100vw - #{$showcase-peek});
+$showcase-item-title-padding: 10px;
+
+/**
+ * The maximum amount of vertical screen real estate that intrusive block
+ * elements (e.g. images/figures) should take up.
+ */
+$max-vh-usage: 60vh;
+
 /**
  * Main styles
  */
@@ -106,10 +116,6 @@ $spacing-default: 10px;
 p {
     margin: $spacing-default;
 }
-
-// Classes
-
-// -- Nothing here yet
 
 // Specifics
 
@@ -235,18 +241,63 @@ footer {
     .temp-container {
         margin: $spacing-default;
         border: 1px solid $footer-fg-color;
-        max-height: 60vh;
+        max-height: $max-vh-usage;
         max-width: 100%;
         height: 3in;
     }
     
     #latest-issue-thumbnail {
-        max-height: 60vh;
+        max-height: $max-vh-usage;
         max-width: 100%;
         height: auto;
         width: auto;
     }
     
+}
+
+// Classes
+
+.showcase {
+    display: flex;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    height: $showcase-height;
+    max-height: $max-vh-usage;
+
+    .showcase-item {
+        border: 1px solid grey;     // TODO: Remove when done testing.
+        
+        display: block;
+        min-width: $showcase-height;
+        max-width: $max-vh-usage;   // To match height of `.showcase`.
+        height: 100%;
+
+        a {
+            /** Allows `position: absolute` on `.title` to work as intended. */
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        
+        .thumbnail {
+            min-height: 100%;
+            min-width: 100%;
+        }
+
+        .temp-container {
+            border: 1px solid grey;
+            min-height: 100%;
+            min-width: 100%;
+        }
+
+        .title {
+            position: absolute;
+            bottom: 0;
+            max-width: 100%;
+            padding: $showcase-item-title-padding;
+        }
+    }
 }
 
 /**

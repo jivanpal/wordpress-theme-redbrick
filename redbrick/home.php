@@ -1,6 +1,28 @@
 <?php get_header(); ?>
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 <main class="fallback">
+    <ul class="showcase">
+        <li class="showcase-item"><a href="#">
+            <div class="temp-container"><img class="thumbnail" src="#"/></div>
+            <h1 class="title">Article One</h1>
+        </a></li>
+        <li class="showcase-item"><a href="#">
+            <div class="temp-container"><img class="thumbnail" src="#"/></div>
+            <h1 class="title">Article Two</h1>
+        </a></li>
+        <li class="showcase-item"><a href="#">
+            <div class="temp-container"><img class="thumbnail" src="#"/></div>
+            <h1 class="title">Article Three</h1>
+        </a></li>
+        <li class="showcase-item"><a href="#">
+            <div class="temp-container"><img class="thumbnail" src="#"/></div>
+            <h1 class="title">Article Four</h1>
+        </a></li>
+        <li class="showcase-item"><a href="#">
+            <div class="temp-container"><img class="thumbnail" src="#"/></div>
+            <h1 class="title">Article Five</h1>
+        </a></li>
+    </ul>
     <p>This is the main body of the home page.</p>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut molestie ex
         eleifend tellus condimentum, non lacinia urna facilisis. Mauris non
