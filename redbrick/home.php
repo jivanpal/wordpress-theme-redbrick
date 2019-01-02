@@ -23,6 +23,11 @@
             <h1 class="title">Article Five</h1>
         </a></li>
     </ul>
+    <div class="banner">
+        <div class="declaration-container"><div class="declaration-content">AD</div></div>
+        <?php /* TODO: Make the content of `.banner` and the link here admin-configurable */ ?>
+        <a href="#"><div class="content">Banner content</div></a>
+    </div>
     <p>This is the main body of the home page.</p>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut molestie ex
         eleifend tellus condimentum, non lacinia urna facilisis. Mauris non

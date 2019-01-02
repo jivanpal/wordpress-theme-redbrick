@@ -86,6 +86,9 @@ $footer-fg-color: #ddd;
 $main-bg-color: white;
 $main-fg-color: #111;
 
+$ad-declaration-bg-color: #ddd;
+$ad-declaration-fg-color: #111;
+
 $header-height:         50px;
 $header-padding-side:   15px;
 
@@ -95,17 +98,20 @@ $logo-icon-wordmark-separation: 3px;
 $logo-wordmark-height:  30px;
 $search-icon-height:    22px;
 
+/**
+ * The maximum amount of vertical screen real estate that intrusive block
+ * elements (e.g. images/figures) should take up.
+ */
+$max-vh-usage: 60vh;
+
 $spacing-default: 10px;
 
 $showcase-peek: 60px;   // how much of the next item in a showcase can be seen
 $showcase-height: calc(100vw - #{$showcase-peek});
 $showcase-item-title-padding: 10px;
 
-/**
- * The maximum amount of vertical screen real estate that intrusive block
- * elements (e.g. images/figures) should take up.
- */
-$max-vh-usage: 60vh;
+$banner-content-width: 300px;
+$banner-content-height: 50px;
 
 /**
  * Main styles
@@ -303,6 +309,36 @@ footer {
             max-width: 100%;
             padding: $showcase-item-title-padding;
         }
+    }
+}
+
+.banner {
+    display: flex;
+    height: $banner-content-height;
+    width: 100vw;
+
+    .declaration-container {
+        display: flex;
+        align-items: center;
+
+        width: calc(100vw - #{$banner-content-width});
+        height: 100%;
+
+        background-color: $ad-declaration-bg-color;
+        color: $ad-declaration-fg-color;
+
+        .declaration-content {
+            transform: rotate(-90deg);
+        }
+    }
+    
+    a {
+        display: block;
+    }
+    
+    .content {
+        width: $banner-content-width;
+        height: 100%;
     }
 }
 
