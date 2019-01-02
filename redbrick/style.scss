@@ -114,7 +114,6 @@ p {
 // Specifics
 
 body {
-    margin-top: $header-height; // Accounts for sticky/fixed header.
     font: 16px/1.2 'Helvetica Neue', 'Helvetica', 'Arial', monospace;
 
     background-color: $header-footer-bg-color; // Gives over-scroll the right color.
@@ -122,33 +121,38 @@ body {
 }
 
 header {
-    &.fixed {
-        position: fixed;
-        top: 0;
+    /** Sticky header */
+
+    position: fixed;
+    top: 0;
+
+    + * {
+        margin-top: $header-height;
+    }
+
+    body.admin-bar & {
+        @media only screen and (min-width: 601px) and (max-width: 782px) {
+            top: 46px;
+        }
+
+        @media only screen and (min-width: 783px) {
+            top: 32px;
+        }
+    }
+
+    /**
+     * The class `notSticky` is set appropriately in
+     * `/assets/position-header.js`.
+     */
+    &.notSticky {
+        position: static;
 
         + * {
-            margin-top: $header-height;
+            margin-top: 0;
         }
     }
 
-    @media only screen and (max-width: 600px) {
-        &:not(.fixed) {
-            margin-top: -$header-height;
-        }
-    }
-
-    @media only screen and (min-width: 601px) {
-        position: fixed;
-        top: 0;
-
-        body.admin-bar & {
-            top: 46px;
-
-            @media only screen and (min-width: 783px) {
-                top: 32px;
-            }
-        }
-    }
+    /** END - Sticky header */
     
     width: 100vw;
     height: $header-height;

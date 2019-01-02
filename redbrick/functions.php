@@ -32,8 +32,8 @@ if (!function_exists('redbrick_enqueue_styles_and_scripts')) {
             'position-header',
             get_template_directory_uri() . '/scripts/position-header.js',
             ['jquery'], // dependencies
-            time(),      // version
-            true        // enqueue in footer?
+            time(),     // version  // TODO: set actual version number rather than `time()`
+            true        // enqueue in footer (rather than head)?
         );
     }
 }
