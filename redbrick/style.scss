@@ -93,9 +93,9 @@ $header-height:         50px;
 $header-padding-side:   15px;
 
 $hamburger-icon-height: 20px;
-$logo-icon-height:      30px;
+$logo-icon-height:      28px;
 $logo-icon-wordmark-separation: 3px;
-$logo-wordmark-height:  30px;
+$logo-wordmark-height:  22px;
 $search-icon-height:    22px;
 
 /**
@@ -180,6 +180,8 @@ header {
 
     background-color: $header-footer-bg-color;
     color: $header-fg-color;
+
+    border-bottom: 5px solid #c00;   /** TODO: Change this to correct colour */
 
     display: flex;
     justify-content: space-between;
