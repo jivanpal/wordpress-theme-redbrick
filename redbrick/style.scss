@@ -12,9 +12,249 @@ Tags:
 This theme doesn't have a more detailed description — yet!
 */
 
+/**
+ * CSS reset
+ * Adapted from the work of Eric A. Meyer.
+ * http://meyerweb.com/eric/tools/css/reset/ (v2.0, 2011-01-26)
+ */
+
 * {
-    margin: 0;
-    border: 0;
-    padding: 0;
     box-sizing: border-box;
 }
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+a {
+    color: inherit;
+    text-decoration: none;
+}
+a:hover {
+    color: inherit;
+    text-decoration: underline;
+}
+
+/**
+ * END - CSS reset
+ */
+
+
+$header-footer-bg-color: #272727;
+$header-fg-color: white;
+$footer-fg-color: #ddd;
+
+$main-bg-color: white;
+$main-fg-color: #111;
+
+$header-height:         50px;
+$header-padding-side:   15px;
+
+$hamburger-icon-height: 20px;
+$logo-icon-height:      30px;
+$logo-icon-wordmark-separation: 3px;
+$logo-wordmark-height:  30px;
+$search-icon-height:    22px;
+
+$spacing-default: 10px;
+
+/**
+ * Main styles
+ */
+
+// Custom resets
+
+p {
+    margin: $spacing-default;
+}
+
+// Classes
+
+// -- Nothing here yet
+
+// Specifics
+
+body {
+    margin-top: $header-height; // Accounts for sticky/fixed header.
+    font: 16px/1.2 'Helvetica Neue', 'Helvetica', 'Arial', monospace;
+
+    background-color: $header-footer-bg-color; // Gives over-scroll the right color.
+    color: $main-fg-color;
+}
+
+header {
+    &.fixed {
+        position: fixed;
+        top: 0;
+
+        + * {
+            margin-top: $header-height;
+        }
+    }
+
+    @media only screen and (max-width: 600px) {
+        &:not(.fixed) {
+            margin-top: -$header-height;
+        }
+    }
+
+    @media only screen and (min-width: 601px) {
+        position: fixed;
+        top: 0;
+
+        body.admin-bar & {
+            top: 46px;
+
+            @media only screen and (min-width: 783px) {
+                top: 32px;
+            }
+        }
+    }
+    
+    width: 100vw;
+    height: $header-height;
+
+    padding-left: $header-padding-side;
+    padding-right: $header-padding-side;
+
+    background-color: $header-footer-bg-color;
+    color: $header-fg-color;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    svg {
+        height: 100%;   // Forces SVG to match the height of its container.
+        fill: $header-fg-color;
+    }
+
+    .hamburger {
+        height: $hamburger-icon-height;
+    }
+
+    .logo {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        > div {
+            margin: $logo-icon-wordmark-separation;
+        }
+
+        .icon {
+            height: $logo-icon-height;
+        }
+
+        .wordmark {
+            height: $logo-wordmark-height;
+        }
+    }
+
+    .search {
+        height: $search-icon-height;
+    }
+}
+
+main {
+    background-color: $main-bg-color;
+}
+
+main, footer {
+    /**
+     * Margin overlap fix 
+     * This prevents the first and list children of both `<main>` and `<footer>`
+     * from overlapping, and ensures that `<main>` and `<footer>` themselves are
+     * directly touching.
+     */
+     padding: 1px 0;
+}
+
+footer {
+
+    background-color: $header-footer-bg-color;
+    color: $footer-fg-color;
+
+    h1 {
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    *:not(ul):not(div):not(a) {
+        margin: $spacing-default;
+    }
+
+    div:not(:first-child), a > div {
+        border-top: 1px solid $footer-fg-color;
+    }
+
+    // TODO: For testing; remove when no longer needed
+    .temp-container {
+        margin: $spacing-default;
+        border: 1px solid $footer-fg-color;
+        max-height: 60vh;
+        max-width: 100%;
+        height: 3in;
+    }
+    
+    #latest-issue-thumbnail {
+        max-height: 60vh;
+        max-width: 100%;
+        height: auto;
+        width: auto;
+    }
+    
+}
+
+/**
+ * END - Main styles
+ */
+
+ /**
+  * Element styles
+  */
+
+// -- Nothing here yet
+
+/**
+ * END - Element styles
+ */
