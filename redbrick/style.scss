@@ -132,6 +132,12 @@ header {
     position: fixed;
     top: 0;
 
+    /** 
+     * Prevents other non-statically positioned elements from sitting on top of
+     * the header.
+     */
+    z-index: 1;
+
     + * {
         margin-top: $header-height;
     }
