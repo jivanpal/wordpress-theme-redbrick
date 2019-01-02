@@ -3,7 +3,7 @@
                 <div class="popular-articles">
                     <h1>Most Popular</h1>
                     <ul>
-                        <?php /* TODO: Fetch popular articles here */ ?>
+                        <?php /** TODO: Fetch popular articles here */ ?>
                         <li><a href="#">Article One</a></li>
                         <li><a href="#">Article Two</a></li>
                     </ul>
@@ -11,13 +11,13 @@
                 <div class="social-media">
                     <h1>Connect</h1>
                     <ul>
-                        <?php /* TODO: Fetch social media menu here */ ?>
+                        <?php /** TODO: Fetch social media menu here */ ?>
                         <li><a href="#">Facebook</a></li>
                         <li><a href="#">Twitter</a></li>
                     </ul>
                 </div>
                 <a href="#">
-                    <?php /* TODO: Make this section admin-configurable */ ?>
+                    <?php /** TODO: Make this section admin-configurable */ ?>
                     <div class="latest-issue">
                         <div class="summary">
                             <h1>Issue #1500</h1>
@@ -28,7 +28,7 @@
                             </ul>
                         </div>
                         <div class="thumbnail">
-                            <div class="temp-container"> <?php /* TODO: Remove container when done testing */ ?>
+                            <div class="temp-container"> <?php /** TODO: Remove container when done testing */ ?>
                             <img id="lastest-issue-thumbnail" src="#"/>
                             </div>
                         </div>
@@ -37,7 +37,7 @@
             </div>
             <div class="footer-links">
                 <ul>
-                    <?php /* TODO: Fetch footer links menu here */ ?>
+                    <?php /** TODO: Fetch footer links menu here */ ?>
                     <li><a href="#">About</a></li>
                     <li><a href="#">Contact the Team</a></li>
                     <li><a href="#">Join Redbrick</a></li>
