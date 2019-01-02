@@ -38,17 +38,15 @@ time, mark, audio, video {
 	margin: 0;
 	padding: 0;
 	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+    font-size: 100%;
+    font: inherit;
+    text-decoration: inherit;
+    vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
 	display: block;
-}
-body {
-	line-height: 1;
 }
 ol, ul {
 	list-style: none;
@@ -78,13 +76,14 @@ a:hover {
  * END - CSS reset
  */
 
-
 $header-footer-bg-color: #272727;
 $header-fg-color: white;
 $footer-fg-color: #ddd;
 
 $main-bg-color: white;
 $main-fg-color: #111;
+
+$showcase-fg-color: white;
 
 $ad-declaration-bg-color: #ddd;
 $ad-declaration-fg-color: #111;
@@ -122,11 +121,33 @@ $banner-content-height: 50px;
 p {
     margin: $spacing-default;
 }
+h6, h5, h4, h3, h2, h1 {
+    font-weight: bold;
+}
+h6 {
+    font-size: 1em;
+}
+h5 {
+    font-size: 1.1em;
+}
+h4 {
+    font-size: 1.2em;
+}
+h3 {
+    font-size: 1.5em;
+}
+h2 {
+    font-size: 1.8em;
+}
+h1 {
+    font-size: 2em;
+}
+
 
 // Specifics
 
 body {
-    font: 16px/1.2 'Helvetica Neue', 'Helvetica', 'Arial', monospace;
+    font: 16px/1.3 'Helvetica Neue', 'Helvetica', 'Arial', monospace;
 
     background-color: $header-footer-bg-color; // Gives over-scroll the right color.
     color: $main-fg-color;
@@ -277,10 +298,10 @@ footer {
     overflow-y: hidden;
     height: $showcase-height;
     max-height: $max-vh-usage;
+    
+    color: $showcase-fg-color;
 
     .showcase-item {
-        border: 1px solid grey;     // TODO: Remove when done testing.
-        
         display: block;
         min-width: $showcase-height;
         max-width: $max-vh-usage;   // To match height of `.showcase`.
@@ -295,14 +316,9 @@ footer {
         }
         
         .thumbnail {
-            min-height: 100%;
-            min-width: 100%;
-        }
-
-        .temp-container {
-            border: 1px solid grey;
-            min-height: 100%;
-            min-width: 100%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .title {
@@ -310,6 +326,8 @@ footer {
             bottom: 0;
             max-width: 100%;
             padding: $showcase-item-title-padding;
+
+            text-shadow: 1px 1px 0 #333;
         }
     }
 }
