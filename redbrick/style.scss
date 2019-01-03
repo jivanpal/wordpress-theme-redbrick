@@ -437,9 +437,10 @@ footer {
     color: $showcase-fg-color;
 
     .showcase-item {
+        /** `$max-vh-usage` matches `max-height` of `.showcase` */
+        flex: 1 0 $max-vh-usage;
+
         display: block;
-        min-width: $showcase-height;
-        max-width: $max-vh-usage;   // To match height of `.showcase`.
         height: 100%;
 
         &:not(:last-child) {
