@@ -29,46 +29,46 @@
                              * admin-configurable WordPress menu here.
                              */
                         ?>
-                        <li><a href="/news">
+                        <li class="tint red"><a href="/news">
                             <span>News</span>
                         </a></li>
-                        <li><a href="/comment">
+                        <li class="tint orange"><a href="/comment">
                             <span>Comment</span>
                         </a></li>
-                        <li><a href="/culture">
+                        <li class="tint yellow"><a href="/culture">
                             <span>Culture</span>
                         </a></li>
-                        <li><a href="/music">
+                        <li class="tint green"><a href="/music">
                             <span>Music</span>
                         </a></li>
-                        <li><a href="/film">
+                        <li class="tint blue"><a href="/film">
                             <span>Film</span>
                         </a></li>
-                        <li><a href="/tv">
+                        <li class="tint red"><a href="/tv">
                             <span>TV</span>
                         </a></li>
-                        <li><a href="/gaming">
+                        <li class="tint orange"><a href="/gaming">
                             <span>Gaming</span>
                         </a></li>
-                        <li><a href="/food-and-drink">
+                        <li class="tint yellow"><a href="/food-and-drink">
                             <span>Food&amp;Drink</span>
                         </a></li>
-                        <li><a href="/travel">
+                        <li class="tint green"><a href="/travel">
                             <span>Travel</span>
                         </a></li>
-                        <li><a href="/life-and-style">
+                        <li class="tint blue"><a href="/life-and-style">
                             <span>Life&amp;Style</span>
                         </a></li>
-                        <li><a href="/sci-and-tech">
+                        <li class="tint red"><a href="/sci-and-tech">
                             <span>Sci&amp;Tech</span>
                         </a></li>
-                        <li><a href="/sport">
+                        <li class="tint orange"><a href="/sport">
                             <span>Sport</span>
                         </a></li>
-                        <li><a href="/features">
+                        <li class="tint yellow"><a href="/features">
                             <span>Features</span>
                         </a></li>
-                        <li><a href="/radio">
+                        <li class="tint green"><a href="/radio">
                             <span>Radio</span>
                         </a></li>
                     </ul>

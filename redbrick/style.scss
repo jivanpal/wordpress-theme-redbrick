@@ -456,6 +456,7 @@ footer {
             object-fit: cover;
         }
 
+        /** TODO: Remove sample colours when done testing. */
         .tint {
             position: absolute;
             top: 0;
@@ -599,16 +600,46 @@ footer {
 
                     li {
                         flex: 0 0 auto;
-
-                        display: flex;
-                        align-items: center;
     
                         height: 100%;
-                        padding: 0 $header-nav-item-padding;
+                        
+                        a {
+                            display: flex;
+                            align-items: center;
+
+                            width: 100%;
+                            height: 100%;
+
+                            span {
+                                padding: 0 $header-nav-item-padding;
+                            }
+                        }
+
+                        /** TODO: Remove sample colours when done testing. */
+                        &.tint:hover {
+                            &.red {
+                                background-color: rgba(#c00, 0.35);
+                            }
+
+                            &.orange {
+                                background-color: rgba(#c60, 0.35);
+                            }
+
+                            &.yellow {
+                                background-color: rgba(#cc0, 0.35);
+                            }
+
+                            &.green {
+                                background-color: rgba(#0c0, 0.35);
+                            }
+
+                            &.blue {
+                                background-color: rgba(#0ac, 0.35);
+                            }
+                        }
                     }
                 }
             }
-
         }
     }
 }
