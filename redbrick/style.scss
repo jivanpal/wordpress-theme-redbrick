@@ -299,23 +299,18 @@ footer {
             }
         }
     }
+    
+    .latest-issue .thumbnail {
+        display: flex;
+        justify-content: center;
 
-    // TODO: For testing; remove when no longer needed
-    .temp-container {
-        margin: $spacing-default;
-        border: 1px solid $footer-fg-color;
-        max-height: $max-vh-usage;
-        max-width: 100%;
-        height: 3in;
+        img {
+            max-height: $max-vh-usage;
+            max-width: 100%;
+            height: auto;
+            width: auto;
+        }
     }
-    
-    #latest-issue-thumbnail {
-        max-height: $max-vh-usage;
-        max-width: 100%;
-        height: auto;
-        width: auto;
-    }
-    
 }
 
 // Classes

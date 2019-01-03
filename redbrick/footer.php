@@ -41,9 +41,7 @@
                             </ul>
                         </div>
                         <div class="thumbnail">
-                            <div class="temp-container"> <?php /** TODO: Remove container when done testing */ ?>
-                            <img id="lastest-issue-thumbnail" src="#"/>
-                            </div>
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/mockups/front-page.jpg"/>
                         </div>
                     </div>
                 </a>
