@@ -163,7 +163,7 @@ header {
      * Prevents other non-statically positioned elements from sitting on top of
      * the header.
      */
-    z-index: 1;
+    z-index: 999;
 
     + * {
         margin-top: $header-height;
@@ -307,6 +307,10 @@ footer {
         max-width: $max-vh-usage;   // To match height of `.showcase`.
         height: 100%;
 
+        &:not(:last-child) {
+            border-right: 1px solid white;
+        }
+
         a {
             /** Allows `position: absolute` on `.title` to work as intended. */
             display: block;
@@ -319,6 +323,43 @@ footer {
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+
+        .tint {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+
+            opacity: 0.25;
+
+            &:hover {
+                opacity: 0.35;
+            }
+
+            &.red {
+                background-color: #c00;
+            }
+
+            &.orange {
+                background-color: #c60;
+            }
+
+            &.yellow {
+                background-color: #cc0;
+            }
+
+            &.green {
+                background-color: #0c0;
+            }
+
+            &.blue {
+                background-color: #00c;
+            }
+
+            
+
         }
 
         .title {
