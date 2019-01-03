@@ -339,6 +339,10 @@ header {
 
             .wordmark {
                 height: $logo-wordmark-height;
+
+                @media only screen and (max-width: 280px) {
+                    display: none;
+                }
             }
         }
 
@@ -349,7 +353,7 @@ header {
 
     .search {
         height: $search-icon-height;
-        padding: 0 $header-padding-side;
+        padding-right: $header-padding-side;
     }
 }
 
@@ -640,6 +644,10 @@ footer {
                     }
                 }
             }
+        }
+
+        .search {
+            padding-left: $header-padding-side;
         }
     }
 }
