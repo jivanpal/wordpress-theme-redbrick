@@ -593,6 +593,11 @@ footer {
 
                 overflow-x: auto;
 
+                /**
+                 * TODO: Use JS for shadows instead; undesirably, the existing
+                 * method is not compatible with non-solid regions such as
+                 * `.showcase`.
+                 */
                 @include overflow-x-shadows(
                     $shadow-size: $header-nav-item-padding,
                     $cover-color: $header-footer-bg-color,
