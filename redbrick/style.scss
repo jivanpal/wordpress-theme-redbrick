@@ -79,6 +79,7 @@ a:hover {
 $header-footer-bg-color: #272727;
 $header-fg-color: white;
 $footer-fg-color: #ddd;
+$footer-fg-accent-color: #fff;
 
 $main-bg-color: white;
 $main-fg-color: #111;
@@ -210,7 +211,6 @@ header {
 
     background-color: $header-footer-bg-color;
     color: $header-fg-color;
-    // svg { fill: $header-fg-color; }
 
     border-bottom: 5px solid #c00;   /** TODO: Change this to correct colour */
 
@@ -262,8 +262,10 @@ main, footer {
 footer {
     background-color: $header-footer-bg-color;
     color: $footer-fg-color;
-    // svg { fill: $footer-fg-color; }
-
+    a:hover {
+        color: $footer-fg-accent-color;
+    }
+    
     h1 {
         font-size: 1.5em;
         font-weight: bold;
