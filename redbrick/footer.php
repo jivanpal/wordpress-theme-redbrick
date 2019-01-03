@@ -12,8 +12,21 @@
                     <h1>Connect</h1>
                     <ul>
                         <?php /** TODO: Fetch social media menu here */ ?>
-                        <li><a href="#">Facebook</a></li>
-                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">
+                            <div class="icon-container">
+                                <?php echo file_get_contents(get_template_directory() . '/assets/facebook-icon.svg'); ?>
+                            </div>
+                        </a></li>
+                        <li><a href="#">
+                            <div class="icon-container">
+                                <?php echo file_get_contents(get_template_directory() . '/assets/twitter-icon.svg'); ?>
+                            </div>
+                        </a></li>
+                        <li><a href="#">
+                            <div class="icon-container">
+                                <?php echo file_get_contents(get_template_directory() . '/assets/instagram-icon.svg'); ?>
+                            </div>
+                        </a></li>
                     </ul>
                 </div>
                 <a href="#">

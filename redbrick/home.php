@@ -3,27 +3,27 @@
 <main class="fallback">
     <ul class="showcase">
         <li class="showcase-item"><a href="#">
-            <img class="thumbnail" src="<?php echo get_template_directory_uri() ?>/assets/mockups/suspiria.jpg"/>
+            <img class="thumbnail" src="<?php echo get_template_directory_uri(); ?>/assets/mockups/suspiria.jpg"/>
             <div class="tint red"></div>
             <h1 class="title">Article One</h1>
         </a></li>
         <li class="showcase-item"><a href="#">
-            <img class="thumbnail" src="<?php echo get_template_directory_uri() ?>/assets/mockups/england.jpg"/>
+            <img class="thumbnail" src="<?php echo get_template_directory_uri(); ?>/assets/mockups/england.jpg"/>
             <div class="tint orange"></div>
             <h1 class="title">Article Two</h1>
         </a></li>
         <li class="showcase-item"><a href="#">
-            <img class="thumbnail" src="<?php echo get_template_directory_uri() ?>/assets/mockups/oldjoe.jpg"/>
+            <img class="thumbnail" src="<?php echo get_template_directory_uri(); ?>/assets/mockups/oldjoe.jpg"/>
             <div class="tint yellow"></div>
             <h1 class="title">Article Three</h1>
         </a></li>
         <li class="showcase-item"><a href="#">
-            <img class="thumbnail" src="<?php echo get_template_directory_uri() ?>/assets/mockups/stanlee.jpg"/>
+            <img class="thumbnail" src="<?php echo get_template_directory_uri(); ?>/assets/mockups/stanlee.jpg"/>
             <div class="tint green"></div>
             <h1 class="title">Article Four</h1>
         </a></li>
         <li class="showcase-item"><a href="#">
-            <img class="thumbnail" src="<?php echo get_template_directory_uri() ?>/assets/mockups/capandgown.jpg"/>
+            <img class="thumbnail" src="<?php echo get_template_directory_uri(); ?>/assets/mockups/capandgown.jpg"/>
             <div class="tint blue"></div>
             <h1 class="title">Article Five</h1>
         </a></li>

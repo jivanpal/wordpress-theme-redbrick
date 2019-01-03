@@ -97,6 +97,8 @@ $logo-icon-wordmark-separation: 3px;
 $logo-wordmark-height:  22px;
 $search-icon-height:    22px;
 
+$footer-social-media-icon-height: 25px;
+
 /**
  * The maximum amount of vertical screen real estate that intrusive block
  * elements (e.g. images/figures) should take up.
@@ -124,25 +126,32 @@ p {
 h6, h5, h4, h3, h2, h1 {
     font-weight: bold;
 }
-h6 {
-    font-size: 1em;
-}
-h5 {
-    font-size: 1.1em;
-}
-h4 {
-    font-size: 1.2em;
-}
-h3 {
-    font-size: 1.5em;
+h1 {
+    font-size: 2em;
 }
 h2 {
     font-size: 1.8em;
 }
-h1 {
-    font-size: 2em;
+h3 {
+    font-size: 1.5em;
 }
-
+h4 {
+    font-size: 1.2em;
+}
+h5 {
+    font-size: 1.1em;
+}
+h6 {
+    font-size: 1em;
+}
+svg {
+    /**
+     * Forces SVGs to match the height of their container whilst retaining their
+     * aspect ratio.
+     */
+    height: 100%;
+    width: auto;
+}
 
 // Specifics
 
@@ -201,17 +210,13 @@ header {
 
     background-color: $header-footer-bg-color;
     color: $header-fg-color;
+    // svg { fill: $header-fg-color; }
 
     border-bottom: 5px solid #c00;   /** TODO: Change this to correct colour */
 
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    svg {
-        height: 100%;   // Forces SVG to match the height of its container.
-        fill: $header-fg-color;
-    }
 
     .hamburger {
         height: $hamburger-icon-height;
@@ -255,21 +260,42 @@ main, footer {
 }
 
 footer {
-
     background-color: $header-footer-bg-color;
     color: $footer-fg-color;
+    // svg { fill: $footer-fg-color; }
 
     h1 {
+        font-size: 1.5em;
         font-weight: bold;
         text-transform: uppercase;
     }
 
-    *:not(ul):not(div):not(a) {
+    h2 {
+        font-size: 1.2em;
+    }
+
+    :not(ul):not(div):not(a):not(svg) {
         margin: $spacing-default;
     }
 
     div:not(:first-child), a > div {
-        border-top: 1px solid $footer-fg-color;
+        &:not(.icon-container) {
+            border-top: 1px solid $footer-fg-color;
+        }
+    }
+
+    .social-media {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        ul {
+            display: flex;
+            
+            .icon-container  {
+                height: $footer-social-media-icon-height;
+            }
+        }
     }
 
     // TODO: For testing; remove when no longer needed

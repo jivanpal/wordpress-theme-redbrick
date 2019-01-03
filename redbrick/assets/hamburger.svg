@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 2 25 22">
-    <g>
-        <path   d=" M0,2    L25,2   L25,6   L0,6    Z
-                    M0,10   L25,10  L25,14  L0,14   Z
-                    M0,18   L25,18  L25,22  L0,22   Z"/>
-    </g>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" fill="currentColor" viewBox="0 2 25 22" width="25px" height="22px">
+  <path d="M0,2  L25,2  L25,6  L0,6  Z
+           M0,10 L25,10 L25,14 L0,14 Z
+           M0,18 L25,18 L25,22 L0,22 Z"/>
 </svg>
