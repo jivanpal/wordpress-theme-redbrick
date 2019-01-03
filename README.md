@@ -17,5 +17,6 @@ contributions from the Redbrick committee of 2018–19.
 
 ## Contact
 Bugs, issues, and suggestions should be submitted to [this project's GitHub
-repository](https://github.com/jivanpal/headiner/issues). In case of contact for
-any other reason, please email <developer@redbrick.me> in the first instance.
+repository](https://github.com/jivanpal/redbrick-theme-for-wordpress/issues).
+In case of contact for any other reason, please email <developer@redbrick.me> in
+the first instance.
