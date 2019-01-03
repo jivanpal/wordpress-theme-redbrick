@@ -89,8 +89,9 @@ $showcase-fg-color: white;
 $ad-declaration-bg-color: #ddd;
 $ad-declaration-fg-color: #111;
 
-$header-height:         50px;
-$header-padding-side:   15px;
+$header-height:             50px;
+$header-padding-side:       15px;
+$header-nav-item-padding:   10px;
 
 $hamburger-icon-height: 20px;
 $logo-icon-height:      28px;
@@ -206,8 +207,15 @@ header {
     width: 100vw;
     height: $header-height;
 
+    /** 
+     * We only assign `padding-left` here, and assign `padding-right` to
+     * `.search` to overcome a browser inconsistency relating to whether padding
+     * and margin at the end of scrollable elements are realised.
+     * 
+     * See the following StackOverflow answer for details:
+     * https://stackoverflow.com/a/38177668/9996911
+     */
     padding-left: $header-padding-side;
-    padding-right: $header-padding-side;
 
     background-color: $header-footer-bg-color;
     color: $header-fg-color;
@@ -222,26 +230,35 @@ header {
         height: $hamburger-icon-height;
     }
 
-    .logo {
+    .central-element {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
 
-        > div {
-            margin: $logo-icon-wordmark-separation;
+        .logo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            > div {
+                margin: $logo-icon-wordmark-separation;
+            }
+
+            .icon {
+                height: $logo-icon-height;
+            }
+
+            .wordmark {
+                height: $logo-wordmark-height;
+            }
         }
 
-        .icon {
-            height: $logo-icon-height;
-        }
-
-        .wordmark {
-            height: $logo-wordmark-height;
+        nav {
+            display: none;
         }
     }
 
     .search {
         height: $search-icon-height;
+        padding: 0 $header-padding-side;
     }
 }
 
@@ -317,7 +334,7 @@ footer {
 
 .showcase {
     display: flex;
-    overflow-x: scroll;
+    overflow-x: auto;
     overflow-y: hidden;
     height: $showcase-height;
     max-height: $max-vh-usage;
@@ -439,3 +456,64 @@ footer {
 /**
  * END - Element styles
  */
+
+/**
+ * Desktop styles
+ */
+
+@media only screen and (min-width: 783px) {
+    header {
+        .hamburger {
+            display: none;
+        }
+        
+        .central-element {
+            height: 100%;
+
+            display: flex;
+            align-items: center;
+            
+            /**
+             * In conjunction with the properties set on `nav`, this renders
+             * scrollable navigation of the correct width.
+             */
+            flex-grow: 1;
+
+            .logo {
+                padding-right: $header-nav-item-padding;
+            }
+
+            nav {
+                display: block;
+                height: 100%;
+
+                /**
+                 * Set the width of the `nav` to accomodate all of the space
+                 * between the `.logo` and `.search`.
+                 */
+                width: 0;
+                flex-grow: 1;
+
+                overflow-x: auto;
+
+                // TODO: Apply shadows to the ends of the scrollable region.
+                
+                ul {
+                    display: flex;
+                    height: 100%;
+
+                    li {
+                        flex: 0 0 auto;
+
+                        display: flex;
+                        align-items: center;
+    
+                        height: 100%;
+                        padding: 0 $header-nav-item-padding;
+                    }
+                }
+            }
+
+        }
+    }
+}
