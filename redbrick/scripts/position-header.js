@@ -1,5 +1,7 @@
 /**
- * This script
+ * This script ensures that the Redbrick site header is always visible at the
+ * top of the viewport (but below the WordPress admin bar if it is present)
+ * by toggling the `notSticky` class appropriately.
  */
 
 var header = null;
