@@ -76,97 +76,6 @@ a:hover {
  * END - CSS reset
  */
 
-/**
- * Apply overflow shadows to an element that is has y-overflow.
- * This mixin is adapted from a blog post by Lea Verou
- * (http://lea.verou.me/2012/04/background-attachment-local/).
- * See the following StackOverflow question for details:
- * https://stackoverflow.com/questions/44793453
- */
-@mixin overflow-y-shadows(
-    $cover-color:   white,
-    $shadow-color:  black,
-    $cover-size:    40px,
-    $shadow-size:   14px
-) {
-    background:
-		/* Shadow covers */
-		linear-gradient(
-            $cover-color 30%,
-            rgba($cover-color, 0)
-        )
-        0 0 / 100% $cover-size
-        local,
-		linear-gradient(
-            rgba($cover-color, 0),
-            $cover-color 70%
-        )
-        0 100% / 100% $cover-size
-        local,
-
-		/* Shadows */
-		radial-gradient(
-            farthest-side at 50% 0,
-            rgba($shadow-color, 0.2),
-            rgba($shadow-color, 0)
-        )
-        0 0 / 100% $shadow-size
-        scroll,
-		radial-gradient(
-            farthest-side at 50% 100%,
-            rgba($shadow-color, 0.2),
-            rgba($shadow-color, 0)
-        )
-        0 100% / 100% $shadow-size
-        scroll;
-    
-	background-repeat: no-repeat;
-}
-
-/**
- * Apply overflow shadows to an element that is has x-overflow.
- * See `overflow-y-shadows` for details.
- */
-@mixin overflow-x-shadows(
-    $cover-color:   white,
-    $shadow-color:  black,
-    $cover-size:    40px,
-    $shadow-size:   14px
-) {
-    background:
-		/* Shadow covers */
-		linear-gradient(to right,
-            $cover-color $shadow-size,
-            rgba($cover-color, 0)
-        )
-        0 0 / #{$cover-size} 100%
-        local,
-		linear-gradient(to left,
-            $cover-color $shadow-size,
-            rgba($cover-color, 0),
-        )
-        100% 0 / #{$cover-size} 100%
-        local,
-
-		/* Shadows */
-		radial-gradient(
-            farthest-side at 0 50%,
-            rgba($shadow-color, 0.2),
-            rgba($shadow-color, 0)
-        )
-        0 0 / #{$shadow-size} 100%
-        scroll,
-		radial-gradient(
-            farthest-side at 100% 50%,
-            rgba($shadow-color, 0.2),
-            rgba($shadow-color, 0)
-        )
-        100% 0 / #{$shadow-size} 100%
-        scroll;
-    
-	background-repeat: no-repeat;
-}
-
 /** Colors **/
 
 $header-footer-bg-color: #272727;
@@ -189,6 +98,7 @@ $ad-declaration-fg-color: #111;
 $header-height:             50px;
 $header-padding-side:       15px;
 $header-nav-item-padding:   10px;
+$header-nav-shadow-size:    30px;
 
 $hamburger-icon-height: 20px;
 $logo-icon-height:      28px;
@@ -742,22 +652,57 @@ footer {
                 width: 0;
                 flex-grow: 1;
 
-                overflow-x: auto;
+                /** Overflow shadows */
 
-                /**
-                 * TODO: Use JS for shadows instead; undesirably, the existing
-                 * method is not compatible with non-solid regions such as
-                 * `.showcase`.
-                 */
-                @include overflow-x-shadows(
-                    $shadow-size: $header-nav-item-padding,
-                    $cover-color: $header-footer-bg-color,
-                    $shadow-color: $header-fg-color
-                );
+                position: relative;
+
+                &::before, &::after {
+                    content: "";
+
+                    height: 100%;
+                    width: 0;
+                    transition: width 100ms;
+                    
+                    position: absolute;
+                    top: 0;
+
+                    z-index: 1;
+                    pointer-events: none;
+                }
+
+                &.left-shadow::before {
+                    width: $header-nav-shadow-size;
+                }
+
+                &.right-shadow::after {
+                    width: $header-nav-shadow-size;
+                }
+
+                &::before {
+                    left: 0;
+                    background: linear-gradient(
+                        to right,
+                        rgba(black, 1),
+                        rgba(black, 0)
+                    );
+                }
+
+                &::after {
+                    right: 0;
+                    background: linear-gradient(
+                        to left,
+                        rgba(black, 1),
+                        rgba(black, 0)
+                    );
+                }
+
+                /** END - Overflow shadows */
                 
                 ul {
                     display: flex;
                     height: 100%;
+
+                    overflow-x: auto;
 
                     li {
                         flex: 0 0 auto;

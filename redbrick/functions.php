@@ -46,8 +46,8 @@ if (!function_exists('redbrick_enqueue_styles_and_scripts')) {
         );
 
         wp_enqueue_script(
-            'redbrick_showcase-overflow-shadows',
-            get_template_directory_uri() . '/scripts/showcase-overflow-shadows.js',
+            'redbrick_overflow-shadows',
+            get_template_directory_uri() . '/scripts/overflow-shadows.js',
             [],         // dependencies
             time(),     // version  // TODO: set actual version number rather than `time()`
             true        // enqueue in footer (rather than head)?
