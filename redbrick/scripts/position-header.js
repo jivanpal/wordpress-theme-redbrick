@@ -14,11 +14,6 @@ function redbrick_set_header_stickiness(event) {
     var adminBarIsPresent = jQuery('body').hasClass('admin-bar');
     var viewportWidth = jQuery(window).width();
     var scrollHeight = jQuery(this).scrollTop();
-    
-    console.log("SCROLLING");
-    console.log("adminBar? "+(adminBarIsPresent?"yes":"no"));
-    console.log("vw = "+viewportWidth);
-    console.log("sh = "+scrollHeight);
 
     if (   adminBarIsPresent
         && viewportWidth <= 600 // admin bar is not sticky only when the condition holds
