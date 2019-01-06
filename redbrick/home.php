@@ -1,33 +1,35 @@
 <?php get_header(); ?>
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 <main class="fallback">
-    <ul class="showcase">
-        <li class="showcase-item"><a href="#">
-            <img class="thumbnail" src="<?php echo get_template_directory_uri(); ?>/assets/mockups/suspiria.jpg"/>
-            <div class="tint red"></div>
-            <h1 class="title">Article One</h1>
-        </a></li>
-        <li class="showcase-item"><a href="#">
-            <img class="thumbnail" src="<?php echo get_template_directory_uri(); ?>/assets/mockups/england.jpg"/>
-            <div class="tint orange"></div>
-            <h1 class="title">Article Two</h1>
-        </a></li>
-        <li class="showcase-item"><a href="#">
-            <img class="thumbnail" src="<?php echo get_template_directory_uri(); ?>/assets/mockups/oldjoe.jpg"/>
-            <div class="tint yellow"></div>
-            <h1 class="title">Article Three</h1>
-        </a></li>
-        <li class="showcase-item"><a href="#">
-            <img class="thumbnail" src="<?php echo get_template_directory_uri(); ?>/assets/mockups/stanlee.jpg"/>
-            <div class="tint green"></div>
-            <h1 class="title">Article Four</h1>
-        </a></li>
-        <li class="showcase-item"><a href="#">
-            <img class="thumbnail" src="<?php echo get_template_directory_uri(); ?>/assets/mockups/capandgown.jpg"/>
-            <div class="tint blue"></div>
-            <h1 class="title">Article Five</h1>
-        </a></li>
-    </ul>
+    <div class="showcase-container">    <?php /** This container is used to apply overflow shadows */ ?>
+        <ul class="showcase">
+            <li class="showcase-item"><a href="#">
+                <img class="thumbnail" src="<?php echo get_template_directory_uri(); ?>/assets/mockups/suspiria.jpg"/>
+                <div class="tint red"></div>
+                <h1 class="title">Article One</h1>
+            </a></li>
+            <li class="showcase-item"><a href="#">
+                <img class="thumbnail" src="<?php echo get_template_directory_uri(); ?>/assets/mockups/england.jpg"/>
+                <div class="tint orange"></div>
+                <h1 class="title">Article Two</h1>
+            </a></li>
+            <li class="showcase-item"><a href="#">
+                <img class="thumbnail" src="<?php echo get_template_directory_uri(); ?>/assets/mockups/oldjoe.jpg"/>
+                <div class="tint yellow"></div>
+                <h1 class="title">Article Three</h1>
+            </a></li>
+            <li class="showcase-item"><a href="#">
+                <img class="thumbnail" src="<?php echo get_template_directory_uri(); ?>/assets/mockups/stanlee.jpg"/>
+                <div class="tint green"></div>
+                <h1 class="title">Article Four</h1>
+            </a></li>
+            <li class="showcase-item"><a href="#">
+                <img class="thumbnail" src="<?php echo get_template_directory_uri(); ?>/assets/mockups/capandgown.jpg"/>
+                <div class="tint blue"></div>
+                <h1 class="title">Article Five</h1>
+            </a></li>
+        </ul>
+    </div>
     <div class="banner">
         <div class="declaration-container"><div class="declaration-content">AD</div></div>
         <?php /** TODO: Make the content of `.banner` and the link here admin-configurable */ ?>
