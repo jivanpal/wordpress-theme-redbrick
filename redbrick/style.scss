@@ -167,10 +167,14 @@ a:hover {
 	background-repeat: no-repeat;
 }
 
+/** Colors **/
+
 $header-footer-bg-color: #272727;
 $header-fg-color: white;
 $footer-fg-color: #ddd;
 $footer-fg-accent-color: #fff;
+
+$hamburger-menu-separator-color: #ddd;
 
 $main-bg-color: white;
 $main-fg-color: #111;
@@ -179,6 +183,8 @@ $showcase-fg-color: white;
 
 $ad-declaration-bg-color: #ddd;
 $ad-declaration-fg-color: #111;
+
+/** END - Colors **/
 
 $header-height:             50px;
 $header-padding-side:       15px;
@@ -191,6 +197,8 @@ $logo-wordmark-height:  22px;
 $search-icon-height:    22px;
 
 $footer-social-media-icon-height: 25px;
+
+$hamburger-menu-shadow-size: $header-height;
 
 /**
  * The maximum amount of vertical screen real estate that intrusive block
@@ -311,7 +319,8 @@ header {
     background-color: $header-footer-bg-color;
     color: $header-fg-color;
 
-    border-bottom: 5px solid #c00;   /** TODO: Change this to correct colour */
+    /** TODO: Change this to correct colour */
+    border-bottom: 5px solid #c00;
 
     display: flex;
     justify-content: space-between;
@@ -347,7 +356,75 @@ header {
         }
 
         nav {
-            display: none;
+            /**
+             * Media query is necessary to prevent necessary use of `!important`
+             * to override many properties in desktop query that are explicitly
+             * set here, but for which we would like to assume default values.
+             */
+            @media only screen and (max-width: 600px) {
+                z-index: 998;
+                display: flex;
+                position: fixed;
+                left: 0;
+                bottom: 0;
+
+                width: 100vw;
+
+                height: calc(100vh - #{$header-height});
+                body.admin-bar & {
+                    /**
+                    * TODO: Fix this; dosn't work when scrolling down page, as
+                    * height needs to dynamically increase based on scroll
+                    * position.
+                    */
+                    height: calc(100vh - 46px - #{$header-height}); // WordPress admin bar height = 46px.
+                }
+
+                /**
+                 * The `visible` class is toggled on `<nav>` via JS when the
+                 * hamburger icon in the header is clicked.
+                 * See `scripts/toggle-hamburger-menu.js` for details.
+                 */
+                &:not(.visible) {
+                    left: -100vh;   // slide the menu off the left of the screen
+                }
+
+                transition: left 300ms; // CSS transition for smooth slide into and out of view.
+                
+                /**
+                 * TODO: Consider applying this. Perhaps only apply to the
+                 * active section (e.g. on a "Comment" page, bold "Comment")?
+                 */
+                //font-weight: bold;
+
+                ul {
+                    flex-grow: 1;
+
+                    overflow-x: hidden;
+                    overflow-y: auto;
+
+                    background: $header-footer-bg-color;
+                    border-right: 1px solid $hamburger-menu-separator-color;
+
+                    li {
+                        padding: 10px;
+
+                        &:not(:last-child) {
+                            border-bottom: 1px solid $hamburger-menu-separator-color;
+                        }
+                    }
+                }
+
+                .rest-of-screen {
+                    width: $header-height;
+                    background: linear-gradient(
+                        to right,
+                        rgba(black, 0.8),
+                        25%,
+                        rgba(black, 0.05)
+                    );
+                }
+            }
         }
     }
 
@@ -433,7 +510,7 @@ footer {
     overflow-y: hidden;
     height: $showcase-height;
     max-height: $max-vh-usage;
-    
+
     color: $showcase-fg-color;
 
     .showcase-item {

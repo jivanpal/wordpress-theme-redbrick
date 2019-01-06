@@ -29,9 +29,18 @@ if (!function_exists('redbrick_enqueue_styles_and_scripts')) {
 
         // Load script to correctly position the sticky/fixed header
         wp_enqueue_script(
-            'position-header',
+            'redbrick_position-header',
             get_template_directory_uri() . '/scripts/position-header.js',
             ['jquery'], // dependencies
+            time(),     // version  // TODO: set actual version number rather than `time()`
+            true        // enqueue in footer (rather than head)?
+        );
+
+        // Add functionality to the hamburger icon in the header
+        wp_enqueue_script(
+            'redbrick_toggle-hamburger-menu',
+            get_template_directory_uri() . '/scripts/toggle-hamburger-menu.js',
+            [],         // dependencies
             time(),     // version  // TODO: set actual version number rather than `time()`
             true        // enqueue in footer (rather than head)?
         );

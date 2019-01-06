@@ -72,6 +72,18 @@
                             <span>Radio</span>
                         </a></li>
                     </ul>
+                    <?php
+                        /**
+                         * The following element covers the rest of the screen
+                         * when the hamburger menu is visible, so that if the
+                         * user clicks anywhere outside the hamburger menu or
+                         * site header, the hamubrger menu disappears. This
+                         * element is also responsible for rendering the
+                         * hamburger menu's drop shadow. See `style.scss` for
+                         * implementation details.
+                         */
+                    ?>
+                    <div class="rest-of-screen"></div>
                 </nav>
             </div>
             <div class="search">
