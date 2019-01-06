@@ -22,25 +22,44 @@ var overflowXPairs = [
     ],
 ];
 
+/**
+ * An array of functions, one for each pair in the previous array. When the
+ * respective function for a pair is called, it when set the overflow shadows
+ * correctly for that pair.
+ * 
+ * This array is populated in the for-loop below.
+ */
+var overflowXFunctions = [];
+
 function redbrick_set_overflow_x_shadows(shadowContainer, scrollableElement) {
-    if (scrollableElement.scrollLeft < tolerance) {
+    if (shadowContainer.scrollWidth == scrollableElement.scrollWidth) {
         shadowContainer.classList.remove("left-shadow");
-        shadowContainer.classList.add("right-shadow");
-    } else if (scrollableElement.scrollWidth - scrollableElement.clientWidth - scrollableElement.scrollLeft < tolerance) {
-        shadowContainer.classList.add("left-shadow");
         shadowContainer.classList.remove("right-shadow");
     } else {
-        shadowContainer.classList.add("left-shadow");
-        shadowContainer.classList.add("right-shadow");
+        if (scrollableElement.scrollLeft < tolerance) {
+            shadowContainer.classList.remove("left-shadow");
+            shadowContainer.classList.add("right-shadow");
+        } else if (scrollableElement.scrollWidth - scrollableElement.clientWidth - scrollableElement.scrollLeft < tolerance) {
+            shadowContainer.classList.add("left-shadow");
+            shadowContainer.classList.remove("right-shadow");
+        } else {
+            shadowContainer.classList.add("left-shadow");
+            shadowContainer.classList.add("right-shadow");
+        }
     }
 }
 
 for (let i = 0; i < overflowXPairs.length; i++) {
-    // Set shadows on page load
-    redbrick_set_overflow_x_shadows(overflowXPairs[i][0], overflowXPairs[i][1]);
-
-    // Set shadows on scroll
-    overflowXPairs[i][1].onscroll = function() {
+    overflowXFunctions.push(function () {
         redbrick_set_overflow_x_shadows(overflowXPairs[i][0], overflowXPairs[i][1]);
-    }
+    })
+
+    overflowXFunctions[i]();
+    overflowXPairs[i][1].onscroll = overflowXFunctions[i];
 }
+
+window.addEventListener('resize', function() {
+    for (let i = 0; i < overflowXFunctions.length; i++) {
+        overflowXFunctions[i]();
+    }
+})
