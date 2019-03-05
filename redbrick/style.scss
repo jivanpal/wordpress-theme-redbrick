@@ -86,7 +86,8 @@ $footer-fg-accent-color: #fff;
 $hamburger-menu-separator-color: #ddd;
 
 $main-bg-color: white;
-$main-fg-color: #111;
+$main-fg-color: #000;
+$main-fg-accent-color: #222;
 
 $showcase-fg-color: white;
 
@@ -136,6 +137,7 @@ p {
     margin: $spacing-default;
 }
 h6, h5, h4, h3, h2, h1 {
+    margin: $spacing-default;
     font-weight: bold;
 }
 h1 {
@@ -171,7 +173,6 @@ body {
     font: 16px/1.3 'Helvetica Neue', 'Helvetica', 'Arial', monospace;
 
     background-color: $header-footer-bg-color; // Gives over-scroll the right color.
-    color: $main-fg-color;
 }
 
 header {
@@ -225,7 +226,7 @@ header {
     background-color: $header-footer-bg-color;
     color: $header-fg-color;
 
-    /** TODO: Change this to correct colour */
+    /** TODO: Change this to correct colour; depends on section of website */
     border-bottom: 5px solid #c00;
 
     display: flex;
@@ -334,6 +335,13 @@ header {
 
 main {
     background-color: $main-bg-color;
+
+    color: $main-fg-color;
+
+    a {
+        color: $main-fg-accent-color;
+        text-decoration: underline;
+    }
 }
 
 main, footer {

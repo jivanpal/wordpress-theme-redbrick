@@ -33,7 +33,7 @@ if (!function_exists('redbrick_enqueue_styles_and_scripts')) {
             get_template_directory_uri() . '/scripts/toggle-hamburger-menu.js',
             [],         // dependencies
             time(),     // version  // TODO: set actual version number rather than `time()`
-            true        // enqueue in footer (rather than head)?
+            true        // enqueue in footer (rather than head)
         );
 
         wp_enqueue_script(
@@ -41,7 +41,7 @@ if (!function_exists('redbrick_enqueue_styles_and_scripts')) {
             get_template_directory_uri() . '/scripts/overflow-shadows.js',
             [],         // dependencies
             time(),     // version  // TODO: set actual version number rather than `time()`
-            true        // enqueue in footer (rather than head)?
+            true        // enqueue in footer (rather than head)
         );
     }
 }
