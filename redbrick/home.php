@@ -1,6 +1,5 @@
 <?php get_header(); ?>
-<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-<main class="fallback">
+<main class="home">
     <div class="showcase-container">    <?php /** This container is used to apply overflow shadows */ ?>
         <ul class="showcase">
             <li class="showcase-item"><a href="#">
@@ -31,7 +30,6 @@
         </ul>
     </div>
     <div class="banner">
-        <div class="declaration-container"><div class="declaration-content">AD</div></div>
         <?php /** TODO: Make the content of `.banner` and the link here admin-configurable */ ?>
         <a href="#"><div class="content">Banner content</div></a>
     </div>
@@ -127,5 +125,4 @@
         amet magna vehicula aliquet. Sed elit mi, condimentum et purus ornare,
         blandit lobortis libero. Duis viverra metus eu efficitur consequat.</p>
 </main>
-<?php endwhile; endif; ?>
 <?php get_footer(); ?>

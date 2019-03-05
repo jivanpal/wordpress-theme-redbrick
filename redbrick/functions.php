@@ -5,7 +5,8 @@ if (!function_exists('redbrick_setup')) {
      * features.
      */
     function redbrick_setup() {
-        add_theme_support('post_thumbnails');
+        add_theme_support( 'html5', ['search-form', 'comment-form', 'comment-list', 'gallery', 'caption'] );
+        add_theme_support( 'post_thumbnails' );
     }
 }
 add_action('after_setup_theme', 'redbrick_setup');

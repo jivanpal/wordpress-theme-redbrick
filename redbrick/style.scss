@@ -111,6 +111,8 @@ $footer-social-media-icon-height: 25px;
 
 $hamburger-menu-shadow-size: $header-height;
 
+$author-image-dimensions: 64px;
+
 /**
  * The maximum amount of vertical screen real estate that intrusive block
  * elements (e.g. images/figures) should take up.
@@ -124,7 +126,6 @@ $showcase-height: calc(100vw - #{$showcase-peek});
 $showcase-item-title-padding: 10px;
 $showcase-shadow-size: 50px;
 
-$banner-content-width: 300px;
 $banner-content-height: 50px;
 
 /**
@@ -490,7 +491,9 @@ footer {
     height: $showcase-height;
     max-height: $max-vh-usage;
 
-    color: $showcase-fg-color;
+    &, a {
+        color: $showcase-fg-color;
+    }
 
     .showcase-item {
         /** `$max-vh-usage` matches `max-height` of `.showcase` */
@@ -567,32 +570,30 @@ footer {
 }
 
 .banner {
-    display: flex;
     height: $banner-content-height;
     width: 100vw;
-
-    .declaration-container {
-        display: flex;
-        align-items: center;
-
-        width: calc(100vw - #{$banner-content-width});
-        height: 100%;
-
-        background-color: $ad-declaration-bg-color;
-        color: $ad-declaration-fg-color;
-
-        .declaration-content {
-            transform: rotate(-90deg);
-        }
-    }
     
     a {
         display: block;
     }
     
     .content {
-        width: $banner-content-width;
+        margin: 0 auto;
         height: 100%;
+    }
+}
+
+// Page classes
+
+main.post {
+    .infobox {
+        display: flex;
+        justify-content: stretch;
+
+        .author-image {
+            height: $author-image-dimensions;
+            width: $author-image-dimensions;
+        }
     }
 }
 
