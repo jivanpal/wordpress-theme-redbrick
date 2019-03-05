@@ -176,8 +176,7 @@ body {
 
 header {
     /** Sticky header */
-
-    position: fixed;
+    position: sticky;
     top: 0;
 
     /** 
@@ -185,10 +184,6 @@ header {
      * the header.
      */
     z-index: 999;
-
-    + * {
-        margin-top: $header-height;
-    }
 
     body.admin-bar & {
         @media only screen and (min-width: 601px) and (max-width: 782px) {
@@ -282,14 +277,6 @@ header {
                 width: 100vw;
 
                 height: calc(100vh - #{$header-height});
-                body.admin-bar & {
-                    /**
-                    * TODO: Fix this; dosn't work when scrolling down page, as
-                    * height needs to dynamically increase based on scroll
-                    * position.
-                    */
-                    height: calc(100vh - 46px - #{$header-height}); // WordPress admin bar height = 46px.
-                }
 
                 /**
                  * The `visible` class is toggled on `<nav>` via JS when the
