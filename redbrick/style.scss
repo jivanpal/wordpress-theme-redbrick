@@ -94,6 +94,8 @@ $showcase-fg-color: white;
 $ad-declaration-bg-color: #ddd;
 $ad-declaration-fg-color: #111;
 
+$post-excerpt-color: #555;
+
 /** END - Colors **/
 
 $header-height:             50px;
@@ -624,6 +626,11 @@ main.post {
             font-style: oblique;
             font-size: 0.8rem;
         }
+    }
+
+    .post-excerpt {
+        font-size: 1.3rem;
+        color: $post-excerpt-color;
     }
 }
 

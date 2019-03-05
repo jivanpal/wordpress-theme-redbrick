@@ -29,6 +29,8 @@
                 </div>
             </div>
 
+            <div class="post-excerpt"><?php the_excerpt(); ?></div>
+
             <?php the_content(); ?>
         </article>
         <div class="comments">
