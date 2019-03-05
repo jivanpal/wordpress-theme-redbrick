@@ -4,19 +4,24 @@
         <article>
             <h1><?php the_title(); ?></h1>
             
-            <div class="infobox">
-                <div class="author">
-                    <div class="image"></div>
-                    <div class="name"><?php the_author(); ?></div>
+            <div class="info-box">
+                <div class="author-box">
+                    <?php /** TODO: Fetch actual author image here */ ?>
+                    <img class="image" src="<?php echo get_template_directory_uri(); ?>/assets/mockups/alice_landray.jpg"/>
+                    <div class="author-details">
+                        <div class="author-name"><?php the_author(); ?></div>
+                        <?php /** TODO: Fetch actual bio here */ ?>
+                        <div class="author-bio">Food&amp;Drink Online Editor, English literature student.</div>
+                    </div>
                 </div>
-                <div class="article-dates">
-                    <div class="pubtime">
+                <div class="timestamps">
+                    <div class="published">
                         <span class="label">Published</span>
                         <?php /* TODO: Publish date ; remove example when implemented */ ?>
                         18:00 on 4 March 2019
                     </div>
                     <?php /* TODO: if post has been modified after publish date ... */ ?>
-                    <div class="modtime">
+                    <div class="modified">
                         <span class="label">Last updated</span>
                         <?php /* TODO: Date last modified ; remove example when implemented */ ?>
                         18:29 on 5 March 2019
