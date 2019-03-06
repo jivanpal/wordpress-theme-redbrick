@@ -88,5 +88,10 @@
             </div>
             <div class="search">
                 <?php echo file_get_contents(get_template_directory() . '/assets/search.svg'); ?>
+                <div class="search-bar">
+                    <form id="search-form" action="/">
+                        <input id="search-field" type="search" name="s" placeholder="Search"/>
+                    </form>
+                </div>
             </div>
         </header>

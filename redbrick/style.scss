@@ -335,6 +335,27 @@ header {
         height: $search-icon-height;
         padding-right: $header-padding-side;
     }
+
+    .search-bar {
+        position: fixed;
+        top: $header-height;
+        left: 0;
+        background-color: #555; // TODO: temporary; remove when unncesssary
+        height: 45;
+        width: 100vw;
+    }
+
+    #search-form {
+        padding: 8px 5px;
+        #search-field {
+            width: 100%;
+            height: 36px;
+            padding: 5px 10px;
+            border-radius: 18px;
+    
+            font-size: 1.2em;
+        }
+    }
 }
 
 main {
