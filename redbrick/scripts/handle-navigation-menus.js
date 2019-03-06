@@ -6,7 +6,7 @@
  */
 
 var navigationMainMenu = document.querySelector("header nav .menu");
-var itemsWithSubmenus = document.querySelectorAll("header nav .menu li.has-submenu");
+var itemWithSubmenu = document.querySelectorAll("header nav .menu li.has-submenu");
 
 /**
  * Get the slug of the given menu item.
@@ -49,9 +49,10 @@ function redbrick_hide_navigation_submenu(slug) {
     submenu.classList.remove("visible");
 }
 
-for (var i = 0; i < itemsWithSubmenus.length; i++) {
-    var mainMenuItem = itemsWithSubmenus[i];
-    var slug = redbrick_get_menu_item_slug(mainMenuItem);
+for (var i = 0; i < itemWithSubmenu.length; i++) {
+    var mainMenuItem = itemWithSubmenu[i];
+    let slug = redbrick_get_menu_item_slug(mainMenuItem);
+    var backButton = document.querySelector("header nav .submenu."+slug+" .back-button");
 
     // Add event handlers for the main menu item
     mainMenuItem.addEventListener(
@@ -63,8 +64,6 @@ for (var i = 0; i < itemsWithSubmenus.length; i++) {
     );
 
     // Add event handlers the the submenu's back button
-    var backButton = document.querySelector("header nav .submenu."+slug+" .back-button");
-
     backButton.addEventListener(
         "click",
         function() {
@@ -78,5 +77,3 @@ for (var i = 0; i < itemsWithSubmenus.length; i++) {
         }
     );
 }
-
-
