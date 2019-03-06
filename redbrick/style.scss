@@ -638,6 +638,7 @@ footer {
 main.post {
     .featured-image-box {
         position: relative;
+        height: $max-vh-usage;  // fix height so that `.featured-image` will be of the correct dimensions; `max-height` does not suffice here
 
         .featured-image {
             height: 100%;
@@ -654,7 +655,7 @@ main.post {
             text-shadow: 1px 1px 0 #333;
 
             .post-excerpt {
-                font-size: 1.3rem;
+                font-size: 1.2rem;
             }
         }
     }

@@ -25,13 +25,13 @@
                     <div class="published">
                         <span class="label">Published</span>
                         <?php /* TODO: Publish date ; remove example when implemented */ ?>
-                        18:00 on 4 March 2019
+                        at 18:00 on 4 March 2019
                     </div>
                     <?php /* TODO: if post has been modified after publish date ... */ ?>
                     <div class="modified">
                         <span class="label">Last updated</span>
                         <?php /* TODO: Date last modified ; remove example when implemented */ ?>
-                        18:29 on 5 March 2019
+                        at 18:29 on 5 March 2019
                     </div>
                 </div>
             </div>
