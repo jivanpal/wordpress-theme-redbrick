@@ -65,7 +65,7 @@ table {
 }
 a {
     color: inherit;
-    text-decoration: none;
+    text-decoration: underline;
 }
 a:hover {
     color: inherit;
@@ -390,7 +390,6 @@ main {
 
     a {
         color: $main-fg-accent-color;
-        text-decoration: underline;
     }
 }
 
@@ -561,6 +560,8 @@ footer {
             width: 100%;
             height: 100%;
             position: relative;
+
+            text-decoration: none;
         }
         
         .thumbnail {
