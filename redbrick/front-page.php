@@ -2,6 +2,7 @@
 <main class="home">
     <div class="showcase-container">    <?php /** This container is used to apply overflow shadows */ ?>
         <ul class="showcase">
+            <?php /** TODO: Fetch acutal slider articles */ ?>
             <li class="showcase-item"><a href="#">
                 <img class="thumbnail" src="<?php echo get_template_directory_uri(); ?>/assets/mockups/suspiria.jpg"/>
                 <div class="tint red"></div>
