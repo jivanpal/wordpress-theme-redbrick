@@ -32,3 +32,12 @@ document.querySelector("header .hamburger").addEventListener(
     "click",
     redbrick_hide_search_bar
 );
+
+// Prevent clicking anywhere on the search bar from causing it to hide itself
+
+document.querySelector("#search-form").addEventListener(
+    "click",
+    function(event) {
+        event.stopPropagation();
+    }
+);

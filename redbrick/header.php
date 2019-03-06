@@ -30,10 +30,10 @@
                                  * admin-configurable WordPress menu here.
                                  */
                             ?>
-                            <li class="has-submenu tint red"><a href="/news">
+                            <li class="has-submenu tint red"><a href="#">
                                 <span class="news">News</span>
                             </a></li>
-                            <li class="has-submenu tint orange"><a href="/comment">
+                            <li class="has-submenu tint orange"><a href="#">
                                 <span class="comment">Comment</span>
                             </a></li>
                             <li class="tint yellow"><a href="/culture">
@@ -74,7 +74,7 @@
                             </a></li>
                         </ul>
                         <div class="submenu-container">
-                            <ul class="submenu news">
+                            <ul class="submenu news" style="background-color: #c00;">
                                 <li class="back-button"><a href="#">
                                     <span>&lt; Back</span>
                                 </a></li>
@@ -97,7 +97,7 @@
                                     <span>National</span>
                                 </a></li>
                             </ul>
-                            <ul class="submenu comment">
+                            <ul class="submenu comment" style="background-color: #0c0">
                                 <li class="back-button"><a href="#">
                                     <span>&lt; Back</span>
                                 </a></li>

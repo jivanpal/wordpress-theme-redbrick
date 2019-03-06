@@ -398,7 +398,7 @@ header {
             padding: 8px 5px;
 
             /** TODO: Change this to correct colour; depends on section of website */
-            border-bottom: 5px solid #c00;
+            border-bottom: 1px solid $hamburger-menu-separator-color;
             
             #search-field {
                 width: 100%;
@@ -836,50 +836,76 @@ main.post {
 
                 /** END - Overflow shadows */
                 
-                ul {
-                    display: flex;
+                .menu-container {
                     height: 100%;
 
-                    overflow-x: auto;
-
-                    li {
-                        flex: 0 0 auto;
-    
+                    ul {
+                        display: flex;
                         height: 100%;
-                        
-                        a {
-                            display: flex;
-                            align-items: center;
 
-                            width: 100%;
+                        overflow-x: auto;
+
+                        li {
+                            flex: 0 0 auto;
+        
                             height: 100%;
+                            
+                            a {
+                                display: flex;
+                                align-items: center;
 
-                            span {
-                                padding: 0 $header-nav-item-padding;
+                                width: 100%;
+                                height: 100%;
+
+                                span {
+                                    padding: 0 $header-nav-item-padding;
+                                }
+                            }
+
+                            /** TODO: Remove sample colours when done testing. */
+                            &.tint:hover {
+                                &.red {
+                                    background-color: rgba(#c00, 0.35);
+                                }
+
+                                &.orange {
+                                    background-color: rgba(#c60, 0.35);
+                                }
+
+                                &.yellow {
+                                    background-color: rgba(#cc0, 0.35);
+                                }
+
+                                &.green {
+                                    background-color: rgba(#0c0, 0.35);
+                                }
+
+                                &.blue {
+                                    background-color: rgba(#0ac, 0.35);
+                                }
                             }
                         }
+                    }
+                }
 
-                        /** TODO: Remove sample colours when done testing. */
-                        &.tint:hover {
-                            &.red {
-                                background-color: rgba(#c00, 0.35);
-                            }
+                .submenu-container {
+                    position: fixed;
+                    top: $header-height;
+                    left: 0;
+                    width: 100vw;
+                    height: 0;
 
-                            &.orange {
-                                background-color: rgba(#c60, 0.35);
-                            }
+                    background-color: #555; // TODO: temporary; remove when unnecessary
 
-                            &.yellow {
-                                background-color: rgba(#cc0, 0.35);
-                            }
+                    &.visible {
+                        height: auto;
+                    }
 
-                            &.green {
-                                background-color: rgba(#0c0, 0.35);
-                            }
-
-                            &.blue {
-                                background-color: rgba(#0ac, 0.35);
-                            }
+                    .submenu {
+                        height: 45px;
+    
+                        .back-button {
+                            display: none;
                         }
                     }
                 }
