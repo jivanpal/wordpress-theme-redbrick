@@ -24,7 +24,7 @@ var overflowXPairs = [
 
 /**
  * An array of functions, one for each pair in the previous array. When the
- * respective function for a pair is called, it when set the overflow shadows
+ * respective function for a pair is called, it will set the overflow shadows
  * correctly for that pair.
  * 
  * This array is populated in the for-loop below.
@@ -32,6 +32,10 @@ var overflowXPairs = [
 var overflowXFunctions = [];
 
 function redbrick_set_overflow_x_shadows(shadowContainer, scrollableElement) {
+    if (shadowContainer === null || scrollableElement === null) {
+        return;
+    }
+
     if (shadowContainer.scrollWidth == scrollableElement.scrollWidth) {
         shadowContainer.classList.remove("left-shadow");
         shadowContainer.classList.remove("right-shadow");
@@ -55,7 +59,13 @@ for (let i = 0; i < overflowXPairs.length; i++) {
     })
 
     overflowXFunctions[i]();
-    overflowXPairs[i][1].onscroll = overflowXFunctions[i];
+
+    if (overflowXPairs[i][1] !== null) {
+        overflowXPairs[i][1].addEventListener(
+            "scroll",
+            overflowXFunctions[i]
+        );
+    }
 }
 
 window.addEventListener('resize', function() {
