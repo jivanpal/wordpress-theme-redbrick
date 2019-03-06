@@ -636,6 +636,29 @@ footer {
 // Page classes
 
 main.post {
+    .featured-image-box {
+        position: relative;
+
+        .featured-image {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .text-overlay {
+            position: absolute;
+            bottom: 0;
+            padding: $showcase-item-title-padding; // match styling on front page
+
+            color: $showcase-fg-color; // match styling on front page
+            text-shadow: 1px 1px 0 #333;
+
+            .post-excerpt {
+                font-size: 1.3rem;
+            }
+        }
+    }
+
     .info-box {
         margin: $spacing-default;
         
@@ -673,11 +696,6 @@ main.post {
             font-style: oblique;
             font-size: 0.8rem;
         }
-    }
-
-    .post-excerpt {
-        font-size: 1.3rem;
-        color: $post-excerpt-color;
     }
 }
 

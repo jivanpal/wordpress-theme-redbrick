@@ -2,8 +2,15 @@
 <main class="post">
     <?php while (have_posts()) : the_post(); ?>
         <article>
-            <h1><?php the_title(); ?></h1>
-            
+            <div class="featured-image-box">
+                <?php /** TODO: Fetch actual post thumbnail here */ ?>
+                <img class="featured-image" src="<?php echo get_template_directory_uri(); ?>/assets/mockups/featured-image.jpg"/>
+                <div class="text-overlay">
+                    <h1 class="post-title"><?php the_title(); ?></h1>
+                    <div class="post-excerpt"><?php the_excerpt(); ?></div>
+                </div>
+            </div>
+
             <div class="info-box">
                 <div class="author-box">
                     <?php /** TODO: Fetch actual author image here */ ?>
@@ -28,8 +35,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="post-excerpt"><?php the_excerpt(); ?></div>
 
             <?php the_content(); ?>
         </article>
