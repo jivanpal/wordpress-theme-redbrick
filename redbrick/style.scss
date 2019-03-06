@@ -267,10 +267,15 @@ header {
         }
 
         nav {
+            a {
+                text-decoration: none;
+            }
+
             /**
-             * Media query is necessary to prevent necessary use of `!important`
-             * to override many properties in desktop query that are explicitly
-             * set here, but for which we would like to assume default values.
+             * Media query is necessary to prevent otherwise necessary use of
+             * `!important` to override many properties in desktop query that
+             * are explicitly set here, but for which we would like to assume
+             * default values.
              */
             @media only screen and (max-width: 600px) {
                 z-index: 998;
