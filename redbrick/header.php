@@ -92,6 +92,7 @@
                     <form id="search-form" action="/">
                         <input id="search-field" type="search" name="s" placeholder="Search"/>
                     </form>
+                    <div class="rest-of-screen"></div>
                 </div>
             </div>
         </header>

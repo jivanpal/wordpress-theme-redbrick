@@ -340,20 +340,45 @@ header {
         position: fixed;
         top: $header-height;
         left: 0;
-        background-color: #555; // TODO: temporary; remove when unncesssary
-        height: 45;
         width: 100vw;
-    }
+        z-index: -1; // TODO: temporary; remove when search button functional
 
-    #search-form {
-        padding: 8px 5px;
-        #search-field {
-            width: 100%;
-            height: 36px;
-            padding: 5px 10px;
-            border-radius: 18px;
-    
-            font-size: 1.2em;
+        /**
+         * The `visible` class is toggled on `.search-bar` via JS when the
+         * serach icon in the header is clicked.
+         * See `scripts/toggle-search-bar.js` for details.
+         */
+        &:not(.visible) {
+            top: -150vh;    // slide the menu off the top of the screen
+        }
+
+        transition: top 300ms; // CSS transition for smooth slide into and out of view.
+
+        #search-form {
+            background-color: $header-footer-bg-color;
+            padding: 8px 5px;
+
+            /** TODO: Change this to correct colour; depends on section of website */
+            border-bottom: 5px solid #c00;
+            
+            #search-field {
+                width: 100%;
+                height: 36px;
+                padding: 5px 10px;
+                border-radius: 18px;
+        
+                font-size: 1.2em;
+            }
+        }
+
+        .rest-of-screen {
+            height: 100vh;
+            background: linear-gradient(
+                to bottom,
+                rgba(black, 0.8),
+                $header-height,
+                rgba(black, 0)
+            );
         }
     }
 }

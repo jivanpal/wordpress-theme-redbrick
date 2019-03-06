@@ -15,8 +15,20 @@ function redbrick_hide_hamburger_menu() {
 }
 
 // Elements which toggle hamburger menu visibility
-document.querySelector("header .hamburger").onclick = redbrick_toggle_hamburger_menu;
+
+document.querySelector("header .hamburger").addEventListener(
+    "click",
+    redbrick_toggle_hamburger_menu
+);
 
 // Elements which hide the hamburger menu
-document.querySelector("header nav .rest-of-screen").onclick = redbrick_hide_hamburger_menu;
-document.querySelector("header .search").onclick = redbrick_hide_hamburger_menu;
+
+document.querySelector("header nav .rest-of-screen").addEventListener(
+    "click",
+    redbrick_hide_hamburger_menu
+);
+
+document.querySelector("header .search").addEventListener(
+    "click",
+    redbrick_hide_hamburger_menu
+);

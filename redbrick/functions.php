@@ -37,6 +37,15 @@ if (!function_exists('redbrick_enqueue_styles_and_scripts')) {
             true        // enqueue in footer (rather than head)
         );
 
+        // Add functionality to the search icon in the header
+        wp_enqueue_script(
+            'redbrick_toggle-search-bar',
+            get_template_directory_uri() . '/scripts/toggle-search-bar.js',
+            [],         // dependencies
+            time(),     // version  // TODO: set actual version number rather than `time()`
+            true        // enqueue in footer (rather than head)
+        );
+
         wp_enqueue_script(
             'redbrick_overflow-shadows',
             get_template_directory_uri() . '/scripts/overflow-shadows.js',
