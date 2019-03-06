@@ -22,56 +22,103 @@
                     </div>
                 </a>
                 <nav>
-                    <ul>
-                        <?php
-                            /**
-                             * TODO: Fetch navigation items from an
-                             * admin-configurable WordPress menu here.
-                             */
-                        ?>
-                        <li class="tint red"><a href="/news">
-                            <span>News</span>
-                        </a></li>
-                        <li class="tint orange"><a href="/comment">
-                            <span>Comment</span>
-                        </a></li>
-                        <li class="tint yellow"><a href="/culture">
-                            <span>Culture</span>
-                        </a></li>
-                        <li class="tint green"><a href="/music">
-                            <span>Music</span>
-                        </a></li>
-                        <li class="tint blue"><a href="/film">
-                            <span>Film</span>
-                        </a></li>
-                        <li class="tint red"><a href="/tv">
-                            <span>TV</span>
-                        </a></li>
-                        <li class="tint orange"><a href="/gaming">
-                            <span>Gaming</span>
-                        </a></li>
-                        <li class="tint yellow"><a href="/food-and-drink">
-                            <span>Food&amp;Drink</span>
-                        </a></li>
-                        <li class="tint green"><a href="/travel">
-                            <span>Travel</span>
-                        </a></li>
-                        <li class="tint blue"><a href="/life-and-style">
-                            <span>Life&amp;Style</span>
-                        </a></li>
-                        <li class="tint red"><a href="/sci-and-tech">
-                            <span>Sci&amp;Tech</span>
-                        </a></li>
-                        <li class="tint orange"><a href="/sport">
-                            <span>Sport</span>
-                        </a></li>
-                        <li class="tint yellow"><a href="/features">
-                            <span>Features</span>
-                        </a></li>
-                        <li class="tint green"><a href="/radio">
-                            <span>Radio</span>
-                        </a></li>
-                    </ul>
+                    <div class="menu-container">
+                        <ul class="menu">
+                            <?php
+                                /**
+                                 * TODO: Fetch navigation items from an
+                                 * admin-configurable WordPress menu here.
+                                 */
+                            ?>
+                            <li class="has-submenu tint red"><a href="/news">
+                                <span class="news">News</span>
+                            </a></li>
+                            <li class="has-submenu tint orange"><a href="/comment">
+                                <span class="comment">Comment</span>
+                            </a></li>
+                            <li class="tint yellow"><a href="/culture">
+                                <span class="culture">Culture</span>
+                            </a></li>
+                            <li class="tint green"><a href="/music">
+                                <span class="music">Music</span>
+                            </a></li>
+                            <li class="tint blue"><a href="/film">
+                                <span class="film">Film</span>
+                            </a></li>
+                            <li class="tint red"><a href="/tv">
+                                <span class="tv">TV</span>
+                            </a></li>
+                            <li class="tint orange"><a href="/gaming">
+                                <span class="gaming">Gaming</span>
+                            </a></li>
+                            <li class="tint yellow"><a href="/food-and-drink">
+                                <span class="food-drink">Food&amp;Drink</span>
+                            </a></li>
+                            <li class="tint green"><a href="/travel">
+                                <span class="travel">Travel</span>
+                            </a></li>
+                            <li class="tint blue"><a href="/life-and-style">
+                                <span class="life-style">Life&amp;Style</span>
+                            </a></li>
+                            <li class="tint red"><a href="/sci-and-tech">
+                                <span class="sci-tech">Sci&amp;Tech</span>
+                            </a></li>
+                            <li class="tint orange"><a href="/sport">
+                                <span class="sport">Sport</span>
+                            </a></li>
+                            <li class="tint yellow"><a href="/features">
+                                <span>Features</span>
+                            </a></li>
+                            <li class="tint green"><a href="/radio">
+                                <span>Radio</span>
+                            </a></li>
+                        </ul>
+                        <div class="submenu-container">
+                            <ul class="submenu news">
+                                <li class="back-button"><a href="#">
+                                    <span>&lt; Back</span>
+                                </a></li>
+                                <li><a href="#">
+                                    <span>All News</span>
+                                </a></li>
+                                <li><a href="#">
+                                    <span>Guild of Students</span>
+                                </a></li>
+                                <li><a href="#">
+                                    <span>Campus</span>
+                                </a></li>
+                                <li><a href="#">
+                                    <span>Selly Oak</span>
+                                </a></li>
+                                <li><a href="#">
+                                    <span>Birmingham</span>
+                                </a></li>
+                                <li><a href="#">
+                                    <span>National</span>
+                                </a></li>
+                            </ul>
+                            <ul class="submenu comment">
+                                <li class="back-button"><a href="#">
+                                    <span>&lt; Back</span>
+                                </a></li>
+                                <li><a href="#">
+                                    <span>All Comment</span>
+                                </a></li>
+                                <li><a href="#">
+                                    <span>International</span>
+                                </a></li>
+                                <li><a href="#">
+                                    <span>National</span>
+                                </a></li>
+                                <li><a href="#">
+                                    <span>Features</span>
+                                </a></li>
+                                <li><a href="#">
+                                    <span>Politics</span>
+                                </a></li>
+                            </ul>
+                        </div>
+                    </div>
                     <?php
                         /**
                          * The following element covers the rest of the screen

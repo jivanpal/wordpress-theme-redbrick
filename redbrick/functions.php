@@ -28,6 +28,24 @@ if (!function_exists('redbrick_enqueue_styles_and_scripts')) {
             wp_enqueue_script('comment-reply');
         }
 
+        // Add scrolling shadows to some scrollable elements
+        wp_enqueue_script(
+            'redbrick_overflow-shadows',
+            get_template_directory_uri() . '/scripts/overflow-shadows.js',
+            [],         // dependencies
+            time(),     // version  // TODO: set actual version number rather than `time()`
+            true        // enqueue in footer (rather than head)
+        );
+
+        // Add functionality to submenu items and back buttons in the navigation menu
+        wp_enqueue_script(
+            'redbrick_handle-navigation-menus',
+            get_template_directory_uri() . '/scripts/handle-navigation-menus.js',
+            [],         // dependencies
+            time(),     // version  // TODO: set actual version number rather than `time()`
+            true        // enqueue in footer (rather than head)
+        );
+        
         // Add functionality to the hamburger icon in the header
         wp_enqueue_script(
             'redbrick_toggle-hamburger-menu',
@@ -46,13 +64,7 @@ if (!function_exists('redbrick_enqueue_styles_and_scripts')) {
             true        // enqueue in footer (rather than head)
         );
 
-        wp_enqueue_script(
-            'redbrick_overflow-shadows',
-            get_template_directory_uri() . '/scripts/overflow-shadows.js',
-            [],         // dependencies
-            time(),     // version  // TODO: set actual version number rather than `time()`
-            true        // enqueue in footer (rather than head)
-        );
+        
     }
 }
 add_action('wp_enqueue_scripts', 'redbrick_enqueue_styles_and_scripts');

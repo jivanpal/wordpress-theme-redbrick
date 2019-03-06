@@ -305,20 +305,54 @@ header {
                  */
                 //font-weight: bold;
 
-                ul {
+                .menu-container {
                     flex-grow: 1;
-
+                    
                     overflow-x: hidden;
-                    overflow-y: auto;
 
-                    background: $header-footer-bg-color;
-                    border-right: 1px solid $hamburger-menu-separator-color;
+                    background-color: $header-footer-bg-color;
 
-                    li {
-                        padding: 10px;
+                    position: relative;
+                    
+                    ul {
+                        border-right: 1px solid $hamburger-menu-separator-color;
 
-                        &:not(:last-child) {
+                        overflow-x: hidden;
+                        overflow-y: auto;
+
+                        li {
+                            padding: 10px;
                             border-bottom: 1px solid $hamburger-menu-separator-color;
+                        }
+                    }
+
+                    .menu, .submenu-container, .submenu {
+                        height: calc(100vh - #{$header-height});
+                    }
+                    
+                    .menu, .submenu-container {
+                        width: 100%;
+
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+
+                        background-color: inherit;
+                    }
+
+                    .menu {
+                        z-index: 1; // place the main menu in front of all submenus
+
+                        &.hidden {
+                            left: -100vw;
+                        }
+
+                        transition: left 300ms; // CSS transition for smooth slide into and out of view.
+                    }
+
+                    .submenu {
+                        &:not(.visible) {
+                            display: none;
                         }
                     }
                 }
@@ -357,7 +391,7 @@ header {
             top: -150vh;    // slide the menu off the top of the screen
         }
 
-        transition: top 300ms; // CSS transition for smooth slide into and out of view.
+        transition: top 300ms; 
 
         #search-form {
             background-color: $header-footer-bg-color;
