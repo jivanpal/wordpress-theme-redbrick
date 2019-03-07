@@ -374,7 +374,7 @@ header {
             * See `scripts/toggle-search-bar.js` for details.
             */
             &:not(.visible) {
-                top: -150vh;    // slide the menu off the top of the screen
+                top: calc(-100vh - #{$header-height});    // slide the menu off the top of the screen
             }
 
             transition: top 300ms; 
