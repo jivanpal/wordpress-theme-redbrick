@@ -6,8 +6,8 @@
                 <?php /** TODO: Fetch actual post thumbnail here */ ?>
                 <img class="featured-image" src="<?php echo get_template_directory_uri(); ?>/assets/mockups/featured-image.jpg"/>
                 <div class="text-overlay">
-                    <h1 class="post-title"><?php the_title(); ?></h1>
-                    <div class="post-excerpt"><?php the_excerpt(); ?></div>
+                    <h1 class="title"><?php the_title(); ?></h1>
+                    <div class="excerpt"><?php the_excerpt(); ?></div>
                 </div>
             </div>
 
@@ -35,25 +35,27 @@
                     </div>
                 </div>
                 <div class="timestamps">
-                    <div class="published">
+                    <div class="publish-time">
                         <span class="label">Published</span>
                         <?php /* TODO: Fetch actual publish date */ ?>
-                        at 18:00 on 4 March 2019
+                        <time datetime="2019-03-04T18:00Z">at 18:00 on 4 March 2019</time>
                     </div>
                     <?php /* TODO: if post has been modified after publish date ... */ ?>
-                    <div class="modified">
+                    <div class="update-time">
                         <span class="label">Last updated</span>
                         <?php /* TODO: Fetch actual date last modified */ ?>
-                        at 18:29 on 5 March 2019
+                        <time datetime="2019-03-05T18:29Z">at 18:29 on 5 March 2019</time>
                     </div>
                 </div>
             </div>
 
-            <div class="article-body">
+            <div class="post-body">
                 <?php the_content(); ?>
             </div>
 
             <div class="comments">
+                <h1>Comments</h1>
+                <p>This is where comments will appear.</p>
                 <?php
                     if ( comments_open() || get_comments_number() ) {
                         comments_template();
@@ -62,5 +64,93 @@
             </div>
         </article>
     <?php endwhile; ?>
+    
+    <aside class="recommended">
+        <h1>Recommended</h1>
+
+        <section class="category tv">
+            <h2>More in <span class="category tv" style="color: #0c0;">TV</span></h2>
+            <ul>
+                <li class="post">
+                    <div class="featured-image-box">
+                        <?php /* TODO: get the featured image */ ?>
+                        <img class="featured-image" src="<?php echo get_template_directory_uri(); ?>/assets/mockups/featured-image.jpg"/>
+                        <div class="text-overlay">
+                            <h3 class="title"><?php /* TODO: get the title */ echo 'Example title' ?></h3>
+                            <div class="byline">
+                                <?php /* TODO: get the actual author name and publish time */ ?>
+                                <p>by Jivan Pal <time datetime="2019-03-05">on 5 March 2019</time></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="excerpt">
+                        <?php /** TODO: get the excerpt */ ?>
+                        <p>This is an example of an excerpt for an article. Read the article for more.</p>
+                    </div>
+                    </div>
+                </li>
+                <li class="post">
+                    <div class="featured-image-box">
+                        <?php /* TODO: get the featured image */ ?>
+                        <img class="featured-image" src="<?php echo get_template_directory_uri(); ?>/assets/mockups/featured-image.jpg"/>
+                        <div class="text-overlay">
+                            <h3 class="title"><?php /* TODO: get the title */ echo 'Example title' ?></h3>
+                            <div class="byline">
+                                <?php /* TODO: get the actual author name and publish time */ ?>
+                                <p>by Jivan Pal <time datetime="2019-03-05">on 5 March 2019</time></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="excerpt">
+                        <?php /** TODO: get the excerpt */ ?>
+                        <p>This is an example of an excerpt for an article. Read the article for more.</p>
+                    </div>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section class="most-popular">
+            <h2>Most popular</h2>
+            <ul>
+            <li class="post">
+                    <div class="featured-image-box">
+                        <?php /* TODO: get the featured image */ ?>
+                        <img class="featured-image" src="<?php echo get_template_directory_uri(); ?>/assets/mockups/featured-image.jpg"/>
+                        <div class="text-overlay">
+                            <h3 class="title"><?php /* TODO: get the title */ echo 'Example title' ?></h3>
+                            <div class="byline">
+                                <?php /* TODO: get the actual author name and publish time */ ?>
+                                <p>by Jivan Pal <time datetime="2019-03-05">on 5 March 2019</time></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="excerpt">
+                        <?php /** TODO: get the excerpt */ ?>
+                        <p>This is an example of an excerpt for an article. Read the article for more.</p>
+                    </div>
+                    </div>
+                </li>
+                <li class="post">
+                    <div class="featured-image-box">
+                        <?php /* TODO: get the featured image */ ?>
+                        <img class="featured-image" src="<?php echo get_template_directory_uri(); ?>/assets/mockups/featured-image.jpg"/>
+                        <div class="text-overlay">
+                            <h3 class="title"><?php /* TODO: get the title */ echo 'Example title' ?></h3>
+                            <div class="byline">
+                                <?php /* TODO: get the actual author name and publish time */ ?>
+                                <p>by Jivan Pal <time datetime="2019-03-05">on 5 March 2019</time></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="excerpt">
+                        <?php /** TODO: get the excerpt */ ?>
+                        <p>This is an example of an excerpt for an article. Read the article for more.</p>
+                    </div>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </aside>
 </main>
 <?php get_footer(); ?>

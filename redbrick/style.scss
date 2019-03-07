@@ -38,8 +38,6 @@ time, mark, audio, video {
 	margin: 0;
 	padding: 0;
 	border: 0;
-    font-size: 100%;
-    font: inherit;
     text-decoration: inherit;
     vertical-align: baseline;
 }
@@ -124,9 +122,10 @@ $max-vh-usage: 50vh;
 $spacing-default: 10px;
 $spacing-thin: 3px;
 
+$text-overlay-padding: 10px;
+
 $showcase-peek: 60px;   // how much of the next item in a showcase can be seen
 $showcase-height: calc(100vw - #{$showcase-peek});
-$showcase-item-title-padding: 10px;
 $showcase-shadow-size: 50px;
 
 $banner-content-height: 50px;
@@ -175,7 +174,6 @@ svg {
 
 body {
     font: 16px/1.3 'Helvetica Neue', 'Helvetica', 'Arial', monospace;
-
     background-color: $header-footer-bg-color; // Gives over-scroll the right color.
 }
 
@@ -458,17 +456,17 @@ footer {
     }
 
     div:not(:first-child), a > div {
-        &:not(.icon-container):not(.thumbnail) {
+        &:not(.icon-container):not(.featured-image) {
             border-top: 1px solid $footer-fg-color;
         }
     }
 
     /**
-     * Actually give `.thumbnail` an upper border. This rule is not incorporated
+     * Actually give `.featured-image` an upper border. This rule is not incorporated
      * into the previous rule becuase it needs to have lower specificity in
      * order to be overriden in a subsequent media query.
      */
-    .thumbnail {
+    .featured-image {
         border-top: 1px solid $footer-fg-color;
     }
 
@@ -588,7 +586,7 @@ footer {
         }
 
         a {
-            /** Allows `position: absolute` on `.title` to work as intended. */
+            /** Allows `position: absolute` on `.text-overlay` to work as intended. */
             display: block;
             width: 100%;
             height: 100%;
@@ -597,7 +595,7 @@ footer {
             text-decoration: none;
         }
         
-        .thumbnail {
+        .featured-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -641,12 +639,11 @@ footer {
 
         }
 
-        .title {
+        .text-overlay {
             position: absolute;
             bottom: 0;
             max-width: 100%;
-            padding: $showcase-item-title-padding;
-
+            padding: $text-overlay-padding;
             text-shadow: 1px 1px 0 #333;
         }
     }
@@ -682,12 +679,12 @@ main.post {
         .text-overlay {
             position: absolute;
             bottom: 0;
-            padding: $showcase-item-title-padding; // match styling on front page
+            padding: $text-overlay-padding; // match styling on front page
 
             color: $showcase-fg-color; // match styling on front page
             text-shadow: 1px 1px 0 #333;
 
-            .post-excerpt {
+            .excerpt {
                 font-size: 1.2rem;
             }
         }
@@ -729,6 +726,33 @@ main.post {
         .timestamps {
             font-style: oblique;
             font-size: 0.8rem;
+        }
+    }
+
+    .comments {
+        // Margin overlap fix
+        padding: 1px 0;
+
+        background-color: $header-footer-bg-color;
+        color: $header-fg-color;
+    }
+}
+
+main {
+    aside.recommended {
+        .post {
+            margin: $spacing-default;
+            border: 1px solid black;
+
+            .featured-image-box {
+                width: 100%;
+                height: 250px;
+                max-height: $max-vh-usage;
+                
+                .text-overlay {
+                    padding: 3px;
+                }
+            }
         }
     }
 }
