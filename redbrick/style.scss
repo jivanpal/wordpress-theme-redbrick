@@ -96,16 +96,23 @@ $post-excerpt-color: #555;
 
 /** END - Colors **/
 
+$breakpoint-mobile-max:     600px;
+$breakpoint-tablet-min:     $breakpoint-mobile-max + 1px;
+$breakpoint-tablet-max:     782px;
+$breakpoint-desktop-min:    $breakpoint-tablet-max + 1px;
+
+$column-max-width: 600px;
+
 $header-height:             50px;
 $header-padding-side:       15px;
 $header-nav-item-padding:   10px;
 $header-nav-shadow-size:    30px;
 
-$hamburger-icon-height: 20px;
-$logo-icon-height:      28px;
+$hamburger-icon-height:     20px;
+$logo-icon-height:          28px;
 $logo-icon-wordmark-separation: 3px;
-$logo-wordmark-height:  22px;
-$search-icon-height:    22px;
+$logo-wordmark-height:      22px;
+$search-icon-height:        22px;
 
 $footer-social-media-icon-height: 25px;
 
@@ -182,7 +189,7 @@ header {
     position: sticky;
     top: 0;
     body.admin-bar & {
-        @media only screen and (min-width: 601px) and (max-width: 782px) {
+        @media only screen and (min-width: $breakpoint-tablet-min) and (max-width: $breakpoint-tablet-max) {
             top: 46px;
         }
 
@@ -269,7 +276,7 @@ header {
                 *
                 * In other words, we specify mobile-only layout rules here.
                 */
-                @media only screen and (max-width: 600px) {
+                @media only screen and (max-width: $breakpoint-mobile-max) {
                     z-index: 998;
                     display: flex;
                     position: fixed;
@@ -666,6 +673,13 @@ footer {
 // Page classes
 
 main.post {
+    // Column width constraints
+    .constraint-container {
+        max-width: $column-max-width;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
     .featured-image-box {
         position: relative;
         height: $max-vh-usage;  // fix height so that `.featured-image` will be of the correct dimensions; `max-height` does not suffice here
@@ -679,6 +693,7 @@ main.post {
         .text-overlay {
             position: absolute;
             bottom: 0;
+            width: 100%;
             padding: $text-overlay-padding; // match styling on front page
 
             color: $showcase-fg-color; // match styling on front page
@@ -691,8 +706,6 @@ main.post {
     }
 
     .info-box {
-        margin: $spacing-default;
-        
         .label {
             font-weight: bold;
         }
@@ -702,7 +715,7 @@ main.post {
             justify-content: stretch;
             align-items: center;
 
-            margin-bottom: $spacing-default;
+            margin: $spacing-default;
 
             .image {
                 height: $author-image-dimensions;
@@ -724,7 +737,8 @@ main.post {
         }
 
         .timestamps {
-            font-style: oblique;
+            margin: $spacing-default;
+            // font-style: oblique;
             font-size: 0.8rem;
         }
     }
@@ -775,7 +789,7 @@ main {
  * Desktop styles
  */
 
-@media only screen and (min-width: 601px) {
+@media only screen and (min-width: $breakpoint-tablet-min) {
     header {
         .content {
             .hamburger {
