@@ -18,7 +18,7 @@ var overflowXPairs = [
     ],
     [
         document.querySelector("header nav"),
-        document.querySelector("header nav > ul"),
+        document.querySelector("header nav .menu"),
     ],
 ];
 

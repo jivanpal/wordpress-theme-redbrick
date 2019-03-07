@@ -10,6 +10,10 @@ function redbrick_toggle_hamburger_menu() {
     hamburgerMenu.classList.toggle("visible");
 }
 
+function redbrick_show_hamburger_menu() {
+    hamburgerMenu.classList.add("visible");
+}
+
 function redbrick_hide_hamburger_menu() {
     hamburgerMenu.classList.remove("visible");
 }

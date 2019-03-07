@@ -41,7 +41,7 @@ if (!function_exists('redbrick_enqueue_styles_and_scripts')) {
         wp_enqueue_script(
             'redbrick_handle-navigation-menus',
             get_template_directory_uri() . '/scripts/handle-navigation-menus.js',
-            [],         // dependencies
+            [ 'redbrick_toggle-hamburger-menu' ],         // dependencies
             time(),     // version  // TODO: set actual version number rather than `time()`
             true        // enqueue in footer (rather than head)
         );

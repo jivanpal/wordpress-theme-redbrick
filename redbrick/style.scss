@@ -180,16 +180,9 @@ body {
 }
 
 header {
-    /** Sticky header */
+    // Sticky header
     position: sticky;
     top: 0;
-
-    /** 
-     * Prevents other non-statically positioned elements from sitting on top of
-     * the header.
-     */
-    z-index: 999;
-
     body.admin-bar & {
         @media only screen and (min-width: 601px) and (max-width: 782px) {
             top: 46px;
@@ -200,229 +193,240 @@ header {
         }
     }
 
-    /**
-     * The class `notSticky` is set appropriately in
-     * `/assets/position-header.js`.
+    /** 
+     * Prevents other non-statically positioned elements
+     * from sitting on top of the header.
      */
-    &.notSticky {
-        position: static;
-
-        + * {
-            margin-top: 0;
-        }
-    }
-
-    /** END - Sticky header */
+    z-index: 999;
     
     width: 100vw;
     height: $header-height;
 
-    /** 
-     * We only assign `padding-left` here, and assign `padding-right` to
-     * `.search` to overcome a browser inconsistency relating to whether padding
-     * and margin at the end of scrollable elements are realised.
-     * 
-     * See the following StackOverflow answer for details:
-     * https://stackoverflow.com/a/38177668/9996911
-     */
-    padding-left: $header-padding-side;
-
     background-color: $header-footer-bg-color;
     color: $header-fg-color;
+    
+    border-bottom: 1px solid white;
 
-    /** TODO: Change this to correct colour; depends on section of website */
-    border-bottom: 5px solid #c00;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    .hamburger {
-        height: $hamburger-icon-height;
-    }
-
-    .central-element {
+    .content {
+        height: 100%;
         display: flex;
+        justify-content: space-between;
+        align-items: center;
 
-        .logo {
+        /** 
+         * We only assign `padding-left` here, and assign `padding-right` to
+         * `.search` to overcome a browser inconsistency relating to whether padding
+         * and margin at the end of scrollable elements are realised.
+         * 
+         * See the following StackOverflow answer for details:
+         * https://stackoverflow.com/a/38177668/9996911
+         */
+        padding-left: $header-padding-side;
+        
+        .hamburger {
+            height: $hamburger-icon-height;
+        }
+
+        .central-element {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
 
-            > div {
-                margin: $logo-icon-wordmark-separation;
+            .logo {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                > div {
+                    margin: $logo-icon-wordmark-separation;
+                }
+
+                .icon {
+                    height: $logo-icon-height;
+                }
+
+                .wordmark {
+                    height: $logo-wordmark-height;
+
+                    @media only screen and (max-width: 280px) {
+                        display: none;
+                    }
+                }
             }
 
-            .icon {
-                height: $logo-icon-height;
-            }
+            nav {
+                a {
+                    text-decoration: none;
+                }
 
-            .wordmark {
-                height: $logo-wordmark-height;
+                .submenu {
+                    &:not(.visible) {
+                        display: none;
+                    }
+                }
 
-                @media only screen and (max-width: 280px) {
-                    display: none;
+                /**
+                * Despite mobile-first design, media query is necessary to prevent
+                * the otherwise necessary use of `!important` to override many
+                * properties in desktop query that are explicitly set here, but for
+                * which we would like to assume default values.
+                *
+                * In other words, we specify mobile-only layout rules here.
+                */
+                @media only screen and (max-width: 600px) {
+                    z-index: 998;
+                    display: flex;
+                    position: fixed;
+                    left: 0;
+                    bottom: 0;
+
+                    width: 100vw;
+
+                    height: calc(100vh - #{$header-height});
+
+                    /**
+                    * The `visible` class is toggled on `<nav>` via JS when the
+                    * hamburger icon in the header is clicked.
+                    * See `scripts/toggle-hamburger-menu.js` for details.
+                    */
+                    &:not(.visible) {
+                        left: -100vh;   // slide the menu off the left of the screen
+                    }
+
+                    transition: left 300ms; // CSS transition for smooth slide into and out of view.
+                    
+                    /**
+                    * TODO: Consider applying this. Perhaps only apply to the
+                    * active section (e.g. on a "Comment" page, bold "Comment")?
+                    */
+                    //font-weight: bold;
+
+                    .menu-container {
+                        flex-grow: 1;
+                        
+                        overflow-x: hidden;
+
+                        background-color: $header-footer-bg-color;
+
+                        position: relative;
+                        
+                        ul {
+                            border-right: 1px solid $hamburger-menu-separator-color;
+
+                            overflow-x: hidden;
+                            overflow-y: auto;
+
+                            li {
+                                padding: 10px;
+                                border-bottom: 1px solid $hamburger-menu-separator-color;
+                            }
+                        }
+
+                        .menu, .submenu-container, .submenu {
+                            height: calc(100vh - #{$header-height});
+                        }
+                        
+                        .menu, .submenu-container {
+                            width: 100%;
+
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+
+                            background-color: inherit;
+                        }
+
+                        .menu {
+                            z-index: 1; // place the main menu in front of all submenus
+
+                            &.hidden {
+                                left: -100vw;
+                            }
+
+                            transition: left 300ms; // CSS transition for smooth slide into and out of view.
+                        }
+                    }
+
+                    .rest-of-screen {
+                        width: $header-height;
+                        background: linear-gradient(
+                            to right,
+                            rgba(black, 0.8),
+                            25%,
+                            rgba(black, 0.05)
+                        );
+                    }
                 }
             }
         }
 
-        nav {
-            a {
-                text-decoration: none;
-            }
+        .search {
+            height: $search-icon-height;
+            padding-right: $header-padding-side;
+        }
+
+        .search-bar {
+            position: fixed;
+            top: $header-height;
+            left: 0;
+            width: 100vw;
+            z-index: -1; // TODO: temporary; remove when search button functional
 
             /**
-             * Media query is necessary to prevent otherwise necessary use of
-             * `!important` to override many properties in desktop query that
-             * are explicitly set here, but for which we would like to assume
-             * default values.
-             */
-            @media only screen and (max-width: 600px) {
-                z-index: 998;
-                display: flex;
-                position: fixed;
-                left: 0;
-                bottom: 0;
+            * The `visible` class is toggled on `.search-bar` via JS when the
+            * serach icon in the header is clicked.
+            * See `scripts/toggle-search-bar.js` for details.
+            */
+            &:not(.visible) {
+                top: -150vh;    // slide the menu off the top of the screen
+            }
 
-                width: 100vw;
+            transition: top 300ms; 
 
-                height: calc(100vh - #{$header-height});
+            #search-form {
+                background-color: $header-footer-bg-color;
+                padding: 8px 5px;
 
-                /**
-                 * The `visible` class is toggled on `<nav>` via JS when the
-                 * hamburger icon in the header is clicked.
-                 * See `scripts/toggle-hamburger-menu.js` for details.
-                 */
-                &:not(.visible) {
-                    left: -100vh;   // slide the menu off the left of the screen
-                }
-
-                transition: left 300ms; // CSS transition for smooth slide into and out of view.
+                /** TODO: Change this to correct colour; depends on section of website */
+                border-bottom: 1px solid $hamburger-menu-separator-color;
                 
-                /**
-                 * TODO: Consider applying this. Perhaps only apply to the
-                 * active section (e.g. on a "Comment" page, bold "Comment")?
-                 */
-                //font-weight: bold;
-
-                .menu-container {
-                    flex-grow: 1;
-                    
-                    overflow-x: hidden;
-
-                    background-color: $header-footer-bg-color;
-
-                    position: relative;
-                    
-                    ul {
-                        border-right: 1px solid $hamburger-menu-separator-color;
-
-                        overflow-x: hidden;
-                        overflow-y: auto;
-
-                        li {
-                            padding: 10px;
-                            border-bottom: 1px solid $hamburger-menu-separator-color;
-                        }
-                    }
-
-                    .menu, .submenu-container, .submenu {
-                        height: calc(100vh - #{$header-height});
-                    }
-                    
-                    .menu, .submenu-container {
-                        width: 100%;
-
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-
-                        background-color: inherit;
-                    }
-
-                    .menu {
-                        z-index: 1; // place the main menu in front of all submenus
-
-                        &.hidden {
-                            left: -100vw;
-                        }
-
-                        transition: left 300ms; // CSS transition for smooth slide into and out of view.
-                    }
-
-                    .submenu {
-                        &:not(.visible) {
-                            display: none;
-                        }
-                    }
-                }
-
-                .rest-of-screen {
-                    width: $header-height;
-                    background: linear-gradient(
-                        to right,
-                        rgba(black, 0.8),
-                        25%,
-                        rgba(black, 0.05)
-                    );
-                }
-            }
-        }
-    }
-
-    .search {
-        height: $search-icon-height;
-        padding-right: $header-padding-side;
-    }
-
-    .search-bar {
-        position: fixed;
-        top: $header-height;
-        left: 0;
-        width: 100vw;
-        z-index: -1; // TODO: temporary; remove when search button functional
-
-        /**
-         * The `visible` class is toggled on `.search-bar` via JS when the
-         * serach icon in the header is clicked.
-         * See `scripts/toggle-search-bar.js` for details.
-         */
-        &:not(.visible) {
-            top: -150vh;    // slide the menu off the top of the screen
-        }
-
-        transition: top 300ms; 
-
-        #search-form {
-            background-color: $header-footer-bg-color;
-            padding: 8px 5px;
-
-            /** TODO: Change this to correct colour; depends on section of website */
-            border-bottom: 1px solid $hamburger-menu-separator-color;
+                #search-field {
+                    width: 100%;
+                    height: 36px;
+                    padding: 5px 10px;
+                    border-radius: 18px;
             
-            #search-field {
-                width: 100%;
-                height: 36px;
-                padding: 5px 10px;
-                border-radius: 18px;
-        
-                font-size: 1.2em;
+                    font-size: 1.2em;
+                }
+            }
+
+            .rest-of-screen {
+                height: 100vh;
+                background: linear-gradient(
+                    to bottom,
+                    rgba(black, 0.8),
+                    $header-height,
+                    rgba(black, 0)
+                );
             }
         }
-
-        .rest-of-screen {
-            height: 100vh;
-            background: linear-gradient(
-                to bottom,
-                rgba(black, 0.8),
-                $header-height,
-                rgba(black, 0)
-            );
-        }
+        border-bottom: 5px solid #c00;
     }
+
+    // .section-indicator {
+    //     /** TODO: Change this to correct colour; depends on section of website */
+    //     height: 5px;
+    //     background-color: #c00;
+    // }
 }
 
 main {
+    /**
+     * Margin overlap fix 
+     * This prevents the first and list children of both `<main>` and `<footer>`
+     * from overlapping, and ensures that `<main>` and `<footer>` themselves are
+     * directly touching.
+     */
+     padding-bottom: 1px;
+
     background-color: $main-bg-color;
 
     color: $main-fg-color;
@@ -430,16 +434,6 @@ main {
     a {
         color: $main-fg-accent-color;
     }
-}
-
-main, footer {
-    /**
-     * Margin overlap fix 
-     * This prevents the first and list children of both `<main>` and `<footer>`
-     * from overlapping, and ensures that `<main>` and `<footer>` themselves are
-     * directly touching.
-     */
-     padding: 1px 0;
 }
 
 footer {
@@ -759,161 +753,167 @@ main.post {
 
 @media only screen and (min-width: 601px) {
     header {
-        .hamburger {
-            display: none;
-        }
-        
-        .central-element {
-            height: 100%;
-
-            display: flex;
-            align-items: center;
-            
-            /**
-             * In conjunction with the properties set on `nav`, this renders
-             * scrollable navigation of the correct width.
-             */
-            flex-grow: 1;
-
-            .logo {
-                padding-right: $header-nav-item-padding;
+        .content {
+            .hamburger {
+                display: none;
             }
-
-            nav {
-                display: block;
+            
+            .central-element {
                 height: 100%;
 
+                display: flex;
+                align-items: center;
+                
                 /**
-                 * Set the width of the `nav` to accomodate all of the space
-                 * between the `.logo` and `.search`.
-                 */
-                width: 0;
+                * In conjunction with the properties set on `nav`, this renders
+                * scrollable navigation of the correct width.
+                */
                 flex-grow: 1;
 
-                /** Overflow shadows */
+                .logo {
+                    padding-right: $header-nav-item-padding;
+                }
 
-                position: relative;
-
-                &::before, &::after {
-                    content: "";
-
+                nav {
+                    display: block;
                     height: 100%;
+
+                    /**
+                    * Set the width of the `nav` to accomodate all of the space
+                    * between the `.logo` and `.search`.
+                    */
                     width: 0;
-                    transition: width 100ms;
+                    flex-grow: 1;
+
+                    /** Overflow shadows */
+
+                    position: relative;
+
+                    &::before, &::after {
+                        content: "";
+
+                        height: 100%;
+                        width: 0;
+                        transition: width 100ms;
+                        
+                        position: absolute;
+                        top: 0;
+
+                        z-index: 1;
+                        pointer-events: none;
+                    }
+
+                    &.left-shadow::before {
+                        width: $header-nav-shadow-size;
+                    }
+
+                    &.right-shadow::after {
+                        width: $header-nav-shadow-size;
+                    }
+
+                    &::before {
+                        left: 0;
+                        background: linear-gradient(
+                            to right,
+                            rgba(black, 1),
+                            rgba(black, 0)
+                        );
+                    }
+
+                    &::after {
+                        right: 0;
+                        background: linear-gradient(
+                            to left,
+                            rgba(black, 1),
+                            rgba(black, 0)
+                        );
+                    }
+
+                    /** END - Overflow shadows */
                     
-                    position: absolute;
-                    top: 0;
-
-                    z-index: 1;
-                    pointer-events: none;
-                }
-
-                &.left-shadow::before {
-                    width: $header-nav-shadow-size;
-                }
-
-                &.right-shadow::after {
-                    width: $header-nav-shadow-size;
-                }
-
-                &::before {
-                    left: 0;
-                    background: linear-gradient(
-                        to right,
-                        rgba(black, 1),
-                        rgba(black, 0)
-                    );
-                }
-
-                &::after {
-                    right: 0;
-                    background: linear-gradient(
-                        to left,
-                        rgba(black, 1),
-                        rgba(black, 0)
-                    );
-                }
-
-                /** END - Overflow shadows */
-                
-                .menu-container {
-                    height: 100%;
-
-                    ul {
-                        display: flex;
+                    .menu-container {
                         height: 100%;
 
-                        overflow-x: auto;
-
-                        li {
-                            flex: 0 0 auto;
-        
+                        ul {
+                            display: flex;
                             height: 100%;
-                            
-                            a {
-                                display: flex;
-                                align-items: center;
 
-                                width: 100%;
+                            overflow-x: auto;
+
+                            li {
+                                flex: 0 0 auto;
+            
                                 height: 100%;
+                                
+                                a {
+                                    display: flex;
+                                    align-items: center;
 
-                                span {
-                                    padding: 0 $header-nav-item-padding;
-                                }
-                            }
+                                    width: 100%;
+                                    height: 100%;
 
-                            /** TODO: Remove sample colours when done testing. */
-                            &.tint:hover {
-                                &.red {
-                                    background-color: rgba(#c00, 0.35);
-                                }
-
-                                &.orange {
-                                    background-color: rgba(#c60, 0.35);
+                                    span {
+                                        padding: 0 $header-nav-item-padding;
+                                    }
                                 }
 
-                                &.yellow {
-                                    background-color: rgba(#cc0, 0.35);
-                                }
+                                /** TODO: Remove sample colours when done testing. */
+                                &.tint:hover {
+                                    &.red {
+                                        background-color: rgba(#c00, 0.35);
+                                    }
 
-                                &.green {
-                                    background-color: rgba(#0c0, 0.35);
-                                }
+                                    &.orange {
+                                        background-color: rgba(#c60, 0.35);
+                                    }
 
-                                &.blue {
-                                    background-color: rgba(#0ac, 0.35);
+                                    &.yellow {
+                                        background-color: rgba(#cc0, 0.35);
+                                    }
+
+                                    &.green {
+                                        background-color: rgba(#0c0, 0.35);
+                                    }
+
+                                    &.blue {
+                                        background-color: rgba(#0ac, 0.35);
+                                    }
                                 }
                             }
                         }
                     }
-                }
 
-                .submenu-container {
-                    position: fixed;
-                    top: $header-height;
-                    left: 0;
-                    width: 100vw;
-                    height: 0;
-
-                    background-color: #555; // TODO: temporary; remove when unnecessary
-
-                    &.visible {
+                    .submenu-container {
+                        position: fixed;
+                        top: $header-height;
+                        left: 0;
+                        width: 100vw;
                         height: auto;
-                    }
 
-                    .submenu {
-                        height: 45px;
-    
-                        .back-button {
-                            display: none;
+                        .submenu {
+                            display: block;
+                            height: $header-height - 6px;
+                            transition: height 300ms;
+
+                            &.visible {
+                                border-bottom: 1px solid white;
+                            }
+                            
+                            &:not(.visible) {
+                                height: 0;
+                            }
+        
+                            .back-button {
+                                display: none;
+                            }
                         }
                     }
                 }
             }
-        }
 
-        .search {
-            padding-left: $header-padding-side;
+            .search {
+                padding-left: $header-padding-side;
+            }
         }
     }
 
