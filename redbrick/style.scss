@@ -286,7 +286,7 @@ header {
                     * See `scripts/toggle-hamburger-menu.js` for details.
                     */
                     &:not(.visible) {
-                        left: -100vh;   // slide the menu off the left of the screen
+                        left: -100vw;   // slide the menu off the left of the screen
                     }
 
                     transition: left 300ms; // CSS transition for smooth slide into and out of view.
