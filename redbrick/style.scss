@@ -96,6 +96,9 @@ $post-excerpt-color: #555;
 
 /** END - Colors **/
 
+$admin-bar-height-mobile: 46px;
+$admin-bar-height-tablet: 32px;
+
 $breakpoint-mobile-max:     600px;
 $breakpoint-tablet-min:     $breakpoint-mobile-max + 1px;
 $breakpoint-tablet-max:     782px;
@@ -286,6 +289,9 @@ header {
                     width: 100vw;
 
                     height: calc(100vh - #{$header-height});
+                    body.admin-bar & {
+                        height: calc(100vh - #{$header-height + $admin-bar-height-mobile});
+                    }
 
                     /**
                     * The `visible` class is toggled on `<nav>` via JS when the
@@ -369,11 +375,20 @@ header {
         }
 
         .search-bar {
-            position: fixed;
-            top: $header-height;
-            left: 0;
             width: 100vw;
+            height: 100vh;
             z-index: -1; // TODO: temporary; remove when search button functional
+            
+            position: fixed;
+            left: 0;
+            top: $header-height;
+            body.admin-bar & {
+                top: $header-height + $admin-bar-height-mobile;
+
+                @media only screen and (min-width: $breakpoint-tablet-min) {
+                    top: $header-height + $admin-bar-height-tablet;
+                }
+            }
 
             /**
             * The `visible` class is toggled on `.search-bar` via JS when the
@@ -381,7 +396,11 @@ header {
             * See `scripts/toggle-search-bar.js` for details.
             */
             &:not(.visible) {
-                top: calc(-100vh - #{$header-height});    // slide the menu off the top of the screen
+                /**
+                 * Here, `!important` is used to directly override the `top`
+                 * value set when the admin bar is present.
+                 */ 
+                top: -100vh !important;
             }
 
             transition: top 300ms; 
@@ -404,7 +423,7 @@ header {
             }
 
             .rest-of-screen {
-                height: 100vh;
+                height: 100%;
                 background: linear-gradient(
                     to bottom,
                     rgba(black, 0.8),
