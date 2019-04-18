@@ -118,7 +118,7 @@
             <section class="most-popular">
                 <h2>Most popular</h2>
                 <ul>
-                <li class="post">
+                    <li class="post">
                         <div class="featured-image-box">
                             <?php /* TODO: get the featured image */ ?>
                             <img class="featured-image" src="<?php echo get_template_directory_uri(); ?>/assets/mockups/featured-image.jpg"/>

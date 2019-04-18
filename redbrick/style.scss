@@ -762,6 +762,27 @@ main.post {
         }
     }
 
+    .post-body {
+        .wp-block-pullquote {
+            text-align: left;
+            margin: #{3 * $spacing-default} 0;
+            padding: 0;
+
+            blockquote {
+                font-size: 1.8rem;
+
+                p {
+                    line-height: normal;
+                }
+                
+                .opening-quotemark {
+                    font-size: 3.5em;
+                    margin: -30px $spacing-default -72px 5px;
+                }
+            }
+        }
+    }
+
     .comments {
         // Margin overlap fix
         padding: 1px 0;
