@@ -100,35 +100,3 @@ if(!function_exists('redbrick_shortcode_do')) {
     }
 }
 add_shortcode('do', 'redbrick_shortcode_do');
-
-if(!function_exists('redbrick_shortcode_pullquote')) {
-    /**
-     * Implements legacy `do` shortcode used in older articles, whose
-     * functionality was previously implemented by a plugin (Shortcodes Pro
-     * by Matt Varone) that is no longer maintained.
-     * 
-     * @see https://wordpress.org/plugins/shortcodes-pro/
-     */
-    function redbrick_shortcode_pullquote($atts, $content, $shortcode_tag) {
-        if($content === null) {
-            return '';
-        }
-
-        if($shortcode_tag !== 'redbrick_pullquote') {
-            return $content;
-        }
-        $atts = shortcode_atts([], $atts, 'redbrick_pullquote');
-        
-        ob_start();
-        ?> 
-        <figure class="wp-block-pullquote">
-            <blockquote>
-                <div class="opening-quotemark">“</div>
-                <p><?php echo $content; ?></p>
-            </blockquote>
-        </figure>
-        <?php
-        return ob_get_clean();
-    }
-}
-// add_shortcode('redbrick_pullquote', 'redbrick_shortcode_pullquote');
