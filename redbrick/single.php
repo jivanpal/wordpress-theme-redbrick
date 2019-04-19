@@ -69,40 +69,41 @@
                 </div>
             </section>
         </article>
-    <?php endwhile; ?>
     
-    <aside class="recommended">
-        <div class="constraint-container">
-            <h1>Recommended</h1>
+    
+        <aside class="recommended">
+            <div class="constraint-container">
+                <h1>Recommended</h1>
 
-            <?php $redbrick_posts = redbrick_get_most_recent_posts(3, ['tv']); ?>
-            <?php if (count($redbrick_posts) != 0): ?>
-                <section class="more-posts">
-                    <h2>More in <span class="category tv" style="color: #0c0;">TV</span></h2>
-                    <ul>
-                        <?php
-                        foreach ($redbrick_posts as $redbrick_post) {
-                            echo redbrick_get_html_post_item($redbrick_post);
-                        }
-                        ?>
-                    </ul>
-                </section>
-            <?php endif; ?>
+                <?php $redbrick_posts = redbrick_get_most_recent_posts(3, [ get_the_category()[0] ]); ?>
+                <?php if (count($redbrick_posts) != 0): ?>
+                    <section class="more-posts">
+                        <h2>More in <span class="category tv" style="color: #0c0;">TV</span></h2>
+                        <ul>
+                            <?php
+                            foreach ($redbrick_posts as $redbrick_post) {
+                                echo redbrick_get_html_post_item($redbrick_post);
+                            }
+                            ?>
+                        </ul>
+                    </section>
+                <?php endif; ?>
 
-            <?php $redbrick_posts = redbrick_get_most_recent_posts(3, ['popular']); ?>
-            <?php if (count($redbrick_posts) != 0): ?>
-                <section class="most-popular">
-                    <h2>Most popular</h2>
-                    <ul>
-                        <?php
-                        foreach ($redbrick_posts as $redbrick_post) {
-                            echo redbrick_get_html_post_item($redbrick_post);
-                        }
-                        ?>
-                    </ul>
-                </section>
-            <?php endif; ?>
-        </div>
-    </aside>
+                <?php $redbrick_posts = redbrick_get_most_recent_posts(3, ['popular']); ?>
+                <?php if (count($redbrick_posts) != 0): ?>
+                    <section class="most-popular">
+                        <h2>Most popular</h2>
+                        <ul>
+                            <?php
+                            foreach ($redbrick_posts as $redbrick_post) {
+                                echo redbrick_get_html_post_item($redbrick_post);
+                            }
+                            ?>
+                        </ul>
+                    </section>
+                <?php endif; ?>
+            </div>
+        </aside>
+    <?php endwhile; ?>
 </main>
 <?php get_footer(); ?>

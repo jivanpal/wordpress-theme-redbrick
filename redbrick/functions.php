@@ -385,3 +385,51 @@ if (!function_exists('redbrick_get_html_showcase_item')) {
         return ob_get_clean();
     }
 }
+
+if (!function_exists('redbrick_put_yoast_primary_cat_first')) {
+    /**
+     * Given an array of the categories for a post, move the primary category
+     * for that post to the front of the array. The primary category feature is
+     * implemented by the Yoast SEO plugin. If this plugin is not installed or
+     * activated, the list of categories remains unchanged.
+     * 
+     * This filter allows the primary category for an arbitrary post to be found
+     * simply with `get_the_category($post_id)[0]`; for the global `$post`
+     * object, you can use `get_the_category()[0]`.
+     * 
+     * @param array $categories An array of all the categories that the post
+     *          belongs to.
+     * @param int|bool $post_id The ID of the post whose categories we're
+     *          dealing with. If unspecified or set to `0` or `false`, the ID
+     *          of the post represented by the global `$post` object is used. 
+     */
+    function redbrick_filter_primary_category_first($categories, $post_id) {
+        if (!$post_id) {
+            $post_id = get_the_id();
+        }
+
+        /**
+         * If the Yoast plugin exists (as indicated by the presense of the
+         * `WPSEO_Primary_Term` class) ...
+         */
+        if ($categories && class_exists('WPSEO_Primary_Term')) {
+            // Attempt to get the primary category as given by Yoast;
+            // result is `false` if no such category or an error occurs.
+            $primary_cat_id = (new WPSEO_Primary_Term('category', $post_id))->get_primary_term();
+
+            if ($primary_cat_id) {
+                // Make primary category the first entry in the array
+                foreach ($categories as $index => $category) {
+                    if ($category->term_id === $primary_cat_id) {
+                        $primary_cat_arr = array_splice($categories, $index, 1);
+                        array_splice($categories, 0, 0, $primary_cat_arr);
+                        break;
+                    }
+                }
+            }
+        }
+        
+        return $categories;
+    }
+}
+add_filter('get_the_categories', 'redbrick_filter_primary_category_first');
