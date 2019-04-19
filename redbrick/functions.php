@@ -435,3 +435,25 @@ if (!function_exists('redbrick_put_yoast_primary_cat_first')) {
     }
 }
 add_filter('get_the_categories', 'redbrick_filter_primary_category_first');
+
+if (!function_exists('redbrick_get_html_category_item')) {
+    /**
+     * Get a fully generated HTML `<li class="category">...</li>` item for a
+     * given category. The resulting HTML is intended for use in lists of
+     * categories, e.g. in the list of subsections on a section's main page.
+     * @param category A `WP_Term` object for the category. This function
+     *      performs no error checking, so it is the caller's responsibility to
+     *      check that the provided object is not null, is well-formed, and
+     *      represents a category that actually exists.
+     * @return string The HTML markup for the generated list item.
+     */
+    function redbrick_get_html_category_item($category) {
+        ob_start();
+        ?>
+        <li class="category">
+            <a href="<?php echo get_category_link($category); ?>"><?php echo esc_html($category->name); ?></a>
+        </li>
+        <?php
+        return ob_get_clean();
+    }
+}
