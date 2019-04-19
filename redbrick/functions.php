@@ -324,31 +324,63 @@ if (!function_exists('redbrick_get_html_post_item')) {
     function redbrick_get_html_post_item($post) {
         ob_start();
         ?>
-        <a href="<?php echo get_permalink($post); ?>">
-            <li class="post">
-                <div class="featured-image-box">
-                    <?php
-                    if (has_post_thumbnail($post)) {
-                        echo get_the_post_thumbnail($post, 'post-thumbnail', ['class' => 'featured-image']);
-                    }
-                    ?>
-                    <div class="text-overlay">
-                        <h3 class="title"><?php echo esc_html(get_the_title($post)); ?></h3>
-                        <div class="byline">
-                            <p>
-                                by <?php echo esc_html(redbrick_get_the_author_name($post)); ?>
-                                <time datetime="<?php echo get_the_date('Y-m-d', $post); ?>">on <?php echo get_the_date('', $post); ?></time>
-                            </p>
-                        </div>
+        <li class="post"><a href="<?php echo get_permalink($post); ?>">
+            <div class="featured-image-box">
+                <?php
+                if (has_post_thumbnail($post)) {
+                    echo get_the_post_thumbnail($post, 'post-thumbnail', ['class' => 'featured-image']);
+                }
+                ?>
+                <div class="text-overlay">
+                    <h3 class="title"><?php echo esc_html(get_the_title($post)); ?></h3>
+                    <div class="byline">
+                        <p>
+                            by <?php echo esc_html(redbrick_get_the_author_name($post)); ?>
+                            <time datetime="<?php echo get_the_date('Y-m-d', $post); ?>">on <?php echo get_the_date('', $post); ?></time>
+                        </p>
                     </div>
                 </div>
-                <?php if (has_excerpt($post)): ?>
-                    <div class="excerpt">
-                        <p><?php echo esc_html(get_the_excerpt($post)); ?></p>
-                    </div>
-                <?php endif; ?>
-            </li>
-        </a>
+            </div>
+            <?php if (has_excerpt($post)): ?>
+                <div class="excerpt">
+                    <p><?php echo esc_html(get_the_excerpt($post)); ?></p>
+                </div>
+            <?php endif; ?>
+        </a></li>
+        <?php
+        return ob_get_clean();
+    }
+}
+
+if (!function_exists('redbrick_get_html_showcase_item')) {
+    /**
+     * Get a fully generated HTML `<li class="showcase-item">...</li>` item for
+     * a given post. The resulting HTML is intended for use in the sliders on
+     * category pages and the front page.
+     * @param post A `WP_Post` object for the post. This function performs no
+     *      error checking, so it is the caller's responsibility to check that
+     *      the provided object is not null, is well-formed, and represents a
+     *      post that actually exists.
+     * @return string The HTML markup for the generated list item.
+     */
+    function redbrick_get_html_showcase_item($post) {
+        ob_start();
+        ?>
+        <li class="showcase-item">
+            <a href="<?php echo get_permalink($post); ?>">
+                <?php echo get_the_post_thumbnail($post, 'post-thumbnail', ['class' => 'featured-image']); ?>
+                <?php
+                /**
+                 * TODO: Set up tint colour based on permalink section;
+                 * test colours are 'red', 'orange', 'yellow', 'green', 'blue'
+                 */
+                ?>
+                <div class="tint blue"></div>
+                <div class="text-overlay">
+                    <h1 class="title"><?php echo esc_html(get_the_title($post)); ?></h1>
+                </div>
+            </a>
+        </li>
         <?php
         return ob_get_clean();
     }
