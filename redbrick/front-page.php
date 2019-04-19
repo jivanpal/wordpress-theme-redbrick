@@ -46,140 +46,123 @@
         <a href="#"><div class="content">Banner content</div></a>
     </div>
 
-    <section class="top-posts">
-        <p>Top posts here</p>
-        <?php /** TODO: Fetch some (e.g. three) articles from category "Top Stories" here */ ?>
-        <ul>
-        <?php
-            $redbrick_posts = redbrick_get_most_recent_posts(3, ['top-stories']);
-
-            foreach ($redbrick_posts as $redbrick_post) {
+    <?php $redbrick_posts = redbrick_get_most_recent_posts(3, ['top-stories']); ?>
+    <?php if(count($redbrick_posts) != 0): ?>
+        <section class="top-posts">
+            <ul>
+                <?php 
+                foreach ($redbrick_posts as $redbrick_post) {
+                    echo redbrick_get_html_post_item($redbrick_post);
+                }
                 ?>
-                <li class="post">
-                    <div class="featured-image-box">
-                        <?php
-                        if (has_post_thumbnail($redbrick_post)) {
-                            echo get_the_post_thumbnail($redbrick_post, 'post-thumbnail', ['class' => 'featured-image']);
-                        }
-                        ?>
-                        <div class="text-overlay">
-                            <h3 class="title"><?php echo esc_html(get_the_title($redbrick_post)); ?></h3>
-                            <div class="byline">
-                                <p>
-                                    by <?php echo esc_html(redbrick_get_the_author_name($redbrick_post)); ?>
-                                    <time datetime="<?php echo get_the_date('Y-m-d', $redbrick_post); ?>">on <?php echo get_the_date('', $redbrick_post); ?></time>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <?php if (has_excerpt($redbrick_post)): ?>
-                        <div class="excerpt">
-                            <p><?php echo esc_html(get_the_excerpt($redbrick_post)); ?></p>
-                        </div>
-                    <?php endif; ?>
-                </li>
-                <?php
-            }
-        ?>
-        </ul>
-    </section>
+            </ul>
+        </section>
+    <?php endif; ?>
 
-    <section class="comment-posts">
-        <p>Comment posts here</p>
-        <?php /** TODO: Fetch some (e.g. four) articles from category "Comment" here */ ?>
-    </section>
+    <?php $redbrick_posts = redbrick_get_most_recent_posts(4, ['comment']); ?>
+    <?php if(count($redbrick_posts) != 0): ?>
+        <section class="comment-posts">
+            <ul>
+                <?php 
+                foreach ($redbrick_posts as $redbrick_post) {
+                    echo redbrick_get_html_post_item($redbrick_post);
+                }
+                ?>
+            </ul>
+        </section>
+    <?php endif; ?>
 
-    <section class="featured-posts">
-        <p>Features posts here</p>
-        <?php /** TODO: Fetch some (e.g. four) articles from category "Features" here */ ?>
-    </section>
+    <?php $redbrick_posts = redbrick_get_most_recent_posts(4, ['features']); ?>
+    <?php if(count($redbrick_posts) != 0): ?>
+        <section class="featured-posts">
+            <ul>
+                <?php 
+                foreach ($redbrick_posts as $redbrick_post) {
+                    echo redbrick_get_html_post_item($redbrick_post);
+                }
+                ?>
+            </ul>
+        </section>
+    <?php endif; ?>
 
-    <section class="sport-posts">
-        <p>Sport posts here</p>
-        <?php
-            /**
-             * TODO: Fetch some (e.g. three) articles for the "Campus Sport"
-             * subsection here. These articles are fetched from the following
-             * categories:
-             * 
-             * +---------+--------------------------+---------------------+
-             * | term_id | name                     | slug                |
-             * +---------+--------------------------+---------------------+
-             * |    2280 | University Match Reports | uni-match-reports   |
-             * |    2281 | University Features      | university-features |
-             * +---------+--------------------------+---------------------+
-             */
-        ?>
-    </section>
+    <?php $redbrick_posts = redbrick_get_most_recent_posts(3, ['uni-match-reports', 'university-features']); ?>
+    <?php if(count($redbrick_posts) != 0): ?>
+        <section class="sport-posts">
+            <ul>
+                <?php 
+                foreach ($redbrick_posts as $redbrick_post) {
+                    echo redbrick_get_html_post_item($redbrick_post);
+                }
+                ?>
+            </ul>
+        </section>
+    <?php endif; ?>
 
-    <section class="other-posts">
-        <p>Other posts here</p>
-        <?php
-            /**
-             * TODO: Fetch some (e.g. three) of the latest articles here. These
-             * articles are fetched from a subset of (almost) all categories,
-             * namely those which are in the following table:
-             * 
-             * +---------+---------------------+-----------------------+
-             * | term_id | name                | slug                  |
-             * +---------+---------------------+-----------------------+
-             * |      41 | Review              | review                |
-             * |      46 | Preview             | preview               |
-             * |     164 | Science             | science               |
-             * |    1789 | Album Reviews       | album-reviews         |
-             * |    1843 | Debate              | debate-film           |
-             * |    1876 | Essentials          | music-essentials      |
-             * |    2263 | Features            | features-culture      |
-             * |    2264 | Fashion             | fashion               |
-             * |    2265 | Men's               | mens                  |
-             * |    2266 | Health              | health-lifestyle      |
-             * |    2267 | Fierce and Finished | fierce-and-finished   |
-             * |    2268 | Relationships       | sex-and-relationships |
-             * |    2269 | Campus Couture      | campus-couture        |
-             * |    2270 | Review              | review-food-2         |
-             * |    2271 | Recipes             | recipes               |
-             * |    2275 | Review              | review-film           |
-             * |    2276 | Film News           | film-news-film        |
-             * |    2283 | Travel News         | travel-news           |
-             * |    2284 | Features            | features-travel       |
-             * |    2288 | Single Reviews      | single-reviews        |
-             * |    2289 | Live Reviews        | live-reviews          |
-             * |    2290 | Review              | review-television     |
-             * |    2292 | Feature             | feature               |
-             * |    2360 | Gadgets             | technology-gadgets    |
-             * |    2361 | Features            | features-tech         |
-             * |    2388 | Gadget Reviews      | gadget-reviews        |
-             * |    2490 | Seasonal            | seasonal              |
-             * |    2517 | Restaurant Reviews  | restaurant            |
-             * |    2541 | UK                  | uk                    |
-             * |    2542 | Abroad              | abroad                |
-             * |    2543 | Tips                | tips-travel           |
-             * |    2665 | Top Five            | top-five              |
-             * |    2671 | Interview           | interview-television  |
-             * |    3140 | Features            | features-music        |
-             * |    3438 | Beauty              | beauty                |
-             * |    3859 | Previews            | previews-music        |
-             * +---------+---------------------+-----------------------+
-             */
-        ?>
-    </section>
+    <?php
+        $redbrick_posts = redbrick_get_most_recent_posts( 3,
+            [
+                'review',
+                'preview',
+                'science',
+                'album-reviews',
+                'debate-film',
+                'music-essentials',
+                'features-culture',
+                'fashion',
+                'mens',
+                'health-lifestyle',
+                'fierce-and-finished',
+                'sex-and-relationships',
+                'campus-couture',
+                'review-food-2',
+                'recipes',
+                'review-film',
+                'film-news-film',
+                'travel-news',
+                'features-travel',
+                'single-reviews',
+                'live-reviews',
+                'review-television',
+                'feature',
+                'technology-gadgets',
+                'features-tech',
+                'gadget-reviews',
+                'seasonal',
+                'restaurant',
+                'uk',
+                'abroad',
+                'tips-travel',
+                'top-five',
+                'interview-television',
+                'features-music',
+                'beauty',
+                'previews-music',
+            ]
+        );
+    ?>
+    <?php if(count($redbrick_posts) != 0): ?>
+        <section class="other-posts">
+            <ul>
+                <?php 
+                foreach ($redbrick_posts as $redbrick_post) {
+                    echo redbrick_get_html_post_item($redbrick_post);
+                }
+                ?>
+            </ul>
+        </section>
+    <?php endif; ?>
 
-    <section class="photography-posts">
-        <p>Photography posts here</p>
-        <?php
-            /**
-             * TODO: Fetch some (e.g. one) articles for the "Photography and
-             * Illustration" subsection here. These articles are fetched from the
-             * following categories:
-             * 
-             * +---------+--------------+--------------+
-             * | term_id | name         | slug         |
-             * +---------+--------------+--------------+
-             * |   80557 | Photography  | photos       |
-             * |   80558 | Illustration | illustration |
-             * +---------+--------------+--------------+
-             */
-        ?>
-    </section>
+    <?php $redbrick_posts = redbrick_get_most_recent_posts(3, ['photos', 'illustration']); ?>
+    <?php if(count($redbrick_posts) != 0): ?>
+        <section class="photography-posts">
+            <ul>
+                <?php 
+                foreach ($redbrick_posts as $redbrick_post) {
+                    echo redbrick_get_html_post_item($redbrick_post);
+                }
+                ?>
+            </ul>
+        </section>
+    <?php endif; ?>
 </main>
 <?php get_footer(); ?>

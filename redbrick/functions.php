@@ -309,3 +309,47 @@ if (!function_exists('redbrick_get_the_author_name')) {
         return $result;
     }
 }
+
+if (!function_exists('redbrick_get_html_post_item')) {
+    /**
+     * Get a fully generated HTML `<li class="post">...</li>` item for a given
+     * post. The resulting HTML is intended for use in lists of posts, e.g. on
+     * the front page, in "Read More" sections, etc.
+     * @param post A `WP_Post` object for the post. This function performs no
+     *      error checking, so it is the caller's responsibility to check that
+     *      the provided object is not null, is well-formed, and represents a
+     *      post that actually exists.
+     * @return string The HTML markup for the generated list item.
+     */
+    function redbrick_get_html_post_item($post) {
+        ob_start();
+        ?>
+        <a href="<?php echo get_permalink($post); ?>">
+            <li class="post">
+                <div class="featured-image-box">
+                    <?php
+                    if (has_post_thumbnail($post)) {
+                        echo get_the_post_thumbnail($post, 'post-thumbnail', ['class' => 'featured-image']);
+                    }
+                    ?>
+                    <div class="text-overlay">
+                        <h3 class="title"><?php echo esc_html(get_the_title($post)); ?></h3>
+                        <div class="byline">
+                            <p>
+                                by <?php echo esc_html(redbrick_get_the_author_name($post)); ?>
+                                <time datetime="<?php echo get_the_date('Y-m-d', $post); ?>">on <?php echo get_the_date('', $post); ?></time>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <?php if (has_excerpt($post)): ?>
+                    <div class="excerpt">
+                        <p><?php echo esc_html(get_the_excerpt($post)); ?></p>
+                    </div>
+                <?php endif; ?>
+            </li>
+        </a>
+        <?php
+        return ob_get_clean();
+    }
+}
