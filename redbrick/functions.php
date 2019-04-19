@@ -397,6 +397,8 @@ if (!function_exists('redbrick_put_yoast_primary_cat_first')) {
      * simply with `get_the_category($post_id)[0]`; for the global `$post`
      * object, you can use `get_the_category()[0]`.
      * 
+     * @see https://joshuawinn.com/using-yoasts-primary-category-in-wordpress-theme/#comment-107849
+     * 
      * @param array $categories An array of all the categories that the post
      *          belongs to.
      * @param int|bool $post_id The ID of the post whose categories we're
