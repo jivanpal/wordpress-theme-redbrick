@@ -49,6 +49,39 @@
     <section class="top-posts">
         <p>Top posts here</p>
         <?php /** TODO: Fetch some (e.g. three) articles from category "Top Stories" here */ ?>
+        <ul>
+        <?php
+            $redbrick_posts = redbrick_get_most_recent_posts(3, ['top-stories']);
+
+            foreach ($redbrick_posts as $redbrick_post) {
+                ?>
+                <li class="post">
+                    <div class="featured-image-box">
+                        <?php
+                        if (has_post_thumbnail($redbrick_post)) {
+                            echo get_the_post_thumbnail($redbrick_post, 'post-thumbnail', ['class' => 'featured-image']);
+                        }
+                        ?>
+                        <div class="text-overlay">
+                            <h3 class="title"><?php echo esc_html(get_the_title($redbrick_post)); ?></h3>
+                            <div class="byline">
+                                <p>
+                                    by <?php echo esc_html(redbrick_get_the_author_name($redbrick_post)); ?>
+                                    <time datetime="<?php echo get_the_date('Y-m-d', $redbrick_post); ?>">on <?php echo get_the_date('', $redbrick_post); ?></time>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <?php if (has_excerpt($redbrick_post)): ?>
+                        <div class="excerpt">
+                            <p><?php echo esc_html(get_the_excerpt($redbrick_post)); ?></p>
+                        </div>
+                    <?php endif; ?>
+                </li>
+                <?php
+            }
+        ?>
+        </ul>
     </section>
 
     <section class="comment-posts">

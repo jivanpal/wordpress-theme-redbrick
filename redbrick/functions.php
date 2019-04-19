@@ -76,7 +76,7 @@ if (!function_exists('redbrick_enqueue_styles_and_scripts')) {
 add_action('wp_enqueue_scripts', 'redbrick_enqueue_styles_and_scripts');
 
 /** TODO: Implement styles for Guild Council Motions, YouTube, and text boxes */
-if(!function_exists('redbrick_shortcode_do')) {
+if (!function_exists('redbrick_shortcode_do')) {
     /**
      * Implements legacy `do` shortcode used in older articles, whose
      * functionality was previously implemented by a plugin (Shortcodes Pro
@@ -230,3 +230,82 @@ if(!function_exists('redbrick_shortcode_do')) {
     }
 }
 add_shortcode('do', 'redbrick_shortcode_do');
+
+if (!function_exists('redbrick_get_cat_id_from_slug')) {
+    /**
+     * Retrive category ID from category slug.
+     * @param slug The slug of the category.
+     * @return int If failure occurs or no such category exists, returns 0;
+     *      else returns the ID of the category.
+     */
+    function redbrick_get_cat_id_from_slug($slug) {
+            $category = get_term_by('slug', $slug, 'category');
+            if ($category) {
+                return $category->term_id;
+            }
+            return 0;
+    }
+}
+
+if (!function_exists('redbrick_get_cat_ids_from_slug_arr')) {
+    /**
+     * Retrieve a list of category IDs from an array of category slugs.
+     * @param slugs The array of category slugs.
+     * @return string A comma-delimited string of category IDs, e.g. "32,8,7".
+     *      Any categories for which there was an error determining the ID or
+     *      which don't exist will not have an ID appear in the string. If no
+     *      IDs are determined, the string will be empty.
+     */
+    function redbrick_get_cat_ids_from_slug_arr($slugs) {
+        $ids = array_map('redbrick_get_cat_id_from_slug', $slugs);
+        foreach ($ids as $index => $id) {
+            if ($id == 0) {
+                unset($ids[$index]);
+            }
+        }
+        return implode(',' , $ids);
+    }
+}
+
+if (!function_exists('redbrick_get_most_recent_posts')) {
+    /**
+     * Retrieve some of the most recent posts from a given set of categories.
+     * @param numberposts The number of most recent posts to retrieve.
+     * @param categories An array of category slugs. These categories will be
+     *          searched.
+     * @return array An array of `WP_Post` objects, from most recent to oldest.
+     */
+    function redbrick_get_most_recent_posts($numberposts, $categories) {
+        $cat_ids = redbrick_get_cat_ids_from_slug_arr($categories);
+        if ($cat_ids == '') {
+            return [];
+        }
+
+        return get_posts( [
+            'numberposts'   => $numberposts,
+            'category'      => $cat_ids,
+        ] );
+    }
+}
+
+if (!function_exists('redbrick_get_the_author_name')) {
+    /**
+     * Get the name of the author of a given post.
+     * @param post `WP_Post` object for the post in question.
+     * @return string The display name of the author for that post. If there is
+     *      no such post/author or an error occurred, returns the string "NULL".
+     */
+    function redbrick_get_the_author_name($post) {
+        if ($post->post_author == '0') {
+            return 'NULL';
+        }
+
+        $result = get_the_author_meta('display_name', $post->post_author);
+
+        if ($result == '') {
+            return 'NULL';
+        }
+
+        return $result;
+    }
+}
