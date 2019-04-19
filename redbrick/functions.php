@@ -70,6 +70,7 @@ if (!function_exists('redbrick_enqueue_styles_and_scripts')) {
 }
 add_action('wp_enqueue_scripts', 'redbrick_enqueue_styles_and_scripts');
 
+/** TODO: Implement styles for Guild Council Motions, YouTube, and text boxes */
 if(!function_exists('redbrick_shortcode_do')) {
     /**
      * Implements legacy `do` shortcode used in older articles, whose
@@ -79,16 +80,123 @@ if(!function_exists('redbrick_shortcode_do')) {
      * @see https://wordpress.org/plugins/shortcodes-pro/
      */
     function redbrick_shortcode_do($atts) {
-        $atts = shortcode_atts( ['action' => 'NULL', 'quote' => 'NULL'], $atts, 'do');
-        
-        if ($atts['action'] != 'shortcode') {
-            return '';
+        /**
+         * Attributes are as follows:
+         * 
+         * • `action` is one of the following:
+         *   • `box` — for a text box with a title
+         *   • `guild-council-motions` — template for Guild Council Motion entries
+         *   • `shortcode` — for pullquotes
+         *   • `youtube` — for YouTube embeds
+         * 
+         * Attributes for `action = box`:
+         *   • `title` — the title for the text box
+         *   • `text` — the text inside the text box
+         *   • `align` — the float for the text box. Its value is one of:
+         *       • `fullwidth` — no float, the box spans the full width of the
+         *           column it resides in
+         *       • `left` — float left
+         *       • `right` — float right
+         * 
+         *  Attributes for `action = guild-council-motions`:
+         *   • `title` — title for the motion.
+         *   • `proposer` — person who proposed the motion
+         *   • `summary` — summary of the motion
+         *   • `status` — status of the motion. Its value is one of:
+         *       • ` ` (single space character) — "Motion to be discussed"
+         *       • `thumbs-o-up` — "Motion passed"
+         *       • `thumbs-o-down` — "Motion rejected"
+         *       • `times-circle` — "Motion withdrawn"
+         *       • `calendar` — "Motion deferred"
+         * 
+         * • Attributes for `action = shortcode`:
+         *   • `quote` — the text for the pullquote
+         *   • `section` — the slug of the newspaper section whose colour should
+         *       be used for the text; this is actually ignored (since the style
+         *       guide dictates that the colour of the section to which the
+         *       article belongs should be used) but is kept here for
+         *       documentation's sake.
+         *   • `align` — the float for the quote. Its value is one of:
+         *       • `fullwidth` — no float, the text spans the full width of the
+         *           column it resides in
+         *       • `left` — float left
+         *       • `right` — float right
+         *   • `size` — the size of the pullquote text. Its value is one of:
+         *       • `normal`
+         *       • `small`
+         *       • `smallest`
+         * 
+         * Attributes for `action = youtube`:
+         *   • `id` — the YouTube video ID, as seen in the query string's `v`
+         *       attribute's value, e.g. in the URLs `https://www.youtube.com/watch?v=orkYm6o6B8s&list=RDAEiQ8UGWDWY&index=2`
+         *       and `https://youtu.be/orkYm6o6B8s`, the video ID is `orkYm6o6B8s`.
+         *   • `align` — the float for the video embed. Its value is one of:
+         *       • `fullwidth` — no float, the embed spans the full width of the
+         *           column it resides in
+         *       • `left` — float left
+         *       • `right` — float right
+         */
+
+        $atts = shortcode_atts(
+            [   /** Array containing all legal attribute keys and their default values (here 'NULL' for compatibility */
+                'action'    => 'NULL',
+                'align'     => 'NULL',
+                'id'        => 'NULL',
+                'proposer'  => 'NULL',
+                'quote'     => 'NULL',
+                'section'   => 'NULL',
+                'size'      => 'NULL',
+                'status'    => 'NULL',
+                'summary'   => 'NULL',
+                'text'      => 'NULL',
+                'title'     => 'NULL',
+            ],
+            $atts,
+            'do'
+        );
+
+        if ($atts['action'] == 'box') {
+            ob_start();
+            ?>
+            <div class="box <?php echo $atts['align']; ?>">
+                <h2><?php echo $atts['title']; ?></h2>
+                <?php echo $atts['text']; ?>
+            </div>'
+            <?php
+            return ob_get_clean();
         }
 
-        if ($atts['quote'] != 'NULL') {
+        if ($atts['action'] == 'guild-council-motions') {
+            ob_start();
+            ?>
+            <dt>
+                <div style="display: inline-block; max-width: 90%;">
+                    <?php echo $atts['title']; ?>
+                </div>
+                <div style="float: right; display: inline-block; padding-right: 5px; box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box;">
+                    <i class="fa fa-<?php echo $atts['status']; ?>"></i>
+                </div>
+            </dt>
+            <dd>
+                <b>Proposed by:</b> <?php echo $atts['proposer']; ?>
+                <br />
+                <b>Summary:</b> <?php echo $atts['summary']; ?>
+            </dd>
+            <?php
+            return ob_get_clean();
+        }
+        
+        if ($atts['action'] == 'shortcode') {
+            if ($atts['quote'] == 'NULL') {
+                return '';
+            }
+            $class_section  = $atts['section'] == 'NULL'                                    ? ' '            : (' section-' . $atts['section']);
+            $class_float    = $atts['align']   == 'NULL' || $atts['align'] == 'fullwidth'   ? ''             : (' float-'   . $atts['align']);
+            $class_size     = $atts['size']    == 'NULL'                                    ? ' size-normal' : (' size-'    . $atts['size']);
+            
             ob_start();
             ?> 
-            <figure class="wp-block-pullquote">
+            <figure class="wp-block-pullquote<?php echo $class_section . $class_float . $class_size; ?>">
                 <blockquote>
                     <div class="opening-quotemark">“</div>
                     <p><?php echo $atts['quote']; ?></p>
@@ -97,6 +205,23 @@ if(!function_exists('redbrick_shortcode_do')) {
             <?php
             return ob_get_clean();
         }
+        
+        if ($atts['action'] == 'youtube') {
+            ob_start();
+            ?>
+            <div class="<?php echo $atts['align']; ?> youtube<?php echo $atts['align']; ?>">
+                <iframe
+                    width="100%"
+                    height="100%"
+                    src="https://www.youtube.com/embed/<?php echo $atts['id']; ?>?rel=0"
+                    frameborder="0"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <?php
+            return ob_get_clean();
+        }
+        
     }
 }
 add_shortcode('do', 'redbrick_shortcode_do');
