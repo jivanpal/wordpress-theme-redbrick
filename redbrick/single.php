@@ -3,8 +3,7 @@
     <?php while (have_posts()) : the_post(); ?>
         <article>
             <div class="featured-image-box">
-                <?php /** TODO: Fetch actual post thumbnail here */ ?>
-                <img class="featured-image" src="<?php echo get_template_directory_uri(); ?>/assets/mockups/featured-image.jpg"/>
+                <?php the_post_thumbnail('post-thumbnail', ['class' => 'featured-image']); ?>
                 <div class="text-overlay">
                     <div class="constraint-container">
                         <h1 class="title"><?php the_title(); ?></h1>
@@ -16,39 +15,33 @@
             <div class="constraint-container">
                 <div class="info-box">
                     <?php
-                        /**
-                         * TODO: Fetch actual boolean value for whether the author
-                         * has a profile picture set. Literal `true` or `false`
-                         * used for debugging.
-                         */
-                        $author_has_profile_picture = true;
+                        $author_profile_picture_url = get_avatar_url(get_post());
+                        $author_has_profile_picture = $author !== false;
                     ?>
                     <div class="author-box">
                         <?php if ($author_has_profile_picture) : ?>
-                            <?php /** TODO: Fetch actual author image here */ ?>
-                            <img class="image" src="<?php echo get_template_directory_uri(); ?>/assets/mockups/alice_landray.jpg"/>
+                            <img class="image" src="<?php echo $author_profile_picture_url; ?>"/>
                         <?php endif; ?>
                         <div class="author-details">
                             <div class="author-name">
                                 <?php if (!$author_has_profile_picture): ?>Written by<?php endif; ?>
                                 <?php the_author(); ?>
                             </div>
-                            <?php /** TODO: Fetch actual bio here */ ?>
-                            <div class="author-bio">Food&amp;Drink Online Editor, English literature student.</div>
+                            <div class="author-bio"><?php the_author_meta('description'); ?></div>
                         </div>
                     </div>
                     <div class="timestamps">
                         <div class="publish-time">
                             <span class="label">Published</span>
-                            <?php /* TODO: Fetch actual publish date */ ?>
-                            <time datetime="2019-03-04T18:00Z">at 18:00 on 4 March 2019</time>
+                            <time datetime="<?php the_time('c'); ?>">at <?php the_time(); ?> on <?php the_date(); ?></time>
                         </div>
-                        <?php /* TODO: if post has been modified after publish date ... */ ?>
-                        <div class="update-time">
-                            <span class="label">Last updated</span>
-                            <?php /* TODO: Fetch actual date last modified */ ?>
-                            <time datetime="2019-03-05T18:29Z">at 18:29 on 5 March 2019</time>
-                        </div>
+                        <?php $seconds_between_publish_and_last_modification = ((int)get_the_modified_time('U')) - ((int)get_the_time('U')); ?>
+                        <?php if ($seconds_between_publish_and_last_modification > 0): ?>
+                            <div class="update-time">
+                                <span class="label">Last updated</span>
+                                <time datetime="<?php the_modified_time('c'); ?>">at <?php the_modified_time(); ?> on <?php the_modified_date(); ?></time>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
 
