@@ -75,85 +75,33 @@
         <div class="constraint-container">
             <h1>Recommended</h1>
 
-            <section class="more-posts">
-                <h2>More in <span class="category tv" style="color: #0c0;">TV</span></h2>
-                <ul>
-                    <li class="post">
-                        <div class="featured-image-box">
-                            <?php /* TODO: get the featured image */ ?>
-                            <img class="featured-image" src="<?php echo get_template_directory_uri(); ?>/assets/mockups/featured-image.jpg"/>
-                            <div class="text-overlay">
-                                <h3 class="title"><?php /* TODO: get the title */ echo 'Example title' ?></h3>
-                                <div class="byline">
-                                    <?php /* TODO: get the actual author name and publish time */ ?>
-                                    <p>by Jivan Pal <time datetime="2019-03-05">on 5 March 2019</time></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="excerpt">
-                            <?php /** TODO: get the excerpt */ ?>
-                            <p>This is an example of an excerpt for an article. Read the article for more.</p>
-                        </div>
-                    </li>
-                    <li class="post">
-                        <div class="featured-image-box">
-                            <?php /* TODO: get the featured image */ ?>
-                            <img class="featured-image" src="<?php echo get_template_directory_uri(); ?>/assets/mockups/featured-image.jpg"/>
-                            <div class="text-overlay">
-                                <h3 class="title"><?php /* TODO: get the title */ echo 'Example title' ?></h3>
-                                <div class="byline">
-                                    <?php /* TODO: get the actual author name and publish time */ ?>
-                                    <p>by Jivan Pal <time datetime="2019-03-05">on 5 March 2019</time></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="excerpt">
-                            <?php /** TODO: get the excerpt */ ?>
-                            <p>This is an example of an excerpt for an article. Read the article for more.</p>
-                        </div>
-                    </li>
-                </ul>
-            </section>
+            <?php $redbrick_posts = redbrick_get_most_recent_posts(3, ['tv']); ?>
+            <?php if (count($redbrick_posts) != 0): ?>
+                <section class="more-posts">
+                    <h2>More in <span class="category tv" style="color: #0c0;">TV</span></h2>
+                    <ul>
+                        <?php
+                        foreach ($redbrick_posts as $redbrick_post) {
+                            echo redbrick_get_html_post_item($redbrick_post);
+                        }
+                        ?>
+                    </ul>
+                </section>
+            <?php endif; ?>
 
-            <section class="most-popular">
-                <h2>Most popular</h2>
-                <ul>
-                    <li class="post">
-                        <div class="featured-image-box">
-                            <?php /* TODO: get the featured image */ ?>
-                            <img class="featured-image" src="<?php echo get_template_directory_uri(); ?>/assets/mockups/featured-image.jpg"/>
-                            <div class="text-overlay">
-                                <h3 class="title"><?php /* TODO: get the title */ echo 'Example title' ?></h3>
-                                <div class="byline">
-                                    <?php /* TODO: get the actual author name and publish time */ ?>
-                                    <p>by Jivan Pal <time datetime="2019-03-05">on 5 March 2019</time></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="excerpt">
-                            <?php /** TODO: get the excerpt */ ?>
-                            <p>This is an example of an excerpt for an article. Read the article for more.</p>
-                        </div>
-                    </li>
-                    <li class="post">
-                        <div class="featured-image-box">
-                            <?php /* TODO: get the featured image */ ?>
-                            <img class="featured-image" src="<?php echo get_template_directory_uri(); ?>/assets/mockups/featured-image.jpg"/>
-                            <div class="text-overlay">
-                                <h3 class="title"><?php /* TODO: get the title */ echo 'Example title' ?></h3>
-                                <div class="byline">
-                                    <?php /* TODO: get the actual author name and publish time */ ?>
-                                    <p>by Jivan Pal <time datetime="2019-03-05">on 5 March 2019</time></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="excerpt">
-                            <?php /** TODO: get the excerpt */ ?>
-                            <p>This is an example of an excerpt for an article. Read the article for more.</p>
-                        </div>
-                    </li>
-                </ul>
-            </section>
+            <?php $redbrick_posts = redbrick_get_most_recent_posts(3, ['popular']); ?>
+            <?php if (count($redbrick_posts) != 0): ?>
+                <section class="most-popular">
+                    <h2>Most popular</h2>
+                    <ul>
+                        <?php
+                        foreach ($redbrick_posts as $redbrick_post) {
+                            echo redbrick_get_html_post_item($redbrick_post);
+                        }
+                        ?>
+                    </ul>
+                </section>
+            <?php endif; ?>
         </div>
     </aside>
 </main>

@@ -71,7 +71,7 @@
     <?php endif; ?>
 
     <?php
-        $redbrick_posts = redbrick_get_most_recent_posts( 3,
+        $redbrick_posts = redbrick_get_most_recent_posts( 3 ,
             [
                 'review',
                 'preview',
