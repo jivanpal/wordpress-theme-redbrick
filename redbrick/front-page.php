@@ -47,22 +47,22 @@
     </div>
 
     <section class="top-posts">
-        Top posts here
+        <p>Top posts here</p>
         <?php /** TODO: Fetch some (e.g. three) articles from category "Top Stories" here */ ?>
     </section>
 
     <section class="comment-posts">
-        Comment posts here
+        <p>Comment posts here</p>
         <?php /** TODO: Fetch some (e.g. four) articles from category "Comment" here */ ?>
     </section>
 
     <section class="featured-posts">
-        Features posts here
+        <p>Features posts here</p>
         <?php /** TODO: Fetch some (e.g. four) articles from category "Features" here */ ?>
     </section>
 
     <section class="sport-posts">
-        Sport posts here
+        <p>Sport posts here</p>
         <?php
             /**
              * TODO: Fetch some (e.g. three) articles for the "Campus Sport"
@@ -80,7 +80,7 @@
     </section>
 
     <section class="other-posts">
-        Other posts here
+        <p>Other posts here</p>
         <?php
             /**
              * TODO: Fetch some (e.g. three) of the latest articles here. These
@@ -132,7 +132,7 @@
     </section>
 
     <section class="photography-posts">
-        Photography posts here
+        <p>Photography posts here</p>
         <?php
             /**
              * TODO: Fetch some (e.g. one) articles for the "Photography and

@@ -449,7 +449,7 @@ main {
      * from overlapping, and ensures that `<main>` and `<footer>` themselves are
      * directly touching.
      */
-     padding-bottom: 1px;
+    padding-bottom: 1px;
 
     background-color: $main-bg-color;
 
@@ -690,6 +690,40 @@ footer {
 }
 
 // Page classes
+
+main.home {
+    /**
+     * Force container to contain margins
+     * This prevents the bounding box for a `<section>` element form not
+     * containinng the margins of children at its extremeties. This is
+     * necessary in order for margins and background colours to function as
+     * intended.
+     */
+    section {
+        padding-top: 1px;
+        padding-bottom: 1px;
+    }
+
+    /** TODO: Remove sample colours when done testing */
+    section.top-posts {
+        background-color: red;
+    }
+    section.comment-posts {
+        background-color: purple;
+    }
+    section.featured-posts {
+        background-color: gold;
+    }
+    section.sport-posts {
+        background-color: lightgreen;
+    }
+    section.other-posts {
+        background-color: #777;
+    }
+    section.photography-posts {
+        background-color: #555;
+    }
+}
 
 main.post {
     // Column width constraints

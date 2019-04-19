@@ -17,8 +17,13 @@ if (!function_exists('redbrick_enqueue_styles_and_scripts')) {
      * Enqueue stylesheets and scripts for this theme.
      */
     function redbrick_enqueue_styles_and_scripts() {
-        // Load `style.css`
-        wp_enqueue_style('style', get_stylesheet_uri());
+        // Load main stylesheet `style.css`
+        wp_enqueue_style(
+            'style',
+            get_stylesheet_uri(),
+            [],     // dependencies
+            time()  // version number // TODO: set actual version number rather than `time()`
+        );
 
         // Load `comment-reply` script if the page requires it
         if (   !is_admin()
@@ -34,7 +39,7 @@ if (!function_exists('redbrick_enqueue_styles_and_scripts')) {
             'redbrick_overflow-shadows',
             get_template_directory_uri() . '/scripts/overflow-shadows.js',
             [],         // dependencies
-            time(),     // version  // TODO: set actual version number rather than `time()`
+            time(),     // version number // TODO: set actual version number rather than `time()`
             true        // enqueue in footer (rather than head)
         );
 
@@ -43,7 +48,7 @@ if (!function_exists('redbrick_enqueue_styles_and_scripts')) {
             'redbrick_handle-navigation-menus',
             get_template_directory_uri() . '/scripts/handle-navigation-menus.js',
             [ 'redbrick_toggle-hamburger-menu' ],         // dependencies
-            time(),     // version  // TODO: set actual version number rather than `time()`
+            time(),     // version number // TODO: set actual version number rather than `time()`
             true        // enqueue in footer (rather than head)
         );
         
@@ -52,7 +57,7 @@ if (!function_exists('redbrick_enqueue_styles_and_scripts')) {
             'redbrick_toggle-hamburger-menu',
             get_template_directory_uri() . '/scripts/toggle-hamburger-menu.js',
             [],         // dependencies
-            time(),     // version  // TODO: set actual version number rather than `time()`
+            time(),     // version number // TODO: set actual version number rather than `time()`
             true        // enqueue in footer (rather than head)
         );
 
@@ -61,7 +66,7 @@ if (!function_exists('redbrick_enqueue_styles_and_scripts')) {
             'redbrick_toggle-search-bar',
             get_template_directory_uri() . '/scripts/toggle-search-bar.js',
             [],         // dependencies
-            time(),     // version  // TODO: set actual version number rather than `time()`
+            time(),     // version number // TODO: set actual version number rather than `time()`
             true        // enqueue in footer (rather than head)
         );
 
