@@ -457,3 +457,151 @@ if (!function_exists('redbrick_get_html_category_item')) {
         return ob_get_clean();
     }
 }
+
+if (!function_exists('redbrick_register_menus')) {
+    /**
+     * Register the custom header and footer navigation menus with WordPress.
+     */
+    function redbrick_register_menus() {
+        register_nav_menus( [
+            'redbrick_nav_menu_header'  => 'Header Menu',
+            'redbrick_nav_menu_footer'  => 'Footer Menu',
+        ] );
+    }
+}
+add_action('init', 'redbrick_register_menus');
+
+if (!function_exists('redbrick_get_nav_menu_object_at_location')) {
+    /**
+     * Get the navigation menu object for the menu which is assigned to a given
+     * navigation menu location.
+     * @param string $nav_menu_location The name of the navigation menu
+     *          location to fetch the menu from.
+     * @return WP_Term|false The menu object; `false` if no such menu or an
+     *          error occurs.
+     */
+    function redbrick_get_nav_menu_object_at_location($nav_menu_location) {
+        $locations = get_nav_menu_locations();
+        if (isset($locations[$nav_menu_location])) {
+            return wp_get_nav_menu_object($locations[$nav_menu_location]);
+        }
+        return false;
+    }
+}
+
+if (!function_exists('redbrick_build_nav_menu_tree')) {
+    /**
+     * Build a tree-like structure of the items in an array.
+     * @param array $elements The array of items from which to generate the
+     *          tree. Each item must have a field `int ID`, and a field
+     *          `int menu_item_parent` which is set to the ID of its parent item
+     *          as seen in this array (or set to `0` if the item is a
+     *          top-level item). The array will be modified in place for
+     *          efficiency, i.e. this operation is destructive (and will reduce
+     *          a fully-formed array to an empty array) so create a copy
+     *          of `$elements` beforehand if necessary.
+     * @param int $parent_id The ID of the parent item for the branch we're
+     *          currently constructing; used internally by the function, since
+     *          it is recursive in nature.
+     * 
+     * @see https://wordpress.stackexchange.com/a/196038
+     */
+    function redbrick_build_array_tree(array &$elements, $parent_id = 0) {
+        $branch = [];
+        foreach ($elements as $element) {
+            if ($element->menu_item_parent == $parent_id) {
+                $children = redbrick_build_array_tree($elements, $element->ID);
+                if ($children) {
+                    $element->redbrick_children = $children;
+                }
+                $branch[$element->ID] = $element;
+                unset($element);
+            }
+        }
+        return $branch;
+    }
+}
+
+if (!function_exists('redbrick_get_nav_menu_items_tree')) {
+    /**
+     * Get a tree-like array of the items in a given navigation menu. 
+     * @param int|string|WP_Term $menu The ID, slug, or object for the
+     *          navigation menu. Such an object can be obtained by the likes of
+     *          `wp_get_nav_menu_object()` or
+     *          `redbrick_get_nav_menu_object_at_location()`.
+     * @return array|null `null` if no such menu exists; else: an array of the
+     *          top-level items in the given navigation menu. Each item is an
+     *          object as returned by `wp_get_nav_menu_items()`, but also with
+     *          a `redbrick_children` field, which is an array of the child
+     *          items for that top-level item. In turn, child items have their
+     *          own `redbrick_children` field for their children, etc.
+     * 
+     * @see https://wordpress.stackexchange.com/a/196038
+     */
+    function redbrick_get_nav_menu_items_tree($menu) {
+        $items = wp_get_nav_menu_items($menu);
+        return $items ? redbrick_build_nav_menu_tree($items) : [] ;
+    }
+}
+
+if (!function_exists('redbrick_get_html_header_menu_item')) {
+    /**
+     * Get a fully generated `<li class="[has-submenu] ...">...</li>` item for
+     * a given header menu item. This markup is to be used within the
+     * `<ul class="menu">...</ul>` element in `header.php`.
+     */
+    function redbrick_get_html_header_menu_item($item_id, $item) {
+        $item_has_children = isset($item->redbrick_children) && (count($item->redbrick_children) != 0);
+        /**
+         * TODO: Set proper tint colour in `<li class="...">`.
+         * Test colours are 'red', 'orange', 'yellow', 'green', 'blue';
+         * remove these when no longer needed.
+         */
+        ob_start();
+        ?>
+        <li class="<?php if ($item_has_children): ?>has-submenu<?php endif; ?> tint red">
+            <?php if (!$item_has_children): ?><a href="<?php echo $item['url']; ?>"><?php endif; ?>
+                <span class="item-<?php echo $item_id; ?>">
+                    <?php echo $item['title']; ?><?php if ($item_has_children): ?> &gt;<?php endif; ?>
+                </span>
+            <?php if (!$item_has_children): ?></a><?php endif; ?>
+        </li>
+        <?php
+        return ob_get_clean();
+    }
+}
+
+if (!function_exists('redbrick_get_html_header_submenu_from_item')) {
+    /**
+     * Get a fully generated `<ul class="submenu item-xx">...</ul>` item for a
+     * given header menu item. This markup is to be used within the
+     * `<div clas="submenu-container">...</div>` element in `header.php`.
+     * If the specific header menu item has no children, i.e. does not have a
+     * submenu, this function returns an empty string, since no markup is
+     * needed for that item.
+     */
+    function redbrick_get_html_header_submenu_from_item($item_id, $item) {
+        $item_has_children = isset($item->redbrick_children) && (count($item->redbrick_children) != 0);
+        if (!$item_has_children) {
+            return '';
+        }
+        ob_start();
+        ?>
+        <ul class="submenu item-<?php echo $item_id; ?>">
+            <li class="back-button">
+                <span>&lt; Back</span>
+            </li>
+            <li><a href="<?php echo $item['url']; ?>">
+                <span>All <?php echo $item['title']; ?></span>
+            </a></li>
+            <?php foreach ($item->redbrick_children as $subitem_id => $subitem): ?>
+                <li><a href="<?php echo $subitem['url']; ?>">
+                    <?php echo $subitem['title']; ?>
+                </a></li>
+            <?php endforeach; ?>
+        </ul>
+        <?php
+        return ob_get_clean();
+    }
+}
+

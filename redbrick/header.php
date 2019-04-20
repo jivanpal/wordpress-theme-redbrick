@@ -12,124 +12,44 @@
                     <?php echo file_get_contents(get_template_directory() . '/assets/hamburger.svg'); ?>
                 </div>
                 <div class="central-element">
-                    <a href="/">
-                        <div class="logo">
+                    <div class="logo">
+                        <a href="/">
                             <div class="icon">
                                 <?php echo file_get_contents(get_template_directory() . '/assets/redbrick-icon.svg'); ?>
                             </div>
                             <div class="wordmark">
                                 <?php echo file_get_contents(get_template_directory() . '/assets/redbrick-wordmark.svg'); ?>
                             </div>
-                        </div>
-                    </a>
+                        </a>
+                    </div>
+                    <?php $redbrick_nav_menu_tree = redbrick_get_nav_menu_items_tree(redbrick_get_nav_menu_object_at_location('redbrick_nav_menu_header')); ?>
                     <nav>
                         <div class="menu-container">
                             <ul class="menu">
                                 <?php
-                                    /**
-                                     * TODO: Fetch navigation items from an
-                                     * admin-configurable WordPress menu here.
-                                     */
+                                foreach ($redbrick_nav_menu_tree as $redbrick_item_id => $redbrick_item) {
+                                    echo redbrick_get_html_header_menu_item($redbrick_item_id, $redbrick_item);
+                                }
                                 ?>
-                                <li class="has-submenu tint red"><a href="#">
-                                    <span class="news">News</span>
-                                </a></li>
-                                <li class="has-submenu tint orange"><a href="#">
-                                    <span class="comment">Comment</span>
-                                </a></li>
-                                <li class="tint yellow"><a href="/culture">
-                                    <span class="culture">Culture</span>
-                                </a></li>
-                                <li class="tint green"><a href="/music">
-                                    <span class="music">Music</span>
-                                </a></li>
-                                <li class="tint blue"><a href="/film">
-                                    <span class="film">Film</span>
-                                </a></li>
-                                <li class="tint red"><a href="/tv">
-                                    <span class="tv">TV</span>
-                                </a></li>
-                                <li class="tint orange"><a href="/gaming">
-                                    <span class="gaming">Gaming</span>
-                                </a></li>
-                                <li class="tint yellow"><a href="/food-and-drink">
-                                    <span class="food-drink">Food&amp;Drink</span>
-                                </a></li>
-                                <li class="tint green"><a href="/travel">
-                                    <span class="travel">Travel</span>
-                                </a></li>
-                                <li class="tint blue"><a href="/life-and-style">
-                                    <span class="life-style">Life&amp;Style</span>
-                                </a></li>
-                                <li class="tint red"><a href="/sci-and-tech">
-                                    <span class="sci-tech">Sci&amp;Tech</span>
-                                </a></li>
-                                <li class="tint orange"><a href="/sport">
-                                    <span class="sport">Sport</span>
-                                </a></li>
-                                <li class="tint yellow"><a href="/features">
-                                    <span>Features</span>
-                                </a></li>
-                                <li class="tint green"><a href="/radio">
-                                    <span>Radio</span>
-                                </a></li>
                             </ul>
                             <div class="submenu-container">
-                                <ul class="submenu news" style="background-color: #c00;">
-                                    <li class="back-button"><a href="#">
-                                        <span>&lt; Back</span>
-                                    </a></li>
-                                    <li><a href="#">
-                                        <span>All News</span>
-                                    </a></li>
-                                    <li><a href="#">
-                                        <span>Guild of Students</span>
-                                    </a></li>
-                                    <li><a href="#">
-                                        <span>Campus</span>
-                                    </a></li>
-                                    <li><a href="#">
-                                        <span>Selly Oak</span>
-                                    </a></li>
-                                    <li><a href="#">
-                                        <span>Birmingham</span>
-                                    </a></li>
-                                    <li><a href="#">
-                                        <span>National</span>
-                                    </a></li>
-                                </ul>
-                                <ul class="submenu comment" style="background-color: #0c0">
-                                    <li class="back-button"><a href="#">
-                                        <span>&lt; Back</span>
-                                    </a></li>
-                                    <li><a href="#">
-                                        <span>All Comment</span>
-                                    </a></li>
-                                    <li><a href="#">
-                                        <span>International</span>
-                                    </a></li>
-                                    <li><a href="#">
-                                        <span>National</span>
-                                    </a></li>
-                                    <li><a href="#">
-                                        <span>Features</span>
-                                    </a></li>
-                                    <li><a href="#">
-                                        <span>Politics</span>
-                                    </a></li>
-                                </ul>
+                                <?php
+                                foreach ($redbrick_nav_menu_tree as $redbrick_item_id => $redbrick_item) {
+                                    echo redbrick_get_html_header_submenu_from_item($redbrick_item_id, $redbrick_item);
+                                }
+                                ?>
                             </div>
                         </div>
                         <?php
-                            /**
-                             * The following element covers the rest of the screen
-                             * when the hamburger menu is visible, so that if the
-                             * user clicks anywhere outside the hamburger menu or
-                             * site header, the hamubrger menu disappears. This
-                             * element is also responsible for rendering the
-                             * hamburger menu's drop shadow. See `style.scss` for
-                             * implementation details.
-                             */
+                        /**
+                         * The following element covers the rest of the screen
+                         * when the hamburger menu is visible, so that if the
+                         * user clicks anywhere outside the hamburger menu or
+                         * site header, the hamubrger menu disappears. This
+                         * element is also responsible for rendering the
+                         * hamburger menu's drop shadow. See `style.scss` for
+                         * implementation details.
+                         */
                         ?>
                         <div class="rest-of-screen"></div>
                     </nav>
@@ -140,6 +60,17 @@
                         <form id="search-form" action="/">
                             <input id="search-field" type="search" name="s" placeholder="Search"/>
                         </form>
+                        <?php
+                        /**
+                         * The following element covers the rest of the screen
+                         * when the search menu is visible, so that if the
+                         * user clicks anywhere outside the search menu or
+                         * site header, the search menu disappears. This
+                         * element is also responsible for rendering the
+                         * search menu's drop shadow. See `style.scss` for
+                         * implementation details.
+                         */
+                        ?>
                         <div class="rest-of-screen"></div>
                     </div>
                 </div>
