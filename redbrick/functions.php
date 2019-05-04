@@ -559,12 +559,25 @@ if (!function_exists('redbrick_get_html_header_menu_item')) {
          */
         ob_start();
         ?>
-        <li class="<?php if ($item_has_children): ?>has-submenu<?php endif; ?> tint red">
-            <?php if (!$item_has_children): ?><a href="<?php echo $item['url']; ?>"><?php endif; ?>
+        <li class="<?php if ($item_has_children): ?>has-submenu <?php endif; ?>tint red">
+            <?php
+            /**
+             * TODO: HTML `<a>` tag without `href` attribute for items with
+             * children exists currently only to result in proper page
+             * styling; try and make this unnecessary
+             */
+
+            /**
+             * TODO: The greater-than sign `>` is currently placed next to the
+             * names of items with children, both in mobile *and* desktop view.
+             * Make this only visible on mobile.
+             */
+            ?>
+            <?php if ($item_has_children): ?><a><?php else: ?><a href="<?php echo $item->url; ?>"><?php endif; ?>
                 <span class="item-<?php echo $item_id; ?>">
-                    <?php echo $item['title']; ?><?php if ($item_has_children): ?> &gt;<?php endif; ?>
+                    <?php echo $item->title; ?><?php if ($item_has_children): ?> &gt;<?php endif; ?>
                 </span>
-            <?php if (!$item_has_children): ?></a><?php endif; ?>
+            </a>
         </li>
         <?php
         return ob_get_clean();
@@ -587,16 +600,27 @@ if (!function_exists('redbrick_get_html_header_submenu_from_item')) {
         }
         ob_start();
         ?>
+        <?php
+        /**
+         * TODO: Background colours for flyouts need to handled, either
+         * by using the currently available means of the `<ul>` class
+         * `item-xx`, or by some other currently undecided means.
+         */
+
+        /**
+         * TODO: Incorrect height offset when WordPress admin bar is visible.
+         */
+        ?>
         <ul class="submenu item-<?php echo $item_id; ?>">
             <li class="back-button">
                 <span>&lt; Back</span>
             </li>
-            <li><a href="<?php echo $item['url']; ?>">
-                <span>All <?php echo $item['title']; ?></span>
+            <li><a href="<?php echo $item->url; ?>">
+                <span>All <?php echo $item->title; ?></span>
             </a></li>
             <?php foreach ($item->redbrick_children as $subitem_id => $subitem): ?>
-                <li><a href="<?php echo $subitem['url']; ?>">
-                    <?php echo $subitem['title']; ?>
+                <li><a href="<?php echo $subitem->url; ?>">
+                    <?php echo $subitem->title; ?>
                 </a></li>
             <?php endforeach; ?>
         </ul>
@@ -604,4 +628,3 @@ if (!function_exists('redbrick_get_html_header_submenu_from_item')) {
         return ob_get_clean();
     }
 }
-
