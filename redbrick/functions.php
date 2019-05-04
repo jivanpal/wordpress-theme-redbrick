@@ -574,9 +574,10 @@ if (!function_exists('redbrick_get_html_header_menu_item')) {
              */
             ?>
             <?php if ($item_has_children): ?><a><?php else: ?><a href="<?php echo $item->url; ?>"><?php endif; ?>
-                <span class="item-<?php echo $item_id; ?>">
-                    <?php echo $item->title; ?><?php if ($item_has_children): ?> &gt;<?php endif; ?>
-                </span>
+                <div class="name-and-arrow-container">
+                    <span class="item-<?php echo $item_id; ?>"><?php echo $item->title; ?></span>
+                    <span class="submenu-arrow"><?php if ($item_has_children): ?>&gt;<?php endif; ?></span>
+                </div>
             </a>
         </li>
         <?php
