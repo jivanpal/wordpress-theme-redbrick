@@ -489,7 +489,7 @@ if (!function_exists('redbrick_get_nav_menu_object_at_location')) {
     }
 }
 
-if (!function_exists('redbrick_build_nav_menu_tree')) {
+if (!function_exists('redbrick_build_array_tree')) {
     /**
      * Build a tree-like structure of the items in an array.
      * @param array $elements The array of items from which to generate the
@@ -540,7 +540,7 @@ if (!function_exists('redbrick_get_nav_menu_items_tree')) {
      */
     function redbrick_get_nav_menu_items_tree($menu) {
         $items = wp_get_nav_menu_items($menu);
-        return $items ? redbrick_build_nav_menu_tree($items) : [] ;
+        return $items ? redbrick_build_array_tree($items) : [] ;
     }
 }
 
