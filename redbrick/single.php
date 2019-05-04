@@ -53,7 +53,6 @@
             <section class="comments">
                 <div class="constraint-container">
                     <h1>Comments</h1>
-                    <p>This is where comments will appear.</p>
                     <?php
                         if ( comments_open() || get_comments_number() ) {
                             comments_template();
