@@ -22,7 +22,7 @@
     <?php if (count($redbrick_posts) != 0): ?>
         <section class="top-posts">
             <ul>
-                <?php 
+                <?php
                 foreach ($redbrick_posts as $redbrick_post) {
                     echo redbrick_get_html_post_item($redbrick_post);
                 }
@@ -35,7 +35,7 @@
     <?php if (count($redbrick_posts) != 0): ?>
         <section class="comment-posts">
             <ul>
-                <?php 
+                <?php
                 foreach ($redbrick_posts as $redbrick_post) {
                     echo redbrick_get_html_post_item($redbrick_post);
                 }
@@ -48,7 +48,7 @@
     <?php if (count($redbrick_posts) != 0): ?>
         <section class="featured-posts">
             <ul>
-                <?php 
+                <?php
                 foreach ($redbrick_posts as $redbrick_post) {
                     echo redbrick_get_html_post_item($redbrick_post);
                 }
@@ -61,7 +61,7 @@
     <?php if (count($redbrick_posts) != 0): ?>
         <section class="sport-posts">
             <ul>
-                <?php 
+                <?php
                 foreach ($redbrick_posts as $redbrick_post) {
                     echo redbrick_get_html_post_item($redbrick_post);
                 }
@@ -115,7 +115,7 @@
     <?php if (count($redbrick_posts) != 0): ?>
         <section class="other-posts">
             <ul>
-                <?php 
+                <?php
                 foreach ($redbrick_posts as $redbrick_post) {
                     echo redbrick_get_html_post_item($redbrick_post);
                 }
@@ -128,7 +128,7 @@
     <?php if (count($redbrick_posts) != 0): ?>
         <section class="photography-posts">
             <ul>
-                <?php 
+                <?php
                 foreach ($redbrick_posts as $redbrick_post) {
                     echo redbrick_get_html_post_item($redbrick_post);
                 }
