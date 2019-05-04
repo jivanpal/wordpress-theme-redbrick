@@ -1007,7 +1007,7 @@ main.post {
                         height: auto;
 
                         .submenu {
-                            display: block;
+                            display: flex;
                             height: $header-height - 6px;
                             transition: height 300ms;
 

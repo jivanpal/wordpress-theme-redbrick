@@ -620,7 +620,7 @@ if (!function_exists('redbrick_get_html_header_submenu_from_item')) {
             </a></li>
             <?php foreach ($item->redbrick_children as $subitem_id => $subitem): ?>
                 <li><a href="<?php echo $subitem->url; ?>">
-                    <?php echo $subitem->title; ?>
+                    <span><?php echo $subitem->title; ?></span>
                 </a></li>
             <?php endforeach; ?>
         </ul>
