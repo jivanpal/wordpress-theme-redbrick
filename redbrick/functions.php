@@ -434,7 +434,7 @@ if (!function_exists('redbrick_put_yoast_primary_cat_first')) {
         return $categories;
     }
 }
-add_filter('get_the_categories', 'redbrick_filter_primary_category_first');
+add_filter('get_the_categories', 'redbrick_filter_primary_category_first', 100, 2);
 
 if (!function_exists('redbrick_get_html_category_item')) {
     /**

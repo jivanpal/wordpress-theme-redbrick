@@ -63,15 +63,27 @@
             </section>
         </article>
     
-    
         <aside class="recommended">
             <div class="constraint-container">
                 <h1>Recommended</h1>
 
-                <?php $redbrick_posts = redbrick_get_most_recent_posts(3, [ get_the_category()[0] ]); ?>
+                <?php
+                    $redbrick_primary_category = get_the_category()[0];
+                    $redbrick_posts = redbrick_get_most_recent_posts(3, [ $redbrick_primary_category->slug ]);
+                ?>
                 <?php if (count($redbrick_posts) != 0): ?>
                     <section class="more-posts">
-                        <h2>More in <span class="category tv" style="color: #0c0;">TV</span></h2>
+                        <?php
+                        /**
+                         * TODO: Set styling colors for class `category-xx`,
+                         * where `xx` is the slug of a category.
+                         */
+                        ?>
+                        <h2>More in
+                            <span class="category category-<?php echo $redbrick_primary_category->slug; ?>">
+                                <?php echo $redbrick_primary_category->name; ?>
+                            </span>
+                        </h2>
                         <ul>
                             <?php
                             foreach ($redbrick_posts as $redbrick_post) {
@@ -81,7 +93,7 @@
                         </ul>
                     </section>
                 <?php endif; ?>
-
+                        
                 <?php $redbrick_posts = redbrick_get_most_recent_posts(3, ['popular']); ?>
                 <?php if (count($redbrick_posts) != 0): ?>
                     <section class="most-popular">
