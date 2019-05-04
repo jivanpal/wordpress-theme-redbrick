@@ -5,3 +5,5 @@
 *.css
 
 .vscode
+
+/push.sh
