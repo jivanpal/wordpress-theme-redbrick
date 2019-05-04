@@ -12,16 +12,16 @@
                     <?php echo file_get_contents(get_template_directory() . '/assets/hamburger.svg'); ?>
                 </div>
                 <div class="central-element">
-                    <div class="logo">
-                        <a href="/">
+                    <a href="/">
+                        <div class="logo">
                             <div class="icon">
                                 <?php echo file_get_contents(get_template_directory() . '/assets/redbrick-icon.svg'); ?>
                             </div>
                             <div class="wordmark">
                                 <?php echo file_get_contents(get_template_directory() . '/assets/redbrick-wordmark.svg'); ?>
                             </div>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                     <?php $redbrick_nav_menu_tree = redbrick_get_nav_menu_items_tree(redbrick_get_nav_menu_object_at_location('redbrick_nav_menu_header')); ?>
                     <nav>
                         <div class="menu-container">
