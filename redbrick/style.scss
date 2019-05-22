@@ -551,6 +551,8 @@ main, footer, main.home section {
 .showcase-container {
     width: 100%;
 
+    /** Overflow shadows */
+    
     position: relative;
 
     &::before, &::after {
@@ -596,6 +598,8 @@ main, footer, main.home section {
             rgba(black, 0)
         );
     }
+
+    /** END - Overflow shadows */
 }
 
 .showcase {
@@ -846,6 +850,91 @@ main.post {
     }
 }
 
+main.category {
+    .subsections {
+        position: sticky;
+        z-index: 998;
+        top: $header-height;
+        margin-top: 1px;
+        border-bottom: 1px solid white;
+
+        /** Overflow shadows */
+
+        // `position: relative;` is unnecessary since `position: sticky;` is set.
+
+        &::before, &::after {
+            content: "";
+
+            height: 100%;
+            width: 0;
+            transition: width 100ms;
+            
+            position: absolute;
+            top: 0;
+
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        &.left-shadow::before {
+            width: $header-nav-shadow-size;
+        }
+
+        &.right-shadow::after {
+            width: $header-nav-shadow-size;
+        }
+
+        &::before {
+            left: 0;
+            background: linear-gradient(
+                to right,
+                rgba(black, 1),
+                rgba(black, 0)
+            );
+        }
+
+        &::after {
+            right: 0;
+            background: linear-gradient(
+                to left,
+                rgba(black, 1),
+                rgba(black, 0)
+            );
+        }
+
+        /** END - Overflow shadows */
+
+        .category-list {
+            display: flex;
+            align-items: center;
+            overflow-x: scroll;
+
+            height: $header-height - 6px;
+            background-color: $header-footer-bg-color;
+
+            li {
+                flex: 0 0 auto;            
+                height: 100%;
+
+                color: $header-fg-color;
+
+                a {
+                    display: flex;
+                    align-items: center;
+                    height: 100%;
+                    width: 100%;
+
+                    color: inherit;
+                    text-decoration: none;
+                }
+                span {
+                    padding: 0 $spacing-default;
+                }
+            }
+        }
+    }
+}
+
 /**
  * END - Main styles
  */
@@ -1003,12 +1092,10 @@ main.post {
                     .submenu-container {
                         position: fixed;
                         top: $header-height;
-                        body.admin-bar & {
-                            top: $admin-bar-height-tablet + $header-height;
-                        }
                         left: 0;
                         width: 100vw;
                         height: auto;
+                        background-color: $header-footer-bg-color;
 
                         .submenu {
                             display: flex;

@@ -15,7 +15,7 @@
                 ?>
             </ul>
         </div>
-    <? endif; ?>
+    <?php endif; ?>
 
     <?php $redbrick_categories = get_categories(['child_of' => $category_id]); ?>
     <?php if (count($redbrick_categories) != 0): ?>
@@ -30,17 +30,19 @@
         </section>
     <?php endif; ?>
 
-    <?php $redbrick_posts = redbrick_get_most_recent_posts(12, [ $category_slug ]); ?>
-    <?php if (count($redbrick_posts) != 0): ?>
-        <section class="posts section-<?php echo $category_slug; ?>">
-            <ul class="post-list">
-                <?php 
-                foreach ($redbrick_posts as $redbrick_post) {
-                    echo redbrick_get_html_post_item($redbrick_post);
-                }
-                ?>
-            </ul>
-        </section>
-    <?php endif; ?>
+    <div class="constraint-container">
+        <?php $redbrick_posts = redbrick_get_most_recent_posts(12, [ $category_slug ]); ?>
+        <?php if (count($redbrick_posts) != 0): ?>
+            <section class="posts section-<?php echo $category_slug; ?>">
+                <ul class="post-list">
+                    <?php 
+                    foreach ($redbrick_posts as $redbrick_post) {
+                        echo redbrick_get_html_post_item($redbrick_post);
+                    }
+                    ?>
+                </ul>
+            </section>
+        <?php endif; ?>
+    </div>
 </main>
 <?php get_footer(); ?>

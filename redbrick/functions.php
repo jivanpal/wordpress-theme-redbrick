@@ -451,7 +451,9 @@ if (!function_exists('redbrick_get_html_category_item')) {
         ob_start();
         ?>
         <li class="category">
-            <a href="<?php echo get_category_link($category); ?>"><?php echo esc_html($category->name); ?></a>
+            <a href="<?php echo get_category_link($category); ?>">
+                <span><?php echo esc_html($category->name); ?></span>
+            </a>
         </li>
         <?php
         return ob_get_clean();

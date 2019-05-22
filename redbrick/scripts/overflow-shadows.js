@@ -20,6 +20,10 @@ var overflowXPairs = [
         document.querySelector("header nav"),
         document.querySelector("header nav .menu"),
     ],
+    [
+        document.querySelector(".subsections"),
+        document.querySelector(".category-list"),
+    ]
 ];
 
 /**
