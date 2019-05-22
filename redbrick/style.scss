@@ -4,7 +4,7 @@ Theme URI: https://github.com/jivanpal/redbrick-theme-for-wordpress
 Author: Jivan Pal
 Author URI: https://www.jivanpal.com/
 Description: A WordPress theme designed for Redbrick, the official University of Birmingham student newspaper.
-Version: 0.19.03.07
+Version: 0.19.05.22
 License: GNU GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0-standalone.html
 Text Domain: redbrick
@@ -447,14 +447,6 @@ header {
 }
 
 main {
-    /**
-     * Margin overlap fix 
-     * This prevents the first and list children of both `<main>` and `<footer>`
-     * from overlapping, and ensures that `<main>` and `<footer>` themselves are
-     * directly touching.
-     */
-    padding-bottom: 1px;
-
     background-color: $main-bg-color;
 
     color: $main-fg-color;
@@ -539,6 +531,19 @@ footer {
             }
         }
     }
+}
+
+/**
+ * == Margin overlap fix ==
+ * This prevents the first and list children of selected elements from
+ * overlapping with those of their neighbours. In detail, it prevents the
+ * bounding box of selected elements from not containinng the margins of
+ * children at its extremeties. This is necessary in order for margins and
+ * background colours to function as intended.
+ */
+main, footer, main.home section {
+    padding-top: 1px;
+    padding-bottom: 1px;
 }
 
 // Classes
@@ -696,18 +701,6 @@ footer {
 // Page classes
 
 main.home {
-    /**
-     * Force container to contain margins
-     * This prevents the bounding box for a `<section>` element form not
-     * containinng the margins of children at its extremeties. This is
-     * necessary in order for margins and background colours to function as
-     * intended.
-     */
-    section {
-        padding-top: 1px;
-        padding-bottom: 1px;
-    }
-
     /** TODO: Remove sample colours when done testing */
     section.top-posts {
         background-color: red;
@@ -762,8 +755,34 @@ main {
         }
     }
 
-    aside.recommended, section.posts {
-        .post {
+    .author-box {
+        display: flex;
+        justify-content: stretch;
+        align-items: center;
+
+        margin: $spacing-default;
+
+        .image {
+            height: $author-image-dimensions;
+            width: $author-image-dimensions;
+            object-fit: cover;
+            
+            margin-right: $spacing-default;
+            border-radius: $author-image-dimensions / 2;
+        }
+
+        .author-name {
+            font-weight: bold;
+            margin-bottom: $spacing-thin;
+        }
+
+        .author-bio {
+            font-size: 0.8rem;
+        }
+    }
+
+    .post-list {
+        .post-item {
             margin: $spacing-default;
             border: 1px solid black;
 
@@ -784,32 +803,6 @@ main.post {
     .info-box {
         .label {
             font-weight: bold;
-        }
-
-        .author-box {
-            display: flex;
-            justify-content: stretch;
-            align-items: center;
-
-            margin: $spacing-default;
-
-            .image {
-                height: $author-image-dimensions;
-                width: $author-image-dimensions;
-                object-fit: cover;
-                
-                margin-right: $spacing-default;
-                border-radius: $author-image-dimensions / 2;
-            }
-
-            .author-name {
-                font-weight: bold;
-                margin-bottom: $spacing-thin;
-            }
-
-            .author-bio {
-                font-size: 0.8rem;
-            }
         }
 
         .timestamps {

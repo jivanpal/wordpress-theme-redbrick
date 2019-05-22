@@ -22,7 +22,7 @@
         <?php $redbrick_posts = redbrick_get_most_recent_posts(3, ['top-stories']); ?>
         <?php if (count($redbrick_posts) != 0): ?>
             <section class="posts top-posts">
-                <ul>
+                <ul class="post-list">
                     <?php
                     foreach ($redbrick_posts as $redbrick_post) {
                         echo redbrick_get_html_post_item($redbrick_post);
@@ -35,7 +35,7 @@
         <?php $redbrick_posts = redbrick_get_most_recent_posts(4, ['comment']); ?>
         <?php if (count($redbrick_posts) != 0): ?>
             <section class="posts comment-posts">
-                <ul>
+                <ul class="post-list">
                     <?php
                     foreach ($redbrick_posts as $redbrick_post) {
                         echo redbrick_get_html_post_item($redbrick_post);
@@ -48,7 +48,7 @@
         <?php $redbrick_posts = redbrick_get_most_recent_posts(4, ['features']); ?>
         <?php if (count($redbrick_posts) != 0): ?>
             <section class="posts featured-posts">
-                <ul>
+                <ul class="post-list">
                     <?php
                     foreach ($redbrick_posts as $redbrick_post) {
                         echo redbrick_get_html_post_item($redbrick_post);
@@ -61,7 +61,7 @@
         <?php $redbrick_posts = redbrick_get_most_recent_posts(3, ['uni-match-reports', 'university-features']); ?>
         <?php if (count($redbrick_posts) != 0): ?>
             <section class="posts sport-posts">
-                <ul>
+                <ul class="post-list">
                     <?php
                     foreach ($redbrick_posts as $redbrick_post) {
                         echo redbrick_get_html_post_item($redbrick_post);
@@ -115,7 +115,7 @@
         ?>
         <?php if (count($redbrick_posts) != 0): ?>
             <section class="posts other-posts">
-                <ul>
+                <ul class="post-list">
                     <?php
                     foreach ($redbrick_posts as $redbrick_post) {
                         echo redbrick_get_html_post_item($redbrick_post);
@@ -128,7 +128,7 @@
         <?php $redbrick_posts = redbrick_get_most_recent_posts(3, ['photos', 'illustration']); ?>
         <?php if (count($redbrick_posts) != 0): ?>
             <section class="posts photography-posts">
-                <ul>
+                <ul class="post-list">
                     <?php
                     foreach ($redbrick_posts as $redbrick_post) {
                         echo redbrick_get_html_post_item($redbrick_post);

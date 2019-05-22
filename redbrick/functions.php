@@ -324,7 +324,7 @@ if (!function_exists('redbrick_get_html_post_item')) {
     function redbrick_get_html_post_item($post) {
         ob_start();
         ?>
-        <li class="post"><a href="<?php echo get_permalink($post); ?>">
+        <li class="post-item"><a href="<?php echo get_permalink($post); ?>">
             <div class="featured-image-box">
                 <?php
                 if (has_post_thumbnail($post)) {
