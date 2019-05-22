@@ -17,6 +17,7 @@
                     <?php
                         $author_profile_picture_url = get_avatar_url(get_post());
                         $author_has_profile_picture = $author_profile_picture_url !== false;
+                        $author_name = get_the_author();
                     ?>
                     <div class="author-box">
                         <?php if ($author_has_profile_picture) : ?>
@@ -25,7 +26,7 @@
                         <div class="author-details">
                             <div class="author-name">
                                 <?php if (!$author_has_profile_picture): ?>Written by<?php endif; ?>
-                                <?php the_author(); ?>
+                                <a href="<?php echo esc_url(get_author_posts_url(get_the_author_meta('ID'))); ?>" title="<?php echo esc_attr($author_name); ?>"><?php echo $author_name; ?></a>
                             </div>
                             <div class="author-bio"><?php the_author_meta('description'); ?></div>
                         </div>
@@ -65,7 +66,6 @@
         <aside class="recommended">
             <div class="constraint-container">
                 <h1>Recommended</h1>
-
                 <?php
                     $redbrick_primary_category = get_the_category()[0];
                     $redbrick_posts = redbrick_get_most_recent_posts(3, [ $redbrick_primary_category->slug ]);
@@ -83,7 +83,7 @@
                                 <?php echo $redbrick_primary_category->name; ?>
                             </span>
                         </h2>
-                        <ul>
+                        <ul class="post-list">
                             <?php
                             foreach ($redbrick_posts as $redbrick_post) {
                                 echo redbrick_get_html_post_item($redbrick_post);
@@ -97,7 +97,7 @@
                 <?php if (count($redbrick_posts) != 0): ?>
                     <section class="most-popular">
                         <h2>Most popular</h2>
-                        <ul>
+                        <ul class="post-list">
                             <?php
                             foreach ($redbrick_posts as $redbrick_post) {
                                 echo redbrick_get_html_post_item($redbrick_post);
