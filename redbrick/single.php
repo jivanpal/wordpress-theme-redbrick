@@ -51,16 +51,17 @@
                 </div>
             </div>
 
-            <section class="comments">
-                <div class="constraint-container">
-                    <h1>Comments</h1>
-                    <?php
-                        if ( comments_open() || get_comments_number() ) {
-                            comments_template();
-                        }
-                    ?>
-                </div>
-            </section>
+            <?php if ( comments_open() || get_comments_number() ) : ?>
+                <section class="comments">
+                    <div class="constraint-container">
+                        <h1>Comments</h1>
+                        <?php if (!comments_open()) : ?>
+                            <p>Comments are closed on this page.</p>
+                        <?php endif; ?>
+                        <?php comments_template(); ?>
+                    </div>
+                </section>
+            <?php endif; ?>
         </article>
     
         <aside class="recommended">
