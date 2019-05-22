@@ -16,7 +16,7 @@
                 <div class="info-box">
                     <?php
                         $author_profile_picture_url = get_avatar_url(get_post());
-                        $author_has_profile_picture = $author !== false;
+                        $author_has_profile_picture = $author_profile_picture_url !== false;
                     ?>
                     <div class="author-box">
                         <?php if ($author_has_profile_picture) : ?>

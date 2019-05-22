@@ -75,7 +75,7 @@ if (!function_exists('redbrick_enqueue_styles_and_scripts')) {
 }
 add_action('wp_enqueue_scripts', 'redbrick_enqueue_styles_and_scripts');
 
-/** TODO: Implement styles for Guild Council Motions, YouTube, and text boxes */
+/** TODO: Implement CSS styles for Guild Council Motions, YouTube, and text boxes; see HTML given here for reference */
 if (!function_exists('redbrick_shortcode_do')) {
     /**
      * Implements legacy `do` shortcode used in older articles, whose
@@ -565,12 +565,6 @@ if (!function_exists('redbrick_get_html_header_menu_item')) {
              * TODO: HTML `<a>` tag without `href` attribute for items with
              * children exists currently only to result in proper page
              * styling; try and make this unnecessary
-             */
-
-            /**
-             * TODO: The greater-than sign `>` is currently placed next to the
-             * names of items with children, both in mobile *and* desktop view.
-             * Make this only visible on mobile.
              */
             ?>
             <?php if ($item_has_children): ?><a><?php else: ?><a href="<?php echo $item->url; ?>"><?php endif; ?>

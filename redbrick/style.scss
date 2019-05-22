@@ -382,7 +382,7 @@ header {
         .search-bar {
             width: 100vw;
             height: 100vh;
-            z-index: -1; // TODO: temporary; remove when search button functional
+            z-index: -1;
             
             position: fixed;
             left: 0;
@@ -414,7 +414,6 @@ header {
                 background-color: $header-footer-bg-color;
                 padding: 8px 5px;
 
-                /** TODO: Change this to correct colour; depends on section of website */
                 border-bottom: 1px solid $hamburger-menu-separator-color;
                 
                 #search-field {
@@ -1011,6 +1010,9 @@ main.post {
                     .submenu-container {
                         position: fixed;
                         top: $header-height;
+                        body.admin-bar & {
+                            top: $admin-bar-height-tablet + $header-height;
+                        }
                         left: 0;
                         width: 100vw;
                         height: auto;
