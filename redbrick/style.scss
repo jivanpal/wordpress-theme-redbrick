@@ -679,21 +679,24 @@ footer {
 
 // Page classes
 
-main.home {
-    /**
-     * == Margin overlap fix ==
-     * This prevents the first and list children of selected elements from
-     * overlapping with those of their neighbours. In detail, it prevents the
-     * bounding box of selected elements from not containinng the margins of
-     * children at its extremeties. This is necessary in order for margins and
-     * background colours to function as intended.
-     */
-    section {
-        padding-top: 1px;
-        padding-bottom: 1px;
-    }
+/**
+ * == Margin overlap workaround ==
+ * This prevents the first and last children of selected elements from
+ * overlapping with those of their neighbours. In detail, it prevents the
+ * bounding box of selected elements from not containinng the margins of
+ * children at its extremeties. This is necessary in order for margins and
+ * background colours to function as intended.
+ */
+main.home section.posts, main.author {
+    padding-top: 1px;
+}
+main {
+    padding-bottom: 1px;
+}
 
+main.home {
     /** TODO: Remove sample colours when done testing */
+    /*
     section.top-posts {
         background-color: red;
     }
@@ -712,6 +715,7 @@ main.home {
     section.photography-posts {
         background-color: #555;
     }
+    */
 }
 
 main {
