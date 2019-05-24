@@ -610,8 +610,18 @@ main, footer, main.home section {
     }
 
     .showcase-item {
-        /** `$max-vh-usage` matches `max-height` of `.showcase` */
+        /**
+         *`$max-vh-usage` matches `max-height` of `.showcase`, so here we are
+         * instructing items to take width ≥ showcase-height.
+         */
         flex: 1 0 $max-vh-usage;
+        /**
+         * When showcase-height < max-vh-usage, items still take
+         * width = max-vh-usage as given above. The following rule imposes
+         * that items take width ≤ showcase-height so that the showcase-peek
+         * value still takes effect.
+         */
+        max-width: $showcase-height;
 
         display: block;
         height: 100%;
