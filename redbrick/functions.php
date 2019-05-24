@@ -333,12 +333,6 @@ if (!function_exists('redbrick_get_html_post_item')) {
                 ?>
                 <div class="text-overlay">
                     <h3 class="title"><?php echo esc_html(get_the_title($post)); ?></h3>
-                    <div class="byline">
-                        <p>
-                            by <?php echo esc_html(redbrick_get_the_author_name($post)); ?>
-                            <time datetime="<?php echo get_the_date('Y-m-d', $post); ?>">on <?php echo get_the_date('', $post); ?></time>
-                        </p>
-                    </div>
                 </div>
             </div>
             <?php if (has_excerpt($post)): ?>

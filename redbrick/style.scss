@@ -760,7 +760,10 @@ main {
     .post-list {
         .post-item {
             margin: $spacing-default;
-            border: 1px solid black;
+
+            &:not(:last-child) {
+                border-bottom: 1px solid gray;
+            }
 
             .featured-image-box {
                 width: 100%;
@@ -768,7 +771,7 @@ main {
                 max-height: $max-vh-usage;
                 
                 .text-overlay {
-                    padding: 3px;
+                    padding: 0;
                 }
             }
         }
