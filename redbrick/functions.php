@@ -619,3 +619,40 @@ if (!function_exists('redbrick_get_html_header_submenu_from_item')) {
         return ob_get_clean();
     }
 }
+
+if (!function_exists('redbrick_get_html_list_from_menu_tree')) {
+    /**
+     * Get a fully generated `<ul>...</ul>` item for a given menu tree. Such a
+     * tree can be obtained via a call to `redbrick_get_nav_menu_items_tree()`.
+     * Submenus will be nested within the `<li>` element corresponding to their
+     * parent, as in the HTML5 standard. See the StackOverflow answer given
+     * below (https://stackoverflow.com/a/30064576/9996911) for an example of
+     * this sort of output.
+     * 
+     * @param array $menu_tree A menu tree, as obtained via a call to
+     *      `redbrick_get_nav_menu_items_tree()`. The given array must not be
+     *      empty, and it must not be `NULL`, else behaviour is undefined.
+     * 
+     * @see https://stackoverflow.com/a/30064576/9996911
+     */
+    function redbrick_get_html_list_from_menu_tree($menu_tree) {
+        ob_start();
+        ?>
+        <ul>
+            <?php foreach ($menu_tree as $menu_item_id => $menu_item): ?>
+                <li>
+                    <a href="<?php echo $menu_item->url; ?>">
+                        <?php echo $menu_item->title; ?>
+                    </a>
+                    <?php
+                        if ($menu_item->redbrick_children) {
+                            echo redbrick_get_html_list_from_menu_tree($menu_item->redbrick_children);
+                        }
+                    ?>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+        <?php
+        return ob_get_clean();
+    }
+}

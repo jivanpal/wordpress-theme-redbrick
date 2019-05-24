@@ -179,6 +179,9 @@ svg {
     height: 100%;
     width: auto;
 }
+#wpstats {
+    display: none;  // Hide the little smiley at the bottom of the page.
+}
 
 // Specifics
 
@@ -473,18 +476,7 @@ footer {
         margin: $spacing-default;
     }
 
-    div:not(:first-child), a > div {
-        &:not(.icon-container):not(.featured-image) {
-            border-top: 1px solid $footer-fg-color;
-        }
-    }
-
-    /**
-     * Actually give `.featured-image` an upper border. This rule is not incorporated
-     * into the previous rule becuase it needs to have lower specificity in
-     * order to be overriden in a subsequent media query.
-     */
-    .featured-image {
+    .social-media, .latest-issue, .footer-links {
         border-top: 1px solid $footer-fg-color;
     }
 
@@ -527,19 +519,6 @@ footer {
             }
         }
     }
-}
-
-/**
- * == Margin overlap fix ==
- * This prevents the first and list children of selected elements from
- * overlapping with those of their neighbours. In detail, it prevents the
- * bounding box of selected elements from not containinng the margins of
- * children at its extremeties. This is necessary in order for margins and
- * background colours to function as intended.
- */
-main, footer, main.home section {
-    padding-top: 1px;
-    padding-bottom: 1px;
 }
 
 // Classes
@@ -701,6 +680,19 @@ main, footer, main.home section {
 // Page classes
 
 main.home {
+    /**
+     * == Margin overlap fix ==
+     * This prevents the first and list children of selected elements from
+     * overlapping with those of their neighbours. In detail, it prevents the
+     * bounding box of selected elements from not containinng the margins of
+     * children at its extremeties. This is necessary in order for margins and
+     * background colours to function as intended.
+     */
+    section {
+        padding-top: 1px;
+        padding-bottom: 1px;
+    }
+
     /** TODO: Remove sample colours when done testing */
     section.top-posts {
         background-color: red;
