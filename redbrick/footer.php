@@ -1,13 +1,5 @@
         <footer>
             <div class="container">
-                <div class="popular-articles">
-                    <h1>Most Popular</h1>
-                    <ul>
-                        <?php /** TODO: Fetch popular articles here */ ?>
-                        <li><a href="#">Article One</a></li>
-                        <li><a href="#">Article Two</a></li>
-                    </ul>
-                </div>
                 <div class="social-media">
                     <h1>Connect</h1>
                     <ul>
