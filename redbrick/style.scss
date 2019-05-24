@@ -63,7 +63,7 @@ table {
 }
 a {
     color: inherit;
-    text-decoration: underline;
+    text-decoration: none;
 }
 a:hover {
     color: inherit;
@@ -261,10 +261,6 @@ header {
             }
 
             nav {
-                a {
-                    text-decoration: none;
-                }
-
                 .submenu {
                     &:not(.visible) {
                         display: none;
@@ -630,8 +626,6 @@ main, footer, main.home section {
             width: 100%;
             height: 100%;
             position: relative;
-
-            text-decoration: none;
         }
         
         .featured-image {
@@ -676,14 +670,6 @@ main, footer, main.home section {
 
             
 
-        }
-
-        .text-overlay {
-            position: absolute;
-            bottom: 0;
-            max-width: 100%;
-            padding: $text-overlay-padding;
-            text-shadow: 1px 1px 0 #333;
         }
     }
 }
@@ -743,20 +729,6 @@ main {
             width: 100%;
             object-fit: cover;
         }
-
-        .text-overlay {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            padding: $text-overlay-padding; // match styling on front page
-
-            color: $showcase-fg-color; // match styling on front page
-            text-shadow: 1px 1px 0 #333;
-
-            .excerpt {
-                font-size: 1.2rem;
-            }
-        }
     }
 
     .author-box {
@@ -804,6 +776,12 @@ main {
 }
 
 main.post, main.static-page {
+    article {
+        a {
+            text-decoration: underline;
+        }
+    }
+
     .info-box {
         .label {
             font-weight: bold;
@@ -925,7 +903,6 @@ main.category {
                     width: 100%;
 
                     color: inherit;
-                    text-decoration: none;
                 }
                 span {
                     padding: 0 $spacing-default;
@@ -958,7 +935,22 @@ main.search-results {
   * Element styles
   */
 
-// -- Nothing here yet
+.featured-image-box, .showcase-item {
+    .text-overlay {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: $text-overlay-padding; // match styling on front page
+
+        color: $showcase-fg-color; // match styling on front page
+
+        .title {
+            margin: 0;
+            padding: $spacing-default;
+            background-color: rgba(black, 0.5);
+        }
+    }
+}
 
 /**
  * END - Element styles

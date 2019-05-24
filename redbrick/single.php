@@ -7,12 +7,14 @@
                 <div class="text-overlay">
                     <div class="constraint-container">
                         <h1 class="title"><?php the_title(); ?></h1>
-                        <div class="excerpt"><?php the_excerpt(); ?></div>
                     </div>
                 </div>
             </div>
 
             <div class="constraint-container">
+                <div class="excerpt">
+                    <?php the_excerpt(); ?>
+                </div>
                 <div class="info-box">
                     <?php
                         $author_profile_picture_url = get_avatar_url(get_post());
