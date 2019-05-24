@@ -17,7 +17,7 @@
                 </div>
                 <div class="info-box">
                     <?php
-                        $author_profile_picture_url = get_avatar_url(get_post());
+                        $author_profile_picture_url = get_avatar_url(get_the_author_meta('ID'));
                         $author_has_profile_picture = $author_profile_picture_url !== false;
                         $author_name = get_the_author();
                     ?>
