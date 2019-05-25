@@ -10,7 +10,7 @@
             <ul class="showcase">
                 <?php
                 foreach ($redbrick_posts as $redbrick_post) {
-                    echo redbrick_get_html_showcase_item($redbrick_post);
+                    echo redbrick_get_html_showcase_item($redbrick_post->ID);
                 }
                 ?>
             </ul>

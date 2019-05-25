@@ -94,6 +94,23 @@ $ad-declaration-fg-color: #111;
 
 $post-excerpt-color: #555;
 
+$color-other:      rgb(200, 200, 200);
+$color-news:       rgb(204,   0,   0);
+$color-comment:    rgb(125,  67, 163);
+$color-culture:    rgb(255, 204,   0);
+$color-music:      rgb(255, 179, 179);
+$color-film:       rgb( 48, 151, 155);
+$color-tv:         rgb(  5, 199, 101);
+$color-gaming:     rgb(255, 51,   51);
+$color-food:       rgb(250, 131,  56);
+$color-travel:     rgb(102, 178, 255);
+$color-lifestyle:   rgb(147, 151, 203);
+$color-tech:       rgb( 69, 114, 161);
+$color-sport:      rgb( 34, 139,  34);
+$color-features:   rgb(200, 200, 200);
+
+$header-nav-menu-tint-opacity: 0.35;
+
 /** END - Colors **/
 
 $admin-bar-height-mobile: 46px;
@@ -623,7 +640,6 @@ footer {
             object-fit: cover;
         }
 
-        /** TODO: Remove sample colours when done testing. */
         .tint {
             position: absolute;
             top: 0;
@@ -631,34 +647,24 @@ footer {
             width: 100%;
             height: 100%;
 
-            opacity: 0.25;
-
-            &:hover {
-                opacity: 0.35;
+            opacity: 0.30;
+            &:hover { opacity: 0.40; }
+            &.section- {
+                &-          { background-color: $color-other;       }
+                &-news      { background-color: $color-news;        }
+                &-comment   { background-color: $color-comment;     }
+                &-culture   { background-color: $color-culture;     }
+                &-music     { background-color: $color-music;       }
+                &-film      { background-color: $color-film;        }
+                &-tv        { background-color: $color-tv;          }
+                &-gaming    { background-color: $color-gaming;      }
+                &-food      { background-color: $color-food;        }
+                &-travel    { background-color: $color-travel;      }
+                &-lifestyle { background-color: $color-lifestyle;   }
+                &-tech      { background-color: $color-tech;        }
+                &-sport     { background-color: $color-sport;       }
+                &-features  { background-color: $color-features;    }
             }
-
-            &.red {
-                background-color: #c00;
-            }
-
-            &.orange {
-                background-color: #c60;
-            }
-
-            &.yellow {
-                background-color: #cc0;
-            }
-
-            &.green {
-                background-color: #0c0;
-            }
-
-            &.blue {
-                background-color: #00c;
-            }
-
-            
-
         }
     }
 }
@@ -830,6 +836,25 @@ main.post, main.static-page {
 
         #disqus_thread {
             padding: 0 12px;
+        }
+    }
+
+    .recommended {
+        .more-posts .category.section- {
+            &-          { color: $color-other;       }
+            &-news      { color: $color-news;        }
+            &-comment   { color: $color-comment;     }
+            &-culture   { color: $color-culture;     }
+            &-music     { color: $color-music;       }
+            &-film      { color: $color-film;        }
+            &-tv        { color: $color-tv;          }
+            &-gaming    { color: $color-gaming;      }
+            &-food      { color: $color-food;        }
+            &-travel    { color: $color-travel;      }
+            &-lifestyle { color: $color-lifestyle;   }
+            &-tech      { color: $color-tech;        }
+            &-sport     { color: $color-sport;       }
+            &-features  { color: $color-features;    }
         }
     }
 }
@@ -1076,26 +1101,22 @@ main.search-results {
                                     }
                                 }
 
-                                /** TODO: Remove sample colours when done testing. */
                                 &.tint:hover {
-                                    &.red {
-                                        background-color: rgba(#c00, 0.35);
-                                    }
-
-                                    &.orange {
-                                        background-color: rgba(#c60, 0.35);
-                                    }
-
-                                    &.yellow {
-                                        background-color: rgba(#cc0, 0.35);
-                                    }
-
-                                    &.green {
-                                        background-color: rgba(#0c0, 0.35);
-                                    }
-
-                                    &.blue {
-                                        background-color: rgba(#0ac, 0.35);
+                                    &.section- {
+                                        &-          { background-color: rgba($color-other       , $header-nav-menu-tint-opacity);   }
+                                        &-news      { background-color: rgba($color-news        , $header-nav-menu-tint-opacity);   }
+                                        &-comment   { background-color: rgba($color-comment     , $header-nav-menu-tint-opacity);   }
+                                        &-culture   { background-color: rgba($color-culture     , $header-nav-menu-tint-opacity);   }
+                                        &-music     { background-color: rgba($color-music       , $header-nav-menu-tint-opacity);   }
+                                        &-film      { background-color: rgba($color-film        , $header-nav-menu-tint-opacity);   }
+                                        &-tv        { background-color: rgba($color-tv          , $header-nav-menu-tint-opacity);   }
+                                        &-gaming    { background-color: rgba($color-gaming      , $header-nav-menu-tint-opacity);   }
+                                        &-food      { background-color: rgba($color-food        , $header-nav-menu-tint-opacity);   }
+                                        &-travel    { background-color: rgba($color-travel      , $header-nav-menu-tint-opacity);   }
+                                        &-lifestyle { background-color: rgba($color-lifestyle   , $header-nav-menu-tint-opacity);   }
+                                        &-tech      { background-color: rgba($color-tech        , $header-nav-menu-tint-opacity);   }
+                                        &-sport     { background-color: rgba($color-sport       , $header-nav-menu-tint-opacity);   }
+                                        &-features  { background-color: rgba($color-features    , $header-nav-menu-tint-opacity);   }
                                     }
                                 }
                             }

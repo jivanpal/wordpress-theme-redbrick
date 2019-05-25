@@ -351,27 +351,19 @@ if (!function_exists('redbrick_get_html_showcase_item')) {
      * Get a fully generated HTML `<li class="showcase-item">...</li>` item for
      * a given post. The resulting HTML is intended for use in the sliders on
      * category pages and the front page.
-     * @param post A `WP_Post` object for the post. This function performs no
-     *      error checking, so it is the caller's responsibility to check that
-     *      the provided object is not null, is well-formed, and represents a
-     *      post that actually exists.
+     * @param post_id The ID of the post. If the ID is invalid, behaviour is
+     *          undefined.
      * @return string The HTML markup for the generated list item.
      */
-    function redbrick_get_html_showcase_item($post) {
+    function redbrick_get_html_showcase_item($post_id) {
         ob_start();
         ?>
         <li class="showcase-item">
-            <a href="<?php echo get_permalink($post); ?>">
-                <?php echo get_the_post_thumbnail($post, 'post-thumbnail', ['class' => 'featured-image']); ?>
-                <?php
-                /**
-                 * TODO: Set up tint colour based on permalink section;
-                 * test colours are 'red', 'orange', 'yellow', 'green', 'blue'
-                 */
-                ?>
-                <div class="tint blue"></div>
+            <a href="<?php echo get_permalink($post_id); ?>">
+                <?php echo get_the_post_thumbnail($post_id, 'post-thumbnail', ['class' => 'featured-image']); ?>
+                <div class="tint section--<?php echo redbrick_get_topmost_category_of_post($post_id)->slug; ?>"></div>
                 <div class="text-overlay">
-                    <h1 class="title"><?php echo esc_html(get_the_title($post)); ?></h1>
+                    <h1 class="title"><?php echo esc_html(get_the_title($post_id)); ?></h1>
                 </div>
             </a>
         </li>
@@ -548,14 +540,13 @@ if (!function_exists('redbrick_get_html_header_menu_item')) {
      */
     function redbrick_get_html_header_menu_item($item_id, $item) {
         $item_has_children = isset($item->redbrick_children) && (count($item->redbrick_children) != 0);
-        /**
-         * TODO: Set proper tint colour in `<li class="...">`.
-         * Test colours are 'red', 'orange', 'yellow', 'green', 'blue';
-         * remove these when no longer needed.
-         */
+        $item_slug = '';
+        if ($item->object == 'category') {
+            $item_slug = get_category($item->object_id)->slug;
+        }
         ob_start();
         ?>
-        <li class="<?php if ($item_has_children): ?>has-submenu <?php endif; ?>tint red">
+        <li class="<?php if ($item_has_children): ?>has-submenu <?php endif; ?>tint section--<?php echo $item_slug; ?>">
             <?php
             /**
              * TODO: HTML `<a>` tag without `href` attribute for items with
@@ -566,7 +557,9 @@ if (!function_exists('redbrick_get_html_header_menu_item')) {
             <?php if ($item_has_children): ?><a><?php else: ?><a href="<?php echo $item->url; ?>"><?php endif; ?>
                 <div class="name-and-arrow-container">
                     <span class="item-<?php echo $item_id; ?>"><?php echo $item->title; ?></span>
-                    <span class="submenu-arrow"><?php if ($item_has_children): ?>&gt;<?php endif; ?></span>
+                    <?php if ($item_has_children): ?>
+                        <span class="submenu-arrow">&gt;</span>
+                    <?php endif; ?>
                 </div>
             </a>
         </li>
@@ -654,5 +647,21 @@ if (!function_exists('redbrick_get_html_list_from_menu_tree')) {
         </ul>
         <?php
         return ob_get_clean();
+    }
+}
+
+if (!function_exists('redbrick_get_topmost_category_of_post')) {
+    /**
+     * Get the topmost category of the post with a given ID. By "topmost
+     * category", we mean the highest ancestor of the primary category of the
+     * post; the result is always a top-level category.
+     * 
+     * @param int $post_id The ID of the post.
+     * @return WP_Term An object populated with data of the topmost category.
+     */
+    function redbrick_get_topmost_category_of_post($post_id) {
+        $primary_category = get_the_category($post_id)[0];
+        $ancestors = get_ancestors($primary_category->term_id, 'category');
+        return $ancestors ? get_category($ancestors[0]) : $primary_category;
     }
 }

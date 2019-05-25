@@ -2,18 +2,17 @@
             <div class="social-media">
                 <h1>Connect</h1>
                 <ul>
-                    <?php /** TODO: Fetch social media menu here */ ?>
-                    <li><a href="#">
+                    <li><a href="https://www.facebook.com/redbrickpaper/">
                         <div class="icon-container">
                             <?php echo file_get_contents(get_template_directory() . '/assets/facebook-icon.svg'); ?>
                         </div>
                     </a></li>
-                    <li><a href="#">
+                    <li><a href="https://twitter.com/redbrickpaper">
                         <div class="icon-container">
                             <?php echo file_get_contents(get_template_directory() . '/assets/twitter-icon.svg'); ?>
                         </div>
                     </a></li>
-                    <li><a href="#">
+                    <li><a href="https://www.instagram.com/redbrickpaper/">
                         <div class="icon-container">
                             <?php echo file_get_contents(get_template_directory() . '/assets/instagram-icon.svg'); ?>
                         </div>

@@ -70,20 +70,14 @@
             <div class="constraint-container">
                 <h1>Recommended</h1>
                 <?php
-                    $redbrick_primary_category = get_the_category()[0];
-                    $redbrick_posts = redbrick_get_most_recent_posts(3, [ $redbrick_primary_category->slug ]);
+                    $redbrick_topmost_category = redbrick_get_topmost_category_of_post(get_post()->ID);
+                    $redbrick_posts = redbrick_get_most_recent_posts(3, [ $redbrick_topmost_category->slug ]);
                 ?>
                 <?php if (count($redbrick_posts) != 0): ?>
                     <section class="more-posts">
-                        <?php
-                        /**
-                         * TODO: Set styling colors for class `category-xx`,
-                         * where `xx` is the slug of a category.
-                         */
-                        ?>
                         <h2>More in
-                            <span class="category category-<?php echo $redbrick_primary_category->slug; ?>">
-                                <?php echo $redbrick_primary_category->name; ?>
+                            <span class="category section--<?php echo $redbrick_topmost_category->slug; ?>">
+                                <?php echo $redbrick_topmost_category->name; ?>
                             </span>
                         </h2>
                         <ul class="post-list">
