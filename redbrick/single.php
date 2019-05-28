@@ -1,7 +1,8 @@
 <?php get_header(); ?>
 <main class="post">
     <?php while (have_posts()) : the_post(); ?>
-        <article>
+        <?php $redbrick_topmost_category = redbrick_get_topmost_category_of_post(get_post()->ID); ?>
+        <article class="section--<?php echo $redbrick_topmost_category->slug; ?>">
             <div class="featured-image-box">
                 <?php the_post_thumbnail('post-thumbnail', ['class' => 'featured-image']); ?>
                 <div class="text-overlay">
@@ -69,10 +70,7 @@
         <aside class="recommended">
             <div class="constraint-container">
                 <h1>Recommended</h1>
-                <?php
-                    $redbrick_topmost_category = redbrick_get_topmost_category_of_post(get_post()->ID);
-                    $redbrick_posts = redbrick_get_most_recent_posts(3, [ $redbrick_topmost_category->slug ]);
-                ?>
+                <?php $redbrick_posts = redbrick_get_most_recent_posts(3, [ $redbrick_topmost_category->slug ]); ?>
                 <?php if (count($redbrick_posts) != 0): ?>
                     <section class="more-posts">
                         <h2>More in

@@ -70,7 +70,14 @@ if (!function_exists('redbrick_enqueue_styles_and_scripts')) {
             true        // enqueue in footer (rather than head)
         );
 
-        
+        // Add opening quotemarks to pullquotes
+        wp_enqueue_script(
+            'redbrick_add-opening-quotemarks',
+            get_template_directory_uri() . '/scripts/add-opening-quotemarks.js',
+            [],         // dependencies
+            time(),     // version number // TODO: set actual version number rather than `time()`
+            true        // enqueue in footer (rather than head)
+        );
     }
 }
 add_action('wp_enqueue_scripts', 'redbrick_enqueue_styles_and_scripts');
@@ -143,7 +150,7 @@ if (!function_exists('redbrick_shortcode_do')) {
          */
 
         $atts = shortcode_atts(
-            [   /** Array containing all legal attribute keys and their default values (here 'NULL' for compatibility */
+            [   /** Array containing all legal attribute keys and their default values (here 'NULL' for compatibility) */
                 'action'    => 'NULL',
                 'align'     => 'NULL',
                 'id'        => 'NULL',
@@ -203,7 +210,6 @@ if (!function_exists('redbrick_shortcode_do')) {
             ?> 
             <figure class="wp-block-pullquote<?php echo $class_section . $class_float . $class_size; ?>">
                 <blockquote>
-                    <div class="opening-quotemark">“</div>
                     <p><?php echo $atts['quote']; ?></p>
                 </blockquote>
             </figure>
@@ -427,7 +433,7 @@ if (!function_exists('redbrick_get_html_category_item')) {
      * Get a fully generated HTML `<li class="category">...</li>` item for a
      * given category. The resulting HTML is intended for use in lists of
      * categories, e.g. in the list of subsections on a section's main page.
-     * @param category A `WP_Term` object for the category. This function
+     * @param WP_Term $category An object for the category. This function
      *      performs no error checking, so it is the caller's responsibility to
      *      check that the provided object is not null, is well-formed, and
      *      represents a category that actually exists.

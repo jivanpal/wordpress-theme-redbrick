@@ -693,7 +693,7 @@ footer {
  * children at its extremeties. This is necessary in order for margins and
  * background colours to function as intended.
  */
-main.home section.posts, main.author {
+main.home section.posts, main.author, main.search-results {
     padding-top: 1px;
 }
 main {
@@ -792,6 +792,23 @@ main.post, main.static-page {
         a {
             text-decoration: underline;
         }
+
+        &.section- {
+            &-        { .wp-block-pullquote p { color: $color-other;        } }
+            &-news      .wp-block-pullquote p { color: $color-news;         }
+            &-comment   .wp-block-pullquote p { color: $color-comment;      }
+            &-culture   .wp-block-pullquote p { color: $color-culture;      }
+            &-music     .wp-block-pullquote p { color: $color-music;        }
+            &-film      .wp-block-pullquote p { color: $color-film;         }
+            &-tv        .wp-block-pullquote p { color: $color-tv;           }
+            &-gaming    .wp-block-pullquote p { color: $color-gaming;       }
+            &-food      .wp-block-pullquote p { color: $color-food;         }
+            &-travel    .wp-block-pullquote p { color: $color-travel;       }
+            &-lifestyle .wp-block-pullquote p { color: $color-lifestyle;    }
+            &-tech      .wp-block-pullquote p { color: $color-tech;         }
+            &-sport     .wp-block-pullquote p { color: $color-sport;        }
+            &-features  .wp-block-pullquote p { color: $color-features;     }
+        }
     }
 
     .info-box {
@@ -822,6 +839,7 @@ main.post, main.static-page {
                 .opening-quotemark {
                     font-size: 3.5em;
                     margin: -30px $spacing-default -72px 5px;
+                    color: $color-other;
                 }
             }
         }
@@ -838,7 +856,7 @@ main.post, main.static-page {
             padding: 0 12px;
         }
     }
-
+    
     .recommended {
         .more-posts .category.section- {
             &-          { color: $color-other;       }
