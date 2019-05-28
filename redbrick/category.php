@@ -23,7 +23,10 @@
             <ul class="category-list">
                 <?php
                 foreach ($redbrick_categories as $redbrick_category) {
-                    echo redbrick_get_html_category_item($redbrick_category);
+                    if (preg_match('/^slider-/', $redbrick_category->slug) === 0) {
+                        // If category slug does not beign with `slider-` ...
+                        echo redbrick_get_html_category_item($redbrick_category);
+                    }
                 }
                 ?>
             </ul>
