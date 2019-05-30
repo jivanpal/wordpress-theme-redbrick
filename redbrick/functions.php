@@ -240,7 +240,7 @@ add_shortcode('do', 'redbrick_shortcode_do');
 if (!function_exists('redbrick_get_cat_id_from_slug')) {
     /**
      * Retrive category ID from category slug.
-     * @param slug The slug of the category.
+     * @param string $slug The slug of the category.
      * @return int If failure occurs or no such category exists, returns 0;
      *      else returns the ID of the category.
      */
@@ -255,8 +255,8 @@ if (!function_exists('redbrick_get_cat_id_from_slug')) {
 
 if (!function_exists('redbrick_get_cat_ids_from_slug_arr')) {
     /**
-     * Retrieve a list of category IDs from an array of category slugs.
-     * @param slugs The array of category slugs.
+     * Retrieve a string of category IDs from an array of category slugs.
+     * @param string[] $slugs The array of category slugs.
      * @return string A comma-delimited string of category IDs, e.g. "32,8,7".
      *      Any categories for which there was an error determining the ID or
      *      which don't exist will not have an ID appear in the string. If no
@@ -283,7 +283,7 @@ if (!function_exists('redbrick_get_most_recent_posts')) {
      *          fetched. Useful for preventing the current post from being
      *          returned in the results. Default is an empty array,
      *          i.e. no excluded posts.
-     * @return WP_Post[] An array of `WP_Post` objects, from most recent to oldest.
+     * @return WP_Post[] The recent posts, from most recent to oldest.
      */
     function redbrick_get_most_recent_posts($numberposts, $categories, $excluded_posts = []) {
         $cat_ids = redbrick_get_cat_ids_from_slug_arr($categories);
@@ -302,7 +302,7 @@ if (!function_exists('redbrick_get_most_recent_posts')) {
 if (!function_exists('redbrick_get_the_author_name')) {
     /**
      * Get the name of the author of a given post.
-     * @param post `WP_Post` object for the post in question.
+     * @param WP_Post $post An object for the post in question.
      * @return string The display name of the author for that post. If there is
      *      no such post/author or an error occurred, returns the string "NULL".
      */
@@ -326,7 +326,7 @@ if (!function_exists('redbrick_get_html_post_item')) {
      * Get a fully generated HTML `<li class="post">...</li>` item for a given
      * post. The resulting HTML is intended for use in lists of posts, e.g. on
      * the front page, in "Read More" sections, etc.
-     * @param post A `WP_Post` object for the post. This function performs no
+     * @param WP_Post $post An object for the post. This function performs no
      *      error checking, so it is the caller's responsibility to check that
      *      the provided object is not null, is well-formed, and represents a
      *      post that actually exists.
@@ -362,8 +362,8 @@ if (!function_exists('redbrick_get_html_showcase_item')) {
      * Get a fully generated HTML `<li class="showcase-item">...</li>` item for
      * a given post. The resulting HTML is intended for use in the sliders on
      * category pages and the front page.
-     * @param post_id The ID of the post. If the ID is invalid, behaviour is
-     *          undefined.
+     * @param int $post_id The ID of the post. If the ID is invalid, behaviour
+     *          is undefined.
      * @return string The HTML markup for the generated list item.
      */
     function redbrick_get_html_showcase_item($post_id) {
@@ -396,11 +396,13 @@ if (!function_exists('redbrick_put_yoast_primary_cat_first')) {
      * 
      * @see https://joshuawinn.com/using-yoasts-primary-category-in-wordpress-theme/#comment-107849
      * 
-     * @param array $categories An array of all the categories that the post
-     *          belongs to.
+     * @param WP_Term[] $categories An array of all the categories that the
+     *          post belongs to.
      * @param int|bool $post_id The ID of the post whose categories we're
      *          dealing with. If unspecified or set to `0` or `false`, the ID
-     *          of the post represented by the global `$post` object is used. 
+     *          of the post represented by the global `$post` object is used.
+     * @return WP_Term[] The array `$categories`, but with the primary category
+     *          of the post with ID `$post_id` as the first element.
      */
     function redbrick_filter_primary_category_first($categories, $post_id) {
         if (!$post_id) {
@@ -491,7 +493,7 @@ if (!function_exists('redbrick_get_nav_menu_object_at_location')) {
 if (!function_exists('redbrick_build_array_tree')) {
     /**
      * Build a tree-like structure of the items in an array.
-     * @param array $elements The array of items from which to generate the
+     * @param WP_Post[] $elements The array of items from which to generate the
      *          tree. Each item must have a field `int ID`, and a field
      *          `int menu_item_parent` which is set to the ID of its parent item
      *          as seen in this array (or set to `0` if the item is a
@@ -499,9 +501,13 @@ if (!function_exists('redbrick_build_array_tree')) {
      *          efficiency, i.e. this operation is destructive (and will reduce
      *          a fully-formed array to an empty array) so create a copy
      *          of `$elements` beforehand if necessary.
-     * @param int $parent_id The ID of the parent item for the branch we're
-     *          currently constructing; used internally by the function, since
-     *          it is recursive in nature.
+     * @param int $parent_id Ignore this parameter; it is used internally by
+     *          this function since it is recursive in nature. (The ID of the
+     *          parent item for the branch we're currently constructing.)
+     * @return WP_Post[] The array `$elements` but only with the top-level
+     *          items. Second-level items are nested under the
+     *          `redbrick_children` field of their parent, and similarly for
+     *          third-level items, etc.
      * 
      * @see https://wordpress.stackexchange.com/a/196038
      */
@@ -524,6 +530,7 @@ if (!function_exists('redbrick_build_array_tree')) {
 if (!function_exists('redbrick_get_nav_menu_items_tree')) {
     /**
      * Get a tree-like array of the items in a given navigation menu. 
+     * 
      * @param int|string|WP_Term $menu The ID, slug, or object for the
      *          navigation menu. Such an object can be obtained by the likes of
      *          `wp_get_nav_menu_object()` or
@@ -548,6 +555,14 @@ if (!function_exists('redbrick_get_html_header_menu_item')) {
      * Get a fully generated `<li class="[has-submenu] ...">...</li>` item for
      * a given header menu item. This markup is to be used within the
      * `<ul class="menu">...</ul>` element in `header.php`.
+     * 
+     * @param int $item_id The ID of the menu item (this does not necessarily
+     *          equal the ID of the WordPress item it corresponds to,
+     *          e.g. if the item is a category, this is not necessarily the
+     *          category ID).
+     * @param WP_Post $item The menu item.
+     * @return string HTML markup for the `<li>` element generated from the
+     *          menu item.
      */
     function redbrick_get_html_header_menu_item($item_id, $item) {
         $item_has_children = isset($item->redbrick_children) && (count($item->redbrick_children) != 0);
@@ -587,6 +602,15 @@ if (!function_exists('redbrick_get_html_header_submenu_from_item')) {
      * If the specific header menu item has no children, i.e. does not have a
      * submenu, this function returns an empty string, since no markup is
      * needed for that item.
+     * 
+     * @param int $item_id The ID of the menu item (this does not necessarily
+     *          equal the ID of the WordPress item it corresponds to,
+     *          e.g. if the item is a category, this is not necessarily the
+     *          category ID).
+     * @param WP_Post $item The menu item.
+     * @return string HTML markup for the `<ul>` element generated from the
+     *          menu item. This elements contains the children of the item
+     *          described by `$item`.
      */
     function redbrick_get_html_header_submenu_from_item($item_id, $item) {
         $item_has_children = isset($item->redbrick_children) && (count($item->redbrick_children) != 0);
@@ -633,11 +657,12 @@ if (!function_exists('redbrick_get_html_list_from_menu_tree')) {
      * below (https://stackoverflow.com/a/30064576/9996911) for an example of
      * this sort of output.
      * 
-     * @param array $menu_tree A menu tree, as obtained via a call to
+     * @see https://stackoverflow.com/a/30064576/9996911
+     * 
+     * @param WP_Post[] $menu_tree A menu tree, as obtained via a call to
      *      `redbrick_get_nav_menu_items_tree()`. The given array must not be
      *      empty, and it must not be `NULL`, else behaviour is undefined.
-     * 
-     * @see https://stackoverflow.com/a/30064576/9996911
+     * @return string HTML markup for the generated `<ul>` element.
      */
     function redbrick_get_html_list_from_menu_tree($menu_tree) {
         ob_start();
