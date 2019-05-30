@@ -283,7 +283,7 @@ if (!function_exists('redbrick_get_most_recent_posts')) {
      *          fetched. Useful for preventing the current post from being
      *          returned in the results. Default is an empty array,
      *          i.e. no excluded posts.
-     * @return array An array of `WP_Post` objects, from most recent to oldest.
+     * @return WP_Post[] An array of `WP_Post` objects, from most recent to oldest.
      */
     function redbrick_get_most_recent_posts($numberposts, $categories, $excluded_posts = []) {
         $cat_ids = redbrick_get_cat_ids_from_slug_arr($categories);
