@@ -693,7 +693,7 @@ footer {
  * children at its extremeties. This is necessary in order for margins and
  * background colours to function as intended.
  */
-main.home section.posts, main.author, main.search-results {
+main.home section.posts, main.author, main.search-results, main.not-found {
     padding-top: 1px;
 }
 main {
