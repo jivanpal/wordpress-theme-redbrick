@@ -220,15 +220,19 @@ if (!function_exists('redbrick_shortcode_do')) {
         if ($atts['action'] == 'youtube') {
             ob_start();
             ?>
-            <div class="<?php echo $atts['align']; ?> youtube<?php echo $atts['align']; ?>">
-                <iframe
-                    width="100%"
-                    height="100%"
-                    src="https://www.youtube.com/embed/<?php echo $atts['id']; ?>?rel=0"
-                    frameborder="0"
-                    allowfullscreen>
-                </iframe>
-            </div>
+            <figure class="wp-block-embed-youtube wp-block-embed is-type-video is-provider-youtube">
+                <div class="wp-block-embed__wrapper">
+                    <span class="embed-youtube" style="text-align: center; display: block;">
+                        <iframe class="youtube-player"
+                                type="text/html" width="500"
+                                height="282"
+                                src="https://www.youtube.com/embed/<?php echo $atts['id']; ?>?version=3&amp;rel=1&amp;fs=1&amp;autohide=2&amp;showsearch=0&amp;showinfo=1&amp;iv_load_policy=1&amp;wmode=transparent"
+                                allowfullscreen="true"
+                                style="border: 0;">
+                        </iframe>
+                    </span>
+                </div>
+            </figure>
             <?php
             return ob_get_clean();
         }

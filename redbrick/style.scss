@@ -809,6 +809,14 @@ main.post, main.static-page {
             &-sport     .wp-block-pullquote p { color: $color-sport;        }
             &-features  .wp-block-pullquote p { color: $color-features;     }
         }
+
+        .wp-block-embed-youtube {
+            margin: $spacing-default;
+
+            iframe.youtube-player {
+                width: 100%;
+            }
+        }
     }
 
     .info-box {
