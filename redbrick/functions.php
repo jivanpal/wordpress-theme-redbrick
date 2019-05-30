@@ -276,12 +276,16 @@ if (!function_exists('redbrick_get_cat_ids_from_slug_arr')) {
 if (!function_exists('redbrick_get_most_recent_posts')) {
     /**
      * Retrieve some of the most recent posts from a given set of categories.
-     * @param numberposts The number of most recent posts to retrieve.
-     * @param categories An array of category slugs. These categories will be
-     *          searched.
+     * @param int $numberposts The number of most recent posts to retrieve.
+     * @param string[] $categories An array of category slugs. These categories
+     *          will be searched.
+     * @param int[] $excluded_posts An array of post IDs that should not be
+     *          fetched. Useful for preventing the current post from being
+     *          returned in the results. Default is an empty array,
+     *          i.e. no excluded posts.
      * @return array An array of `WP_Post` objects, from most recent to oldest.
      */
-    function redbrick_get_most_recent_posts($numberposts, $categories) {
+    function redbrick_get_most_recent_posts($numberposts, $categories, $excluded_posts = []) {
         $cat_ids = redbrick_get_cat_ids_from_slug_arr($categories);
         if ($cat_ids == '') {
             return [];
@@ -290,6 +294,7 @@ if (!function_exists('redbrick_get_most_recent_posts')) {
         return get_posts( [
             'numberposts'   => $numberposts,
             'category'      => $cat_ids,
+            'post__not_in'  => $excluded_posts,
         ] );
     }
 }

@@ -1,7 +1,9 @@
 <?php get_header(); ?>
 <main class="post">
     <?php while (have_posts()) : the_post(); ?>
-        <?php $redbrick_topmost_category = redbrick_get_topmost_category_of_post(get_post()->ID); ?>
+        <?php
+            $redbrick_post_id = get_the_ID();
+            $redbrick_topmost_category = redbrick_get_topmost_category_of_post($redbrick_post_id); ?>
         <article class="section--<?php echo $redbrick_topmost_category->slug; ?>">
             <div class="featured-image-box">
                 <?php the_post_thumbnail('post-thumbnail', ['class' => 'featured-image']); ?>
@@ -70,7 +72,7 @@
         <aside class="recommended">
             <div class="constraint-container">
                 <h1>Recommended</h1>
-                <?php $redbrick_posts = redbrick_get_most_recent_posts(3, [ $redbrick_topmost_category->slug ]); ?>
+                <?php $redbrick_posts = redbrick_get_most_recent_posts(3, [ $redbrick_topmost_category->slug ], [$redbrick_post_id]); ?>
                 <?php if (count($redbrick_posts) != 0): ?>
                     <section class="more-posts">
                         <h2>More in
@@ -88,7 +90,7 @@
                     </section>
                 <?php endif; ?>
                         
-                <?php $redbrick_posts = redbrick_get_most_recent_posts(3, ['popular']); ?>
+                <?php $redbrick_posts = redbrick_get_most_recent_posts(3, ['popular'], [$redbrick_post_id]); ?>
                 <?php if (count($redbrick_posts) != 0): ?>
                     <section class="most-popular">
                         <h2>Most popular</h2>
