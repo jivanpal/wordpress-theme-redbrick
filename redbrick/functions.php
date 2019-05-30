@@ -80,7 +80,46 @@ if (!function_exists('redbrick_enqueue_styles_and_scripts')) {
         );
     }
 }
-add_action('wp_enqueue_scripts', 'redbrick_enqueue_styles_and_scripts');
+add_action('wp_enqueue_scripts',    'redbrick_enqueue_styles_and_scripts');
+add_action('login_enqueue_scripts', 'redbrick_enqueue_styles_and_scripts');
+
+if (!function_exists('redbrick_set_login_headerurl')) {
+    /**
+     * A filter for the `login_headerurl` hook that sets the hyperlink target
+     * of the icon on the login page to `/` (the homepage).
+     */
+    function redbrick_set_login_headerurl($login_header_url) {
+        return '/';
+    }
+}
+add_filter('login_headerurl', 'redbrick_set_login_headerurl');
+
+if (!function_exists('rebrick_set_login_headertext')) {
+    function redbrick_set_login_headertext($login_header_text) {
+        return file_get_contents(get_template_directory() . '/assets/redbrick-icon.svg');
+    }
+}
+add_filter('login_headertext', 'redbrick_set_login_headertext');
+
+if (!function_exists('redbrick_set_login_message')) {
+    /**
+     * A filter for the `login_message` hook that set the message on the
+     * login page as appropriate.
+     */
+    function redbrick_set_login_message($message) {
+        if ($message == '') {
+            ob_start(); ?>
+            <p class="message login">Log in to Redbrick</p>
+            <?php $message = ob_get_clean();
+        } else if (preg_match( '/^\<p class\=\"message register\"\>/', $message) === 1) {
+            ob_start(); ?>
+            <p class="message register">Create a Redrick account</p>
+            <?php $message = ob_get_clean();
+        }
+        return $message;
+    }
+}
+add_filter('login_message', 'redbrick_set_login_message');
 
 /** TODO: Implement CSS styles for Guild Council Motions, YouTube, and text boxes; see HTML given here for reference */
 if (!function_exists('redbrick_shortcode_do')) {
