@@ -522,6 +522,7 @@ main {
 
 footer {
     background-color: $header-footer-bg-color;
+    
     color: $footer-fg-color;
     a:hover {
         color: $footer-fg-accent-color;
@@ -541,7 +542,7 @@ footer {
         margin: $spacing-default;
     }
 
-    .social-media, .latest-issue, .footer-links {
+    .upper, .lower, .footer-links {
         border-top: 1px solid $footer-fg-color;
     }
 
@@ -559,27 +560,35 @@ footer {
         }
     }
     
-    .latest-issue {
-        display: flex;
-        flex-direction: column;
+    .lower {
+        .latest-issue > a {
+            display: flex;
+            flex-direction: column;
 
-        .thumbnail {
-            padding: $spacing-default;
-            
-            img {
-                display: block;
-                margin: 0 auto;
-                max-height: $max-vh-usage;
-                max-width: 100%;
+            .thumbnail {
+                padding: $spacing-default;
+                
+                img {
+                    display: block;
+                    margin: 0 auto;
+                    max-height: $max-vh-usage;
+                    max-width: 100%;
+                }
+            }
+
+            /** TODO: Deal with presentation on tablets; thumbnail is far too large. */
+            @media only screen and (min-width: 400px) {
+                flex-direction: row;
             }
         }
 
-        /** TODO: Deal with presentation on tablets; thumbnail is far too large. */
-        @media only screen and (min-width: 400px) {
-            flex-direction: row;
+        @media only screen and (min-width: $breakpoint-tablet-min) {
+            .flex-container {
+                display: flex;
+            }
 
-            .thumbnail {
-                border-top: 0;
+            .footer-links {
+                border-top: none;
                 border-left: 1px solid $footer-fg-color;
             }
         }
@@ -587,6 +596,13 @@ footer {
 }
 
 // Classes
+
+// Column width constraints
+.constraint-container {
+    max-width: $column-max-width;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 .showcase-container {
     width: 100%;
@@ -773,13 +789,6 @@ main.home {
 }
 
 main {
-    // Column width constraints
-    .constraint-container {
-        max-width: $column-max-width;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
     .featured-image-box {
         position: relative;
         height: $max-vh-usage;  // fix height so that `.featured-image` will be of the correct dimensions; `max-height` does not suffice here
