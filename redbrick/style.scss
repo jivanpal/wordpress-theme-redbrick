@@ -757,35 +757,57 @@ footer {
  * children at its extremeties. This is necessary in order for margins and
  * background colours to function as intended.
  */
-main.home section.posts, main.author, main.search-results, main.not-found {
+main.front-page section.posts, main.author, main.search-results, main.not-found {
     padding-top: 1px;
 }
-main {
+main:not(.front-page) {
     padding-bottom: 1px;
 }
 
-main.home {
-    /** TODO: Remove sample colours when done testing */
-    /*
-    section.top-posts {
-        background-color: red;
+main.front-page {
+    section.posts {
+        padding: 1px 0;
+        h1 {
+            padding-bottom: 0.2em;
+            border-bottom: 1px solid gray;
+        }
     }
-    section.comment-posts {
-        background-color: purple;
+    section.posts- {
+        &-news { h1 {
+            color:          $color-news;
+            border-color:   $color-news;
+        } }
+        &-top-stories { h1 {
+            color:          $color-other;
+            border-color:   $color-other;
+        } }
+        &-comment     { h1 {
+            color:          $color-comment;
+            border-color:   $color-comment;
+        } }
+        &-features    { h1 {
+            color:          black;
+            border-color:   black;
+        } }
+        &-sport       { h1 {
+            color:          $color-sport;
+            border-color:   $color-sport;
+        } }
+        &-other       { h1 {
+            color:          black;
+            border-color:   black;
+        } }
+        &-photography-and-illustration {
+            background-color: black;
+            h1 {
+                color: white;
+                border-color: white;
+            }
+            &, a {
+                color: white;
+            }
+        }
     }
-    section.featured-posts {
-        background-color: gold;
-    }
-    section.sport-posts {
-        background-color: lightgreen;
-    }
-    section.other-posts {
-        background-color: #777;
-    }
-    section.photography-posts {
-        background-color: #555;
-    }
-    */
 }
 
 main {
