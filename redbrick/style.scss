@@ -904,6 +904,9 @@ main.post, main.static-page {
     }
 
     .info-box {
+        padding: 1px 0;     // Margin overlap fix
+        background-color: #f0f0f0;
+
         .label {
             font-weight: bold;
         }
