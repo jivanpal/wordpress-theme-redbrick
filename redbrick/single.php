@@ -19,23 +19,7 @@
                     <?php the_excerpt(); ?>
                 </div>
                 <div class="info-box">
-                    <?php
-                        $author_profile_picture_url = get_avatar_url(get_the_author_meta('ID'));
-                        $author_has_profile_picture = $author_profile_picture_url !== false;
-                        $author_name = get_the_author();
-                    ?>
-                    <div class="author-box">
-                        <?php if ($author_has_profile_picture) : ?>
-                            <img class="image" src="<?php echo $author_profile_picture_url; ?>"/>
-                        <?php endif; ?>
-                        <div class="author-details">
-                            <div class="author-name">
-                                <?php if (!$author_has_profile_picture): ?>Written by<?php endif; ?>
-                                <a href="<?php echo esc_url(get_author_posts_url(get_the_author_meta('ID'))); ?>" title="<?php echo esc_attr($author_name); ?>"><?php echo $author_name; ?></a>
-                            </div>
-                            <div class="author-bio"><?php the_author_meta('description'); ?></div>
-                        </div>
-                    </div>
+                    <?php echo redbrick_get_html_author_box(); ?>
                     <div class="timestamps">
                         <div class="publish-time">
                             <span class="label">Published</span>

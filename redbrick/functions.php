@@ -744,3 +744,72 @@ if (!function_exists('redbrick_get_topmost_category_of_post')) {
         return $ancestors ? get_category($ancestors[0]) : $primary_category;
     }
 }
+
+if (!function_exists('redrick_get_html_info_box')) {
+    /**
+     * Get a fully generated `<div class="author-box">...</div>` element for a
+     * given post. This element will contain the avatars and names of all
+     * authors of the given post (supports "Co-Authors Plus" plugin). If there
+     * is only one author, the author's bio will also be present in the markup.
+     * 
+     * @see https://wordpress.org/plugins/co-authors-plus/
+     * 
+     * @param int $post_id The ID of the post. Default is the current post
+     *      (global `$post` object).
+     * @return string HTML markup for the author box element for the given post.
+     */
+    function redbrick_get_html_author_box($post_id = 0) {
+        if (is_plugin_active('co-authors-plus/co-authors-plus.php')) {
+            $redbrick_coauthors = get_coauthors($post_id);
+        }
+
+        if (!$redbrick_coauthors || count($redbrick_coauthors) == 1) {  // There is only one author
+            $author_profile_picture_url = get_avatar_url(get_the_author_meta('ID'));
+            $author_has_profile_picture = $author_profile_picture_url !== false;
+            $author_name = get_the_author();
+
+            ob_start();
+            ?>
+            <div class="author-box">
+                <?php if ($author_has_profile_picture) : ?>
+                    <img class="image" src="<?php echo $author_profile_picture_url; ?>" title="<?php echo esc_attr($author_name); ?>"/>
+                <?php endif; ?>
+                <div class="author-details">
+                    <div class="author-name">
+                        <?php if (!$author_has_profile_picture): ?>Written by<?php endif; ?>
+                        <a href="<?php echo esc_url(get_author_posts_url(get_the_author_meta('ID'))); ?>" title="<?php echo esc_attr($author_name); ?>"><?php echo $author_name; ?></a>
+                    </div>
+                    <div class="author-bio"><?php the_author_meta('description'); ?></div>
+                </div>
+            </div>
+            <?php
+            return ob_get_clean();
+        } else { // There are multiple authors
+            ob_start();
+            ?>
+            <div class="author-box">
+                <?php foreach ($redbrick_coauthors as $key => $coauthor): ?>
+                    <?php
+                    $author_profile_picture_url = get_avatar_url($coauthor->ID);
+                    $author_has_profile_picture = $author_profile_picture_url !== false;
+                    $author_name = get_the_author('display_name', $coauthor->ID);
+                    ?>
+                    <img class="image" src="<?php echo $author_profile_picture_url; ?>" title="<?php echo esc_attr($author_name); ?>"/>
+                <?php endforeach; ?>
+                <div class="author-details">
+                    <div class="author-name">
+                        <?php
+                        if ($post_id === 0) {
+                            coauthors_posts_links();
+                        } else {
+                            ?>Non-zero post ID!<?php
+                        }
+                        ?>
+                    </div>
+                </div>
+            </div>
+            <?php
+            return ob_get_clean();
+        }
+    }
+}
