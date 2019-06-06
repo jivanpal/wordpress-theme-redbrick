@@ -763,7 +763,9 @@ if (!function_exists('redrick_get_html_info_box')) {
             $redbrick_coauthors = get_coauthors($post_id);
         }
 
-        if (!$redbrick_coauthors || count($redbrick_coauthors) == 1) {  // There is only one author
+        $number_of_authors = $redbrick_coauthors ? count($redbrick_coauthors) : 1;
+
+        if ($number_of_authors == 1) {  // There is only one author
             $author_profile_picture_url = get_avatar_url(get_the_author_meta('ID'));
             $author_has_profile_picture = $author_profile_picture_url !== false;
             $author_name = get_the_author();
@@ -772,7 +774,9 @@ if (!function_exists('redrick_get_html_info_box')) {
             ?>
             <div class="author-box">
                 <?php if ($author_has_profile_picture) : ?>
-                    <img class="image" src="<?php echo $author_profile_picture_url; ?>" title="<?php echo esc_attr($author_name); ?>"/>
+                    <a href="<?php echo esc_url(get_author_posts_url(get_the_author_meta('ID'))); ?>" title="<?php echo esc_attr($author_name); ?>">
+                        <img class="image" src="<?php echo $author_profile_picture_url; ?>" title="<?php echo esc_attr($author_name); ?>"/>
+                    </a>
                 <?php endif; ?>
                 <div class="author-details">
                     <div class="author-name">
@@ -784,7 +788,7 @@ if (!function_exists('redrick_get_html_info_box')) {
             </div>
             <?php
             return ob_get_clean();
-        } else { // There are multiple authors
+        } else if ($number_of_authors <= 4) {
             ob_start();
             ?>
             <div class="author-box">
@@ -794,6 +798,7 @@ if (!function_exists('redrick_get_html_info_box')) {
                     $author_has_profile_picture = $author_profile_picture_url !== false;
                     $author_name = get_the_author('display_name', $coauthor->ID);
                     ?>
+                    <?php /** TODO: Hyperlink profile picture to author page */ ?>
                     <img class="image" src="<?php echo $author_profile_picture_url; ?>" title="<?php echo esc_attr($author_name); ?>"/>
                 <?php endforeach; ?>
                 <div class="author-details">
@@ -802,6 +807,26 @@ if (!function_exists('redrick_get_html_info_box')) {
                         if ($post_id === 0) {
                             coauthors_posts_links();
                         } else {
+                            /** TODO: Implement this */
+                            ?>Non-zero post ID!<?php
+                        }
+                        ?>
+                    </div>
+                </div>
+            </div>
+            <?php
+            return ob_get_clean();
+        } else {
+            ob_start();
+            ?>
+            <div class="author-box">
+                <div class="author-details">
+                    <div class="author-name">
+                        <?php
+                        if ($post_id === 0) {
+                            coauthors_posts_links();
+                        } else {
+                            /** TODO: Implement this; similar to previous if-block implementation */
                             ?>Non-zero post ID!<?php
                         }
                         ?>
