@@ -977,6 +977,8 @@ main.post, main.static-page {
     }
 
     article {
+        padding-bottom: 20px;
+
         .excerpt {
             font-size: 1.1em;
             font-weight: 600;   // between normal weight and bold weight
