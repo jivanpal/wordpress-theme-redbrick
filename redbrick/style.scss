@@ -769,6 +769,25 @@ main:not(.front-page) {
     padding-bottom: 1px;
 }
 
+main.author, main.category {
+    @media only screen and (min-width: $breakpoint-desktop-min) {
+        .constrained {
+            max-width: 1600px;
+        }
+
+        .author-box {
+            width: $breakpoint-mobile-max;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .post-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+}
+
 main.front-page {
     .recent-posts {
         section.posts {
@@ -1182,17 +1201,6 @@ main.category {
             &-tech      { li.category:hover { background-color: rgba($color-tech       , 0.35); } }
             &-sport     { li.category:hover { background-color: rgba($color-sport      , 0.35); } }
             &-features  { li.category:hover { background-color: rgba($color-features   , 0.35); } }
-        }
-    }
-
-    @media only screen and (min-width: $breakpoint-desktop-min) {
-        .constrained {
-            max-width: 1600px;
-        }
-        
-        .post-list {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
         }
     }
 }
