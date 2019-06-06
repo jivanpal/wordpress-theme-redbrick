@@ -316,7 +316,7 @@ if (!function_exists('redbrick_get_cat_ids_from_slug_arr')) {
     }
 }
 
-if (!function_exists('redbrick_get_most_recent_posts')) {
+if (!function_exists('redbrick_get_latest_posts')) {
     /**
      * Retrieve some of the most recent posts from a given set of categories.
      * @param int $numberposts The number of most recent posts to retrieve.
@@ -328,7 +328,7 @@ if (!function_exists('redbrick_get_most_recent_posts')) {
      *          i.e. no excluded posts.
      * @return WP_Post[] The recent posts, from most recent to oldest.
      */
-    function redbrick_get_most_recent_posts($numberposts, $categories, $excluded_posts = []) {
+    function redbrick_get_latest_posts($numberposts, $categories, $excluded_posts = []) {
         $cat_ids = redbrick_get_cat_ids_from_slug_arr($categories);
         if ($cat_ids == '') {
             return [];

@@ -56,7 +56,7 @@
         <aside class="recommended">
             <div class="constrained">
                 <h1>Recommended</h1>
-                <?php $redbrick_posts = redbrick_get_most_recent_posts(3, [ $redbrick_topmost_category->slug ], [$redbrick_post_id]); ?>
+                <?php $redbrick_posts = redbrick_get_latest_posts(3, [ $redbrick_topmost_category->slug ], [$redbrick_post_id]); ?>
                 <?php if (count($redbrick_posts) != 0): ?>
                     <section class="more-posts">
                         <h2>More in
@@ -74,7 +74,7 @@
                     </section>
                 <?php endif; ?>
                         
-                <?php $redbrick_posts = redbrick_get_most_recent_posts(3, ['popular'], [$redbrick_post_id]); ?>
+                <?php $redbrick_posts = redbrick_get_latest_posts(3, ['popular'], [$redbrick_post_id]); ?>
                 <?php if (count($redbrick_posts) != 0): ?>
                     <section class="most-popular">
                         <h2>Most popular</h2>

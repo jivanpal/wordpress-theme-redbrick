@@ -4,7 +4,7 @@
     $category_slug  = get_queried_object()->slug;
 ?>
 <main class="category">
-    <?php $redbrick_posts = redbrick_get_most_recent_posts(4, [ 'slider-' . $category_slug ]); ?>
+    <?php $redbrick_posts = redbrick_get_latest_posts(4, [ 'slider-' . $category_slug ]); ?>
     <?php if (count($redbrick_posts) != 0): ?>
         <div class="showcase-container">    <?php /** This container is used to apply overflow shadows */ ?>
             <ul class="showcase">
@@ -34,7 +34,7 @@
     <?php endif; ?>
 
     <div class="constrained">
-        <?php $redbrick_posts = redbrick_get_most_recent_posts(12, [ $category_slug ]); ?>
+        <?php $redbrick_posts = redbrick_get_latest_posts(12, [ $category_slug ]); ?>
         <?php if (count($redbrick_posts) != 0): ?>
             <section class="posts section-<?php echo $category_slug; ?>">
                 <ul class="post-list">
