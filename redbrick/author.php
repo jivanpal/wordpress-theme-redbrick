@@ -7,7 +7,7 @@
         $author_has_profile_picture = $author_profile_picture_url !== false;
         $author_name = $author->display_name;
     ?>
-    <div class="constraint-container">
+    <div class="constrained">
         <div class="author-box">
             <?php if ($author_has_profile_picture) : ?>
                 <img class="image" src="<?php echo $author_profile_picture_url; ?>"/>

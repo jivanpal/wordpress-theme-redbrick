@@ -8,13 +8,13 @@
             <div class="featured-image-box">
                 <?php the_post_thumbnail('post-thumbnail', ['class' => 'featured-image']); ?>
                 <div class="text-overlay">
-                    <div class="constraint-container">
+                    <div class="constrained">
                         <h1 class="title"><?php the_title(); ?></h1>
                     </div>
                 </div>
             </div>
 
-            <div class="constraint-container">
+            <div class="constrained">
                 <div class="excerpt">
                     <?php the_excerpt(); ?>
                 </div>
@@ -42,7 +42,7 @@
 
             <?php if ( comments_open() || get_comments_number() ) : ?>
                 <section class="comments">
-                    <div class="constraint-container">
+                    <div class="constrained">
                         <h1>Comments</h1>
                         <?php if (!comments_open()) : ?>
                             <p>Comments are closed on this page.</p>
@@ -54,7 +54,7 @@
         </article>
     
         <aside class="recommended">
-            <div class="constraint-container">
+            <div class="constrained">
                 <h1>Recommended</h1>
                 <?php $redbrick_posts = redbrick_get_most_recent_posts(3, [ $redbrick_topmost_category->slug ], [$redbrick_post_id]); ?>
                 <?php if (count($redbrick_posts) != 0): ?>

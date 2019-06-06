@@ -33,7 +33,7 @@
         </section>
     <?php endif; ?>
 
-    <div class="constraint-container">
+    <div class="constrained">
         <?php $redbrick_posts = redbrick_get_most_recent_posts(12, [ $category_slug ]); ?>
         <?php if (count($redbrick_posts) != 0): ?>
             <section class="posts section-<?php echo $category_slug; ?>">

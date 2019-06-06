@@ -6,7 +6,7 @@
         $html_query_string = esc_html(get_search_query(false));
         $html_attr_query_string = get_search_query();
     ?>
-    <div class="constraint-container">
+    <div class="constrained">
         <h1>Search results</h1>
         <form id="inline-search-form" action="/">
             <input id="inline-search-field" type="search" name="s" placeholder="Search" value="<?php echo $html_attr_query_string; ?>"/>

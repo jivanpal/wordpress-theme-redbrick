@@ -5,13 +5,13 @@
             <div class="featured-image-box">
                 <?php the_post_thumbnail('post-thumbnail', ['class' => 'featured-image']); ?>
                 <div class="text-overlay">
-                    <div class="constraint-container">
+                    <div class="constrained">
                         <h1 class="title"><?php the_title(); ?></h1>
                     </div>
                 </div>
             </div>
 
-            <div class="constraint-container">
+            <div class="constrained">
                 <div class="post-body">
                     <?php the_content(); ?>
                 </div>
@@ -19,7 +19,7 @@
 
             <?php if ( comments_open() || get_comments_number() ) : ?>
                 <section class="comments">
-                    <div class="constraint-container">
+                    <div class="constrained">
                         <h1>Comments</h1>
                         <?php if (!comments_open()) : ?>
                             <p>Comments are closed on this page.</p>

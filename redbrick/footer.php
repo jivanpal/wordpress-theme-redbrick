@@ -1,6 +1,6 @@
         <footer>
             <div class="upper">
-                <div class="constraint-container">
+                <div class="constrained">
                     <div class="social-media">
                         <h1>Connect</h1>
                         <ul>
@@ -25,7 +25,7 @@
             </div>
             
             <div class="lower">
-                <div class="constraint-container flex-container">
+                <div class="constrained flex-container">
                     <div class="latest-issue">
                         <?php /** TODO: Make this section admin-configurable */ ?>
                         <a href="#">
