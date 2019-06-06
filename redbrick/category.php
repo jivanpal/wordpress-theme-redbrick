@@ -19,7 +19,7 @@
 
     <?php $redbrick_categories = get_categories(['child_of' => $category_id]); ?>
     <?php if (count($redbrick_categories) != 0): ?>
-        <section class="subsections section-<?php echo $category_slug; ?>">
+        <section class="subsections section--<?php echo $category_slug; ?>">
             <ul class="category-list">
                 <?php
                 foreach ($redbrick_categories as $redbrick_category) {

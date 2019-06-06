@@ -1145,6 +1145,24 @@ main.category {
                 }
             }
         }
+
+        // Colours
+
+        &.section- {
+            &-news      { li.category:hover { background-color: rgba($color-news       , 0.35); } }
+            &-comment   { li.category:hover { background-color: rgba($color-comment    , 0.35); } }
+            &-culture   { li.category:hover { background-color: rgba($color-culture    , 0.35); } }
+            &-music     { li.category:hover { background-color: rgba($color-music      , 0.35); } }
+            &-film      { li.category:hover { background-color: rgba($color-film       , 0.35); } }
+            &-tv        { li.category:hover { background-color: rgba($color-tv         , 0.35); } }
+            &-gaming    { li.category:hover { background-color: rgba($color-gaming     , 0.35); } }
+            &-food      { li.category:hover { background-color: rgba($color-food       , 0.35); } }
+            &-travel    { li.category:hover { background-color: rgba($color-travel     , 0.35); } }
+            &-lifestyle { li.category:hover { background-color: rgba($color-lifestyle  , 0.35); } }
+            &-tech      { li.category:hover { background-color: rgba($color-tech       , 0.35); } }
+            &-sport     { li.category:hover { background-color: rgba($color-sport      , 0.35); } }
+            &-features  { li.category:hover { background-color: rgba($color-features   , 0.35); } }
+        }
     }
 
     @media only screen and (min-width: $breakpoint-desktop-min) {
