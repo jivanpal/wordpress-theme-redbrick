@@ -1146,6 +1146,17 @@ main.category {
             }
         }
     }
+
+    @media only screen and (min-width: $breakpoint-desktop-min) {
+        .constrained {
+            max-width: 1600px;
+        }
+        
+        .post-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
 }
 
 main.search-results {
