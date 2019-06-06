@@ -765,46 +765,55 @@ main:not(.front-page) {
 }
 
 main.front-page {
-    section.posts {
-        padding: 1px 0;
-        h1 {
-            padding-bottom: 0.2em;
-            border-bottom: 1px solid gray;
-        }
-    }
-    section.posts- {
-        &-news { h1 {
-            color:          $color-news;
-            border-color:   $color-news;
-        } }
-        &-top-stories { h1 {
-            color:          $color-other;
-            border-color:   $color-other;
-        } }
-        &-comment     { h1 {
-            color:          $color-comment;
-            border-color:   $color-comment;
-        } }
-        &-features    { h1 {
-            color:          black;
-            border-color:   black;
-        } }
-        &-sport       { h1 {
-            color:          $color-sport;
-            border-color:   $color-sport;
-        } }
-        &-other       { h1 {
-            color:          black;
-            border-color:   black;
-        } }
-        &-photography-and-illustration {
-            background-color: black;
-            h1 {
-                color: white;
-                border-color: white;
+
+    
+    .recent-posts {
+        section.posts {
+            padding: 1px 0;
+            &:nth-child(2n) {
+                background-color: #f0f0f0;
             }
-            &, a {
-                color: white;
+            
+            h1 {
+                padding-bottom: 0.2em;
+                border-bottom: 1px solid gray;
+            }
+            
+            &.posts- {
+                &-news { h1 {
+                    color:          $color-news;
+                    border-color:   $color-news;
+                } }
+                &-top-stories { h1 {
+                    color:          $color-other;
+                    border-color:   $color-other;
+                } }
+                &-comment     { h1 {
+                    color:          $color-comment;
+                    border-color:   $color-comment;
+                } }
+                &-features    { h1 {
+                    color:          black;
+                    border-color:   black;
+                } }
+                &-sport       { h1 {
+                    color:          $color-sport;
+                    border-color:   $color-sport;
+                } }
+                &-other       { h1 {
+                    color:          black;
+                    border-color:   black;
+                } }
+                &-photography-and-illustration {
+                    background-color: black;
+                    h1 {
+                        color: white;
+                        border-color: white;
+                    }
+                    &, a {
+                        color: white;
+                    }
+                }
             }
         }
     }
