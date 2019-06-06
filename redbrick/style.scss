@@ -717,7 +717,7 @@ footer {
             height: 100%;
 
             opacity: 0.30;
-            &:hover { opacity: 0.40; }
+            @at-root .showcase .showcase-item a:hover .tint { opacity: 0.40; }
             &.section- {
                 &-          { background-color: $color-other;       }
                 &-news      { background-color: $color-news;        }
