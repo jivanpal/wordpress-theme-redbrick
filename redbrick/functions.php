@@ -838,3 +838,28 @@ if (!function_exists('redrick_get_html_info_box')) {
         }
     }
 }
+
+if (!function_exists('redbrick_get_posts_from_wpp_query')) {
+    /**
+     * Given the result of a query made using the `WPP_Query` class provided by
+     * the "WordPress Popular Posts" plugin, fetch the corresponding post
+     * objects (as would be returned by `get_posts`).
+     */
+    function redbrick_get_posts_from_wpp_query($query) {
+        $posts = $query->get_posts();
+
+        if (count($posts) == 0) {
+            return [];
+        }
+
+        $post_ids = [];
+        foreach ($posts as $post) {
+            $post_ids[] = (int)($post->id);
+        }
+
+        return get_posts( [
+            'post__in'  => $post_ids,
+            'orderby'  => 'post__in',
+        ] );
+    }
+}
