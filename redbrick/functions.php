@@ -897,3 +897,36 @@ if (!function_exists('redbrick_get_html_photographer_credits')) {
         return ob_get_clean();
     }
 }
+
+if (!function_exists('redbrick_filter_use_custom_avatar')) {
+    /**
+     * A hook for the `pre_get_avatar_data` filter that causes
+     * `get_avatar_data()` (and thus also `get_avatar_url()`) to return the URL
+     * of the custom avatar set via the "Author Image" plugin.
+     */
+    function redbrick_filter_use_custom_avatar($args, $id_or_email) {
+        if ($id_or_email instanceof WP_User) {
+            $author_id = $id_or_email->ID;
+        } else if ($id_or_email instanceof WP_Post) {
+            $author_id = (int)($id_or_email->post_author);
+        } else if (is_numeric($id_or_email)) {
+            $author_id = (int)$id_or_email;
+        } else if ( is_string($id_or_email) && !strpos($id_or_email, '@md5.gravatar.com') ) {
+            $user = get_user_by('email', $id_or_email);
+            if ($user) {
+                $author_id = $user->ID;
+            }
+        }
+
+        if (isset($author_id)) {
+            $avatar_filename = get_user_meta($author_id, 'author_image', true);
+            if ( $avatar_filename  &&  $avatar_filename != '(unknown)' ) {
+                $args['url'] = '/wp-content/authors/' . $avatar_filename;
+            }
+        }
+
+        return $args;
+
+    }
+}
+add_filter('pre_get_avatar_data', 'redbrick_filter_use_custom_avatar', 10, 2);
