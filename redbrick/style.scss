@@ -512,11 +512,21 @@ header {
         border-bottom: 5px solid #c00;
     }
 
-    // .section-indicator {
-    //     /** TODO: Change this to correct colour; depends on section of website */
-    //     height: 5px;
-    //     background-color: #c00;
-    // }
+    &.section- {
+        &-news      { .content { border-color: $color-news;         } }
+        &-comment   { .content { border-color: $color-comment;      } }
+        &-culture   { .content { border-color: $color-culture;      } }
+        &-music     { .content { border-color: $color-music;        } }
+        &-film      { .content { border-color: $color-film;         } }
+        &-tv        { .content { border-color: $color-tv;           } }
+        &-gaming    { .content { border-color: $color-gaming;       } }
+        &-food      { .content { border-color: $color-food;         } }
+        &-travel    { .content { border-color: $color-travel;       } }
+        &-lifestyle { .content { border-color: $color-lifestyle;    } }
+        &-tech      { .content { border-color: $color-tech;         } }
+        &-sport     { .content { border-color: $color-sport;        } }
+        &-features  { .content { border-color: $color-features;     } }
+    }
 }
 
 main {

@@ -6,7 +6,7 @@
         <?php wp_head(); ?>
     </head>
     <body <?php body_class(); ?>>
-        <header>
+        <header class="section--<?php echo redbrick_get_section_slug_from_query($GLOBALS['wp_query']); ?>">
             <div class="content"><?php /** This wrapper allows the section highlight to be added by applying a bottom border to `.content`. */ ?>
                 <div class="hamburger">
                     <?php echo file_get_contents(get_template_directory() . '/assets/hamburger.svg'); ?>

@@ -956,3 +956,24 @@ if (!function_exists('redbrick_filter_use_custom_avatar')) {
     }
 }
 add_filter('pre_get_avatar_data', 'redbrick_filter_use_custom_avatar', 10, 2);
+
+if (!function_exists('redbrick_get_section_slug_from_query')) {
+    /**
+     * Given a WordPress query object, determine which Redbrick section it is
+     * most related to, if any, and return the corresponding category slug.
+     * If no suitable category is found, the default return value is 'news'.
+     * 
+     * @param WP_Query $query Query object.
+     */
+    function redbrick_get_section_slug_from_query($query) {
+        $slug = news;
+        
+        if ($query->is_single) {
+            $slug = redbrick_get_topmost_category_of_post($query->queried_object_id)->slug;
+        } else if ($query->is_category) {
+            $slug = $query->queried_object->slug;
+        }
+        
+        return $slug;
+    }
+}
