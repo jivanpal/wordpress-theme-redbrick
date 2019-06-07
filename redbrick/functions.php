@@ -660,6 +660,12 @@ if (!function_exists('redbrick_get_html_header_submenu_from_item')) {
         if (!$item_has_children) {
             return '';
         }
+        
+        $item_is_category = $item->object == 'category';
+        if ($item_is_category) {
+            $category_slug = (get_category($item->object_id))->slug;
+        }
+
         ob_start();
         ?>
         <?php
@@ -673,19 +679,39 @@ if (!function_exists('redbrick_get_html_header_submenu_from_item')) {
          * TODO: Incorrect height offset when WordPress admin bar is visible.
          */
         ?>
-        <ul class="submenu item-<?php echo $item_id; ?>">
-            <li class="back-button">
-                <span>&lt; Back</span>
-            </li>
-            <li><a href="<?php echo $item->url; ?>">
-                <span>All <?php echo $item->title; ?></span>
-            </a></li>
-            <?php foreach ($item->redbrick_children as $subitem_id => $subitem): ?>
-                <li><a href="<?php echo $subitem->url; ?>">
-                    <span><?php echo $subitem->title; ?></span>
+        <div class="submenu item-<?php echo $item_id; ?>">
+            <ul class="subcategories">
+                <li class="back-button">
+                    <span>&lt; Back</span>
+                </li>
+                <li><a href="<?php echo $item->url; ?>">
+                    <span>All <?php echo $item->title; ?></span>
                 </a></li>
-            <?php endforeach; ?>
-        </ul>
+                <?php foreach ($item->redbrick_children as $subitem_id => $subitem): ?>
+                    <li><a href="<?php echo $subitem->url; ?>">
+                        <span><?php echo $subitem->title; ?></span>
+                    </a></li>
+                <?php endforeach; ?>
+            </ul>
+            <?php if ($item_is_category): ?>
+                <?php $slider_posts = redbrick_get_latest_posts(4, [ 'slider-' . $category_slug ]); ?>
+                <?php if (count($slider_posts) != 0): ?>
+                    <ul class="post-list">
+                        <?php foreach ($slider_posts as $slider_post): ?>
+                            <li class="post-item">
+                                <a href="<?php echo get_permalink($slider_post->ID); ?>">
+                                    <?php echo get_the_post_thumbnail($slider_post, 'post-thumbnail', ['class' => 'featured-image']); ?>
+                                    <div class="tint section--<?php echo $category_slug; ?>"></div>
+                                    <div class="text-overlay">
+                                        <h1 class="title"><?php echo esc_html(get_the_title($slider_post)); ?></h1>
+                                    </div>
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php endif; ?>
+            <?php endif; ?>
+        </div>
         <?php
         return ob_get_clean();
     }
