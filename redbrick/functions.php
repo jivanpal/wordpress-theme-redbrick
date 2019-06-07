@@ -22,7 +22,7 @@ if (!function_exists('redbrick_enqueue_styles_and_scripts')) {
             'style',
             get_stylesheet_uri(),
             [],     // dependencies
-            time()  // version number // TODO: set actual version number rather than `time()`
+            '0.19.06.07'    // version number
         );
 
         // Load `comment-reply` script if the page requires it
@@ -38,9 +38,9 @@ if (!function_exists('redbrick_enqueue_styles_and_scripts')) {
         wp_enqueue_script(
             'redbrick_overflow-shadows',
             get_template_directory_uri() . '/scripts/overflow-shadows.js',
-            [],         // dependencies
-            time(),     // version number // TODO: set actual version number rather than `time()`
-            true        // enqueue in footer (rather than head)
+            [],             // dependencies
+            '0.19.06.07',   // version number
+            true            // enqueue in footer (rather than head)
         );
 
         // Add functionality to submenu items and back buttons in the navigation menu
@@ -48,35 +48,35 @@ if (!function_exists('redbrick_enqueue_styles_and_scripts')) {
             'redbrick_handle-navigation-menus',
             get_template_directory_uri() . '/scripts/handle-navigation-menus.js',
             [ 'redbrick_toggle-hamburger-menu' ],         // dependencies
-            time(),     // version number // TODO: set actual version number rather than `time()`
-            true        // enqueue in footer (rather than head)
+            '0.19.06.07',   // version number
+            true            // enqueue in footer (rather than head)
         );
         
         // Add functionality to the hamburger icon in the header
         wp_enqueue_script(
             'redbrick_toggle-hamburger-menu',
             get_template_directory_uri() . '/scripts/toggle-hamburger-menu.js',
-            [],         // dependencies
-            time(),     // version number // TODO: set actual version number rather than `time()`
-            true        // enqueue in footer (rather than head)
+            [],             // dependencies
+            '0.19.06.07',   // version number
+            true            // enqueue in footer (rather than head)
         );
 
         // Add functionality to the search icon in the header
         wp_enqueue_script(
             'redbrick_toggle-search-bar',
             get_template_directory_uri() . '/scripts/toggle-search-bar.js',
-            [],         // dependencies
-            time(),     // version number // TODO: set actual version number rather than `time()`
-            true        // enqueue in footer (rather than head)
+            [],             // dependencies
+            '0.19.06.07',   // version number
+            true            // enqueue in footer (rather than head)
         );
 
         // Add opening quotemarks to pullquotes
         wp_enqueue_script(
             'redbrick_add-opening-quotemarks',
             get_template_directory_uri() . '/scripts/add-opening-quotemarks.js',
-            [],         // dependencies
-            time(),     // version number // TODO: set actual version number rather than `time()`
-            true        // enqueue in footer (rather than head)
+            [],             // dependencies
+            '0.19.06.07',   // version number
+            true            // enqueue in footer (rather than head)
         );
     }
 }
