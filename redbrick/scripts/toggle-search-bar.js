@@ -5,13 +5,20 @@
  */
 
 var searchBar = document.querySelector("header .search-bar");
+var searchField = document.querySelector("#search-field");
 
 function redbrick_toggle_search_bar() {
     searchBar.classList.toggle("visible");
+    if (searchBar.classList.contains("visible")) {
+        searchField.focus();
+    }
 }
 
 function redbrick_hide_search_bar() {
     searchBar.classList.remove("visible");
+    if (searchBar.classList.contains("visible")) {
+        searchField.focus();
+    }
 }
 
 // Elements which toggle search bar visibility
