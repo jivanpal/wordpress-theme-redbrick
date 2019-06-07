@@ -34,6 +34,7 @@
                                     <time datetime="<?php the_modified_time('c'); ?>">at <?php the_modified_time(); ?> on <?php the_modified_date(); ?></time>
                                 </div>
                             <?php endif; ?>
+                            <?php echo redbrick_get_html_photographer_credits($redbrick_post_id); ?>
                         </div>
                     </div>
 

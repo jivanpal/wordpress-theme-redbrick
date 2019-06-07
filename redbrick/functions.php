@@ -863,3 +863,37 @@ if (!function_exists('redbrick_get_posts_from_wpp_query')) {
         ] );
     }
 }
+
+if (!function_exists('redbrick_get_html_photographer_credits')) {
+    /**
+     * Get a `<div class="photographer-credits">...</div>` element for a post
+     * 
+     * @param int $post_id The post ID.
+     * @return string HTML as described.
+     */
+    function redbrick_get_html_photographer_credits($post_id) {
+        $photographer_names = explode(',', get_post_meta($post_id, 'photographers_name',    true));
+        $photographer_urls  = explode(',', get_post_meta($post_id, 'photographers_flickr',  true));
+        
+        $keys = array_keys($photographer_names);
+        $remaining_photographers = count($keys);
+        
+        ob_start();
+        ?>
+        <div class="photographer-credits">
+            <span class="label">Images by</span>
+            <?php while (--$remaining_photographers >= 0) : ?>
+                <a href="<?php echo $photographer_urls[$keys[$remaining_photographers]]; ?>"><?php echo $photographer_names[$keys[$remaining_photographers]]; ?></a><?php
+                
+                if ($remaining_photographers > 1) {
+                    echo ',';
+                } else if ($remaining_photographers == 1) {
+                    echo ' and ';
+                }
+                ?>
+            <?php endwhile; ?>
+        </div>
+        <?php
+        return ob_get_clean();
+    }
+}
