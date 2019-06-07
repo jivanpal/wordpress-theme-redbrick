@@ -380,17 +380,14 @@ header {
                     //font-weight: bold;
 
                     .menu-container {
-                        flex-grow: 1;
-                        
+                        width: 3in;
+                        max-width: calc(100vw - #{$header-height});
                         overflow-x: hidden;
+                        position: relative;
 
                         background-color: $header-footer-bg-color;
-
-                        position: relative;
                         
                         ul {
-                            border-right: 1px solid $hamburger-menu-separator-color;
-
                             overflow-x: hidden;
                             overflow-y: auto;
 
@@ -406,11 +403,11 @@ header {
                         
                         .menu, .submenu-container {
                             width: 100%;
-
                             position: absolute;
                             top: 0;
                             left: 0;
-
+                            
+                            border-right: 1px solid $hamburger-menu-separator-color;
                             background-color: inherit;
                         }
 
@@ -428,10 +425,17 @@ header {
                                 justify-content: space-between;
                             }
                         }
+
+                        .submenu-container {
+                            .post-list {
+                                display: none;
+                            }
+                        }
                     }
 
                     .rest-of-screen {
-                        width: $header-height;
+                        flex-grow: 1;
+
                         background: linear-gradient(
                             to right,
                             rgba(black, 0.8),
@@ -1384,101 +1388,101 @@ main.search-results {
                                 }
                             }
                         }
-                    }
 
-                    .submenu-container {
-                        position: fixed;
-                        top: $header-height;
-                        left: 0;
-                        width: 100vw;
-                        height: auto;
-                        background-color: $header-footer-bg-color;
+                        .submenu-container {
+                            position: fixed;
+                            top: $header-height;
+                            left: 0;
+                            width: 100vw;
+                            height: auto;
+                            background-color: $header-footer-bg-color;
 
-                        .submenu {
-                            height: $header-height - 6px + 220px;
-                            display: flex;
-                            flex-direction: column;
-                            transition: height 300ms;
-
-                            &.visible {
-                                border-bottom: 1px solid white;
-                            }
-                            
-                            &:not(.visible) {
-                                height: 0;
-                            }
-
-                            .subcategories {
-                                height: $header-height - 6px;
-                                border-bottom: 1px solid white;
-                            }
-        
-                            .back-button {
-                                display: none;
-                            }
-
-                            .post-list {
-                                height: 220px;
+                            .submenu {
+                                height: $header-height - 6px + 220px;
                                 display: flex;
-                                padding-left: $spacing-default/2;
-                                padding-right: $spacing-default/2;
+                                flex-direction: column;
+                                transition: height 300ms;
 
-                                .post-item {
+                                &.visible {
+                                    border-bottom: 1px solid white;
+                                }
+                                
+                                &:not(.visible) {
+                                    height: 0;
+                                }
+
+                                .subcategories {
+                                    height: $header-height - 6px;
+                                    border-bottom: 1px solid white;
+                                }
+            
+                                .back-button {
+                                    display: none;
+                                }
+
+                                .post-list {
+                                    display: flex;
+                                    height: 220px;
+                                    padding-left: $spacing-default/2;
+                                    padding-right: $spacing-default/2;
+                                    
                                     /**
                                      * TODO: This is mostly a duplication of
                                      * styles used for `.showcase-item`;
                                      * consider refactoring
                                      */
+                                    .post-item {
 
-                                    flex: 1;
-                                    padding: $spacing-default $spacing-default/2;
+                                        flex: 1;
+                                        padding: $spacing-default $spacing-default/2;
 
-                                    a {
-                                        /** Allows `position: absolute` on `.text-overlay` to work as intended. */
-                                        display: block;
-                                        width: 100%;
-                                        height: 100%;
-                                        position: relative;
-                                    }
-                                    
-                                    .featured-image {
-                                        width: 100%;
-                                        height: 100%;
-                                        object-fit: cover;
-                                    }
-
-                                    .text-overlay {
-                                        padding: 0;
-                                        
-                                        .title {
-                                            font-size: 1rem;
+                                        a {
+                                            /** Allows `position: absolute` on `.text-overlay` to work as intended. */
+                                            display: block;
+                                            width: 100%;
+                                            height: 100%;
+                                            position: relative;
                                         }
-                                    }
-                            
-                                    .tint {
-                                        position: absolute;
-                                        top: 0;
-                                        left: 0;
-                                        width: 100%;
-                                        height: 100%;
-                            
-                                        opacity: 0.30;
-                                        @at-root .showcase .showcase-item a:hover .tint { opacity: 0.40; }
-                                        &.section- {
-                                            &-          { background-color: $color-other;       }
-                                            &-news      { background-color: $color-news;        }
-                                            &-comment   { background-color: $color-comment;     }
-                                            &-culture   { background-color: $color-culture;     }
-                                            &-music     { background-color: $color-music;       }
-                                            &-film      { background-color: $color-film;        }
-                                            &-tv        { background-color: $color-tv;          }
-                                            &-gaming    { background-color: $color-gaming;      }
-                                            &-food      { background-color: $color-food;        }
-                                            &-travel    { background-color: $color-travel;      }
-                                            &-lifestyle { background-color: $color-lifestyle;   }
-                                            &-tech      { background-color: $color-tech;        }
-                                            &-sport     { background-color: $color-sport;       }
-                                            &-features  { background-color: $color-features;    }
+                                        
+                                        .featured-image {
+                                            width: 100%;
+                                            height: 100%;
+                                            object-fit: cover;
+                                        }
+
+                                        .text-overlay {
+                                            padding: 0;
+                                            
+                                            .title {
+                                                font-size: 1rem;
+                                            }
+                                        }
+                                
+                                        .tint {
+                                            position: absolute;
+                                            top: 0;
+                                            left: 0;
+                                            width: 100%;
+                                            height: 100%;
+                                
+                                            opacity: 0.30;
+                                            @at-root .showcase .showcase-item a:hover .tint { opacity: 0.40; }
+                                            &.section- {
+                                                &-          { background-color: $color-other;       }
+                                                &-news      { background-color: $color-news;        }
+                                                &-comment   { background-color: $color-comment;     }
+                                                &-culture   { background-color: $color-culture;     }
+                                                &-music     { background-color: $color-music;       }
+                                                &-film      { background-color: $color-film;        }
+                                                &-tv        { background-color: $color-tv;          }
+                                                &-gaming    { background-color: $color-gaming;      }
+                                                &-food      { background-color: $color-food;        }
+                                                &-travel    { background-color: $color-travel;      }
+                                                &-lifestyle { background-color: $color-lifestyle;   }
+                                                &-tech      { background-color: $color-tech;        }
+                                                &-sport     { background-color: $color-sport;       }
+                                                &-features  { background-color: $color-features;    }
+                                            }
                                         }
                                     }
                                 }
