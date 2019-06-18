@@ -1017,3 +1017,74 @@ if (!function_exists('redbrick_get_section_slug_from_query')) {
         return $slug;
     }
 }
+
+if (!function_exists('redbrick_reveal_advanced_editor_toolbar')) {
+    function redbrick_reveal_advanced_editor_toolbar($options) {
+        $options[ 'wordpress_adv_hidden' ] = false;
+        return $options;
+    }
+}
+add_filter( 'tiny_mce_before_init', 'redbrick_reveal_advanced_editor_toolbar' );
+
+if (!function_exists('redbrick_filter_coauthors_roles')) {
+    /**
+     * A hook into the `coauthors_edit_author_cap` provided by the "Co-Authors Plus"
+     * plugin. This hook allows any user with "read" priveleges to be added as an
+     * author of a post.
+     */
+    function redbrick_filter_coauthors_roles($cap) {
+    $cap = 'read';
+    return $cap;
+    }
+}
+add_filter('coauthors_edit_author_cap', 'redbrick_filter_coauthors_roles');
+
+if (!function_exists('redbrick_filter_allow_admins_to_set_guild_status')) {
+    /**
+     * A function that hooks into the `ef_custom_status_list` filter provided
+     * by the "Edit Flow" plugin. This function only allows users with the
+     * "Administrator" role to set the status of a post to "Pending Guild
+     * Review".
+     *
+     * @see http://editflow.org/extend/limit-custom-statuses-based-on-user-role/
+     *
+     * @param array $custom_statuses The existing custom status objects
+     * @return array $custom_statuses Our possibly modified set of custom statuses
+     */
+    function redbrick_filter_allow_admins_to_set_guild_status($custom_statuses) {
+        $permitted_statuses = ['draft', 'auto-draft', 'pending', 'pending-review'];
+        
+        if (
+            is_user_logged_in()
+            && (
+                in_array('administrator', wp_get_current_user()->roles)
+                ||  in_array('gos', wp_get_current_user()->roles)
+            )
+        ) {
+            array_push($permitted_statuses, 'pending-guild-review');
+            array_push($permitted_statuses, 'taken-down-by-guild');
+        }
+    
+        foreach ($custom_statuses as $key => $custom_status) {
+            if (!in_array($custom_status->slug, $permitted_statuses)) {
+                unset($custom_statuses[$key]);
+            }
+        }
+    
+        return $custom_statuses;
+    }
+}
+add_filter('ef_custom_status_list', 'redbrick_filter_allow_admins_to_set_guild_status');
+
+if (!function_exists('redbrick_filter_set_ppp_ttl')) {
+    /**
+     * A function that hooks into the `ppp_nonce_life` filter provided by the
+     * "Public Post Preview" plugin. This hook specifies that the expiry time
+     * ("time to live") of all public post preview URLs should be 365 days.
+     */
+    function redbrick_filter_set_ppp_ttl() {
+        return 31536000; // 31536000 seconds = 365 days
+    }
+}
+add_filter('ppp_nonce_life', 'redbrick_filter_set_ppp_ttl');
+
