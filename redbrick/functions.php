@@ -771,7 +771,7 @@ if (!function_exists('redbrick_get_topmost_category_of_post')) {
     }
 }
 
-if (!function_exists('redrick_get_html_info_box')) {
+if (!function_exists('redrick_get_html_author_box')) {
     /**
      * Get a fully generated `<div class="author-box">...</div>` element for a
      * given post. This element will contain the avatars and names of all
@@ -792,8 +792,8 @@ if (!function_exists('redrick_get_html_info_box')) {
         $number_of_authors = $redbrick_coauthors ? count($redbrick_coauthors) : 1;
 
         if ($number_of_authors == 1) {  // There is only one author
-            $author_profile_picture_url = get_avatar_url(get_the_author_meta('ID'));
-            $author_has_profile_picture = $author_profile_picture_url !== false;
+            $author_profile_picture_url = redbrick_get_avatar_url(get_the_author_meta('ID'));
+            $author_has_profile_picture = $author_profile_picture_url !== null;
             $author_name = get_the_author();
 
             ob_start();
@@ -801,7 +801,7 @@ if (!function_exists('redrick_get_html_info_box')) {
             <div class="author-box">
                 <?php if ($author_has_profile_picture) : ?>
                     <a href="<?php echo esc_url(get_author_posts_url(get_the_author_meta('ID'))); ?>" title="<?php echo esc_attr($author_name); ?>">
-                        <img class="image" src="<?php echo $author_profile_picture_url; ?>" title="<?php echo esc_attr($author_name); ?>"/>
+                        <img class="avatar" src="<?php echo $author_profile_picture_url; ?>" title="<?php echo esc_attr($author_name); ?>"/>
                     </a>
                 <?php endif; ?>
                 <div class="author-details">
@@ -820,12 +820,12 @@ if (!function_exists('redrick_get_html_info_box')) {
             <div class="author-box">
                 <?php foreach ($redbrick_coauthors as $key => $coauthor): ?>
                     <?php
-                    $author_profile_picture_url = get_avatar_url($coauthor->ID);
+                    $author_profile_picture_url = redbrick_get_avatar_url($coauthor->ID);
                     $author_has_profile_picture = $author_profile_picture_url !== false;
                     $author_name = get_the_author('display_name', $coauthor->ID);
                     ?>
                     <?php /** TODO: Hyperlink profile picture to author page */ ?>
-                    <img class="image" src="<?php echo $author_profile_picture_url; ?>" title="<?php echo esc_attr($author_name); ?>"/>
+                    <img class="avatar" src="<?php echo $author_profile_picture_url; ?>" title="<?php echo esc_attr($author_name); ?>"/>
                 <?php endforeach; ?>
                 <div class="author-details">
                     <div class="author-name">
@@ -842,7 +842,7 @@ if (!function_exists('redrick_get_html_info_box')) {
             </div>
             <?php
             return ob_get_clean();
-        } else {
+        } else {    // No author images when more than 4 authors
             ob_start();
             ?>
             <div class="author-box">
@@ -952,10 +952,46 @@ if (!function_exists('redbrick_filter_use_custom_avatar')) {
         }
 
         return $args;
-
     }
 }
-add_filter('pre_get_avatar_data', 'redbrick_filter_use_custom_avatar', 10, 2);
+/**
+ * TODO: This filter hook is disabled until we can make the function always
+ * retrieves a valid URL or until invalid URLs can be filtered out by another
+ * means. Until then, `redbrick_get_avatar_url()` serves as a replacement;
+ * see function definition below.
+ */
+// add_filter('pre_get_avatar_data', 'redbrick_filter_use_custom_avatar', 10, 2);
+
+if (!function_exists('redbrick_get_avatar_url')) {
+    /**
+     * Get the domain-absolute URL (URL relative to root `/`) of a given
+     * author's avatar / profile picture, as set by the "Author Image" plugin.
+     * If no such image, return `null`.
+     */
+    function redbrick_get_avatar_url($id_or_email) {
+        if ($id_or_email instanceof WP_User) {
+            $author_id = $id_or_email->ID;
+        } else if ($id_or_email instanceof WP_Post) {
+            $author_id = (int)($id_or_email->post_author);
+        } else if (is_numeric($id_or_email)) {
+            $author_id = (int)$id_or_email;
+        } else if ( is_string($id_or_email) && !strpos($id_or_email, '@md5.gravatar.com') ) {
+            $user = get_user_by('email', $id_or_email);
+            if ($user) {
+                $author_id = $user->ID;
+            }
+        }
+
+        if (isset($author_id)) {
+            $avatar_filename = get_user_meta($author_id, 'author_image', true);
+            if ( $avatar_filename  &&  $avatar_filename != '(unknown)' ) {
+                return '/wp-content/authors/' . $avatar_filename;
+            }
+        }
+
+        return null;
+    }
+}
 
 if (!function_exists('redbrick_get_section_slug_from_query')) {
     /**

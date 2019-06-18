@@ -20,6 +20,7 @@
                     <div class="excerpt">
                         <?php the_excerpt(); ?>
                     </div>
+                    
                     <div class="info-box">
                         <?php echo redbrick_get_html_author_box(); ?>
                         <div class="timestamps">
@@ -34,9 +35,9 @@
                                     <time datetime="<?php the_modified_time('c'); ?>">at <?php the_modified_time(); ?> on <?php the_modified_date(); ?></time>
                                 </div>
                             <?php endif; ?>
+                        </div>
                             <?php echo redbrick_get_html_photographer_credits($redbrick_post_id); ?>
                         </div>
-                    </div>
 
                     <div class="post-body">
                         <?php the_content(); ?>

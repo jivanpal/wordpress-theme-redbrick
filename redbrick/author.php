@@ -10,7 +10,7 @@
     <div class="constrained">
         <div class="author-box">
             <?php if ($author_has_profile_picture) : ?>
-                <img class="image" src="<?php echo $author_profile_picture_url; ?>"/>
+                <img class="avatar" src="<?php echo $author_profile_picture_url; ?>"/>
             <?php endif; ?>
             <div class="author-details">
                 <div class="author-name"><?php echo $author_name; ?></div>
