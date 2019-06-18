@@ -1088,3 +1088,46 @@ if (!function_exists('redbrick_filter_set_ppp_ttl')) {
 }
 add_filter('ppp_nonce_life', 'redbrick_filter_set_ppp_ttl');
 
+/** TODO: Implement CSS styles for `.featbox` */
+if (!function_exists('redbrick_shortcode_featbox')) {
+    function redbrick_shortcode_featbox($atts, $content) {
+        $atts = shortcode_atts( [
+            'position'  => 'bottom',
+            'solid'     => '1',
+            'color'     => null,    // default is 'black', see below
+            'colour'    => null,    // alternative field for 'color'; prefer 'color'
+            'image'     => '',
+            'title'     => '',
+            'width'     => 'full',
+        ] );
+
+        /**
+         * Special handling for the default `color` value (`'black'`), since
+         * we may have set it in `colour` instead; if both are set, we use
+         * the `color` value rather than the `colour` value.
+         */
+        if ($atts['color'] === null) {
+            if ($atts['colour'] === null) {
+                $atts['color'] = 'black';
+            } else {
+                $atts['color'] = $atts['colour'];
+            }
+        }
+
+        $featbox_class  = ( $atts['solid'] ? 'solid-' : 'clear-' ) . $atts['color'];
+        $featbox_class .= ' width-' . $atts['width'];
+        $featbox_class .= ' position-' . $atts['position'];
+
+        ob_start();
+        ?>
+        <div class="featbox <?php echo $featbox_class; ?>" <?php if ($atts['image']) : ?>style="background-image:url(<?php echo $atts['image']; ?>)"<?php endif; ?> >
+            <?php if ($atts['title']) : ?><h2 class="title"><?php echo $atts['title']; ?></h2><?php endif; ?>
+            <div class="content">
+                <?php echo $atts['content']; ?>
+            </div>
+        </div>
+        <?php
+        return ob_get_clean();
+    }
+}
+add_shortcode('featbox', 'redbrick_shortcode_featbox');
