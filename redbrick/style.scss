@@ -1040,6 +1040,7 @@ main.post, main.static-page {
         .excerpt {
             font-size: 1.1em;
             font-weight: 600;   // between normal weight and bold weight
+            text-align: justify;
         }
 
         a {
@@ -1087,6 +1088,17 @@ main.post, main.static-page {
     }
 
     .post-body {
+        text-align: justify;
+
+        ul {
+            list-style: disc inside none;
+            > li {
+                padding-left:   1em;
+                margin-top:     $spacing-default;
+                margin-bottom:  $spacing-default;
+            }
+        }
+
         .wp-block-pullquote {
             text-align: left;
             margin: #{3 * $spacing-default} 0;
