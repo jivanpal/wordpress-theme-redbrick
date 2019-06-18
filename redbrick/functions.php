@@ -22,7 +22,7 @@ if (!function_exists('redbrick_enqueue_styles_and_scripts')) {
             'style',
             get_stylesheet_uri(),
             [],     // dependencies
-            '0.19.06.17.1'    // version number
+            '0.19.06.18.0'    // version number
         );
 
         // Load `comment-reply` script if the page requires it
@@ -66,7 +66,7 @@ if (!function_exists('redbrick_enqueue_styles_and_scripts')) {
             'redbrick_toggle-search-bar',
             get_template_directory_uri() . '/scripts/toggle-search-bar.js',
             [],             // dependencies
-            '0.19.06.17.0',   // version number
+            '0.19.06.18.0',   // version number
             true            // enqueue in footer (rather than head)
         );
 
