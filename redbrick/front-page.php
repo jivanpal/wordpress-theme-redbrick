@@ -19,7 +19,7 @@
     </div>
     ** END COMMENT */ ?>
 
-    <div class="recent-posts">
+    <div class="front-page-display">
 
         <div class="upper">
             <?php $redbrick_posts = redbrick_get_latest_posts(3, ['top-stories']); ?>
@@ -161,20 +161,20 @@
                 <?php
                 $redbrick_posts = redbrick_get_posts_from_wpp_query($redbrick_query);
             ?>
-        <?php if (count($redbrick_posts) != 0): ?>
+            <?php if (count($redbrick_posts) != 0): ?>
                 <section class="posts posts--trending">
-                <div class="constrained">
+                    <div class="constrained">
                         <h2>Trending</h2>
-                    <ul class="post-list">
-                        <?php
-                        foreach ($redbrick_posts as $redbrick_post) {
-                            echo redbrick_get_html_post_item($redbrick_post);
-                        }
-                        ?>
-                    </ul>
-                </div>
-            </section>
-        <?php endif; ?>
+                        <ul class="post-list">
+                            <?php
+                            foreach ($redbrick_posts as $redbrick_post) {
+                                echo redbrick_get_html_post_item($redbrick_post);
+                            }
+                            ?>
+                        </ul>
+                    </div>
+                </section>
+            <?php endif; ?>
         <?php endif; ?>
 
     </div>
