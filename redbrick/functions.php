@@ -898,7 +898,11 @@ if (!function_exists('redbrick_get_html_photographer_credits')) {
      * @return string HTML as described.
      */
     function redbrick_get_html_photographer_credits($post_id) {
-        $photographer_names = explode(',', get_post_meta($post_id, 'photographers_name',    true));
+        $photographer_names_string = get_post_meta($post_id, 'photographers_name',    true);
+        if (!$photographer_names_string) {
+            return '';
+        }
+        $photographer_names = explode(',', $photographer_names_string);
         $photographer_urls  = explode(',', get_post_meta($post_id, 'photographers_flickr',  true));
         
         $keys = array_keys($photographer_names);

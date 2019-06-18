@@ -1081,9 +1081,8 @@ main.post, main.static-page {
             font-weight: bold;
         }
 
-        .timestamps {
+        .timestamps, .photographer-credits {
             margin: $spacing-default;
-            // font-style: oblique;
             font-size: 0.8rem;
         }
     }
