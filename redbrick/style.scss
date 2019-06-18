@@ -582,25 +582,25 @@ footer {
         .latest-issue {
 
             > a {
-            display: flex;
-            flex-direction: column;
+                display: flex;
+                flex-direction: column;
 
-            .thumbnail {
-                padding: $spacing-default;
-                
-                img {
-                    display: block;
-                    margin: 0 auto;
-                    max-height: $max-vh-usage;
-                    max-width: 100%;
+                .thumbnail {
+                    padding: $spacing-default;
+                    
+                    img {
+                        display: block;
+                        margin: 0 auto;
+                        max-height: $max-vh-usage;
+                        max-width: 100%;
+                    }
+                }
+
+                /** TODO: Deal with presentation on tablets; thumbnail is far too large. */
+                @media only screen and (min-width: 400px) {
+                    flex-direction: row;
                 }
             }
-
-            /** TODO: Deal with presentation on tablets; thumbnail is far too large. */
-            @media only screen and (min-width: 400px) {
-                flex-direction: row;
-            }
-        }
 
             /** This is the Issuu embed */
             .summary > div {
@@ -1036,7 +1036,7 @@ main.post, main.static-page {
 
     article {
         padding-bottom: 20px;
-
+        
         .excerpt {
             font-size: 1.1em;
             font-weight: 600;   // between normal weight and bold weight
@@ -1117,6 +1117,16 @@ main.post, main.static-page {
                     color: $color-other;
                 }
             }
+        }
+
+        > figure, > img {
+            margin: $spacing-default;
+            max-width: calc(100vw - #{2 * $spacing-default});
+        }
+
+        > figure > img {
+            width: 100%;
+            height: auto;
         }
     }
 
