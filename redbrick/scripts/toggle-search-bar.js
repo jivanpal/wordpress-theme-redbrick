@@ -16,9 +16,6 @@ function redbrick_toggle_search_bar() {
 
 function redbrick_hide_search_bar() {
     searchBar.classList.remove("visible");
-    if (searchBar.classList.contains("visible")) {
-        searchField.focus();
-    }
 }
 
 // Elements which toggle search bar visibility
