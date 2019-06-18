@@ -36,8 +36,8 @@
                                 </div>
                             <?php endif; ?>
                         </div>
-                            <?php echo redbrick_get_html_photographer_credits($redbrick_post_id); ?>
-                        </div>
+                        <?php echo redbrick_get_html_photographer_credits($redbrick_post_id); ?>
+                    </div>
 
                     <div class="post-body">
                         <?php the_content(); ?>
@@ -96,8 +96,8 @@
                             $redbrick_posts = redbrick_get_posts_from_wpp_query($redbrick_query);
                         ?>
                         <?php if (count($redbrick_posts) != 0): ?>
-                            <section class="most-popular">
-                                <h2>Most popular this week</h2>
+                            <section class="trending">
+                                <h2>Trending</h2>
                                 <ul class="post-list">
                                     <?php
                                     foreach ($redbrick_posts as $redbrick_post) {

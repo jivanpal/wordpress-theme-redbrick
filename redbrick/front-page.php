@@ -143,11 +143,27 @@
             </section>
         <?php endif; ?>
 
-        <?php $redbrick_posts = redbrick_get_latest_posts(3, ['photos', 'illustration']); ?>
+        <?php if (class_exists('WPP_Query')) : ?>
+            <?php
+                /**
+                 * Fetch array of popular posts using a function provided by the "WordPress Popular Posts" plugin
+                 * @see https://github.com/cabrerahector/wordpress-popular-posts/issues/185
+                 * @see https://github.com/cabrerahector/wordpress-popular-posts/blob/85988b63b1a7cc06f494d14e7f42feda88acfb28/src/Query.php
+                 */
+                $redbrick_query = new WPP_Query( [
+                    'range'     => 'last7days',
+                    'post_type' => 'post',
+                    'order_by'  => 'views',
+                    'limit'     => 3,
+                ] );
+                ?>
+                <?php
+                $redbrick_posts = redbrick_get_posts_from_wpp_query($redbrick_query);
+            ?>
         <?php if (count($redbrick_posts) != 0): ?>
-            <section class="posts posts--photography-and-illustration">
+                <section class="posts posts--trending">
                 <div class="constrained">
-                    <h1>Photography and Illustration</h1>
+                        <h2>Trending</h2>
                     <ul class="post-list">
                         <?php
                         foreach ($redbrick_posts as $redbrick_post) {
@@ -157,6 +173,7 @@
                     </ul>
                 </div>
             </section>
+        <?php endif; ?>
         <?php endif; ?>
 
     </div>

@@ -866,7 +866,7 @@ main.front-page {
                     color:          black;
                     border-color:   black;
                 } }
-                &-photography-and-illustration {
+                &-trending {
                     background-color: black;
                     h1 {
                         color: white;
@@ -946,7 +946,7 @@ main.front-page {
             }
 
             section.posts- {
-                &-features, &-sport, &-photography-and-illustration {
+                &-features, &-sport, &-trending {
                     .post-list {
                         display: grid;
                         grid-template-columns: repeat(3, 1fr);
