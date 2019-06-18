@@ -349,18 +349,17 @@ header {
                 @media only screen and (max-width: $breakpoint-mobile-max) {
                     z-index: 998;
                     display: flex;
+
                     position: fixed;
                     left: 0;
                     bottom: 0;
-
-                    width: 100vw;
-
-                    height: calc(100vh - #{$header-height});
-
+                    top: $header-height;
                     /** TODO: Handle this properly for all screen widths **/
                     body.admin-bar & {
-                        height: calc(100vh - #{$header-height + $admin-bar-height-mobile});
+                        top: $header-height + $admin-bar-height-mobile;
                     }
+
+                    width: 100vw;
 
                     /**
                     * The `visible` class is toggled on `<nav>` via JS when the
@@ -380,8 +379,8 @@ header {
                     //font-weight: bold;
 
                     .menu-container {
-                        width: 3in;
-                        max-width: calc(100vw - #{$header-height});
+                        width: calc(100vw - #{$header-height});
+                        max-width: 3in;
                         overflow-x: hidden;
                         position: relative;
 
@@ -398,7 +397,7 @@ header {
                         }
 
                         .menu, .submenu-container, .submenu {
-                            height: calc(100vh - #{$header-height});
+                            height: 100%;
                         }
                         
                         .menu, .submenu-container {
