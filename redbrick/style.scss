@@ -580,7 +580,9 @@ footer {
     }
     
     .lower {
-        .latest-issue > a {
+        .latest-issue {
+
+            > a {
             display: flex;
             flex-direction: column;
 
@@ -598,6 +600,30 @@ footer {
             /** TODO: Deal with presentation on tablets; thumbnail is far too large. */
             @media only screen and (min-width: 400px) {
                 flex-direction: row;
+            }
+        }
+
+            /** This is the Issuu embed */
+            .summary > div {
+                display: none;
+            }
+        }
+
+        /**
+         * Despite mobile-first design, these are mobile-specific styles that
+         * we want to override on desktop, but we just use the defaults desktop,
+         * so we just use a `@media` query here instead.
+         */
+        @media only screen and (max-width: $breakpoint-mobile-max) {
+            .footer-links {
+                padding-top: 5px;
+                padding-bottom: 5px;
+
+                ul li {
+                    display: inline-block;
+                    margin-top: 5px;
+                    margin-bottom: 5px;
+                }
             }
         }
 

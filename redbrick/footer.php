@@ -26,19 +26,15 @@
             
             <div class="lower">
                 <div class="constrained flex-container">
+                    <?php $redbrick_latest_issue = get_page_by_path('/latest-issue'); ?>
                     <div class="latest-issue">
                         <?php /** TODO: Make this section admin-configurable */ ?>
-                        <a href="#">
+                        <a href="/latest-issue">
                             <div class="summary">
-                                <h1>Issue #1500</h1>
-                                <h2>7 December 2018</h2>
-                                <ul>
-                                    <li>Comment: The true meaning of Christmas</li>
-                                    <li>Gaming: The best games of the year</li>
-                                </ul>
+                                <?php echo $redbrick_latest_issue->post_content; ?>
                             </div>
                             <div class="thumbnail">
-                                <img src="<?php echo get_template_directory_uri(); ?>/assets/mockups/front-page.jpg"/>
+                                <img src="<?php echo get_the_post_thumbnail_url($redbrick_latest_issue); ?>"/>
                             </div>
                         </a>
                     </div>
