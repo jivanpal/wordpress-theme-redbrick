@@ -124,9 +124,9 @@ add_filter('login_message', 'redbrick_set_login_message');
 /** TODO: Implement CSS styles for Guild Council Motions, YouTube, and text boxes; see HTML given here for reference */
 if (!function_exists('redbrick_shortcode_do')) {
     /**
-     * Implements legacy `do` shortcode used in older articles, whose
-     * functionality was previously implemented by a plugin (Shortcodes Pro
-     * by Matt Varone) that is no longer maintained.
+     * Implements legacy `do` shortcode used in articles prior to July 2019,
+     * whose functionality was previously implemented by a plugin ("Shortcodes
+     * Pro" by Matt Varone) which is no longer maintained.
      * 
      * @see https://wordpress.org/plugins/shortcodes-pro/
      */
