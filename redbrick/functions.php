@@ -78,6 +78,13 @@ if (!function_exists('redbrick_enqueue_styles_and_scripts')) {
             '0.19.06.07.0',   // version number
             true            // enqueue in footer (rather than head)
         );
+
+        /** TODO: Sort out image caching/resizing/etc. */
+        wp_enqueue_script(
+            'redbrick_remove-image-srcsets',
+            get_template_directory_uri() . '/scripts/remove-image-srcsets.js',
+            [],             // dependencies
+            '0.19.06.07.0',   // version number
             true            // enqueue in footer (rather than head)
         );
     }
