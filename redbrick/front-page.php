@@ -13,10 +13,11 @@
         </div>
     <?php endif; ?>
 
+    <?php /** TODO: Make the content of `.banner` and the link here admin-configurable
     <div class="banner">
-        <?php /** TODO: Make the content of `.banner` and the link here admin-configurable */ ?>
         <a href="#"><div class="content">Banner content</div></a>
     </div>
+    ** END COMMENT */ ?>
 
     <div class="recent-posts">
 
