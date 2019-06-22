@@ -79,7 +79,7 @@ function redbrick_mce_textbox() {
             );
             
             editor.addMenuItem(
-                'rebrick_mce_textbo_menuItem',
+                'rebrick_mce_textbox_menuItem',
                 {
                     text:       "Insert text box",
                     onclick:    redbrick_mce_textbox_openDialog
