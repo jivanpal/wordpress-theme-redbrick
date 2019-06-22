@@ -1141,3 +1141,75 @@ if (!function_exists('redbrick_shortcode_featbox')) {
     }
 }
 add_shortcode('featbox', 'redbrick_shortcode_featbox');
+
+if (
+        !function_exists('redbrick_mce_register_plugins')
+    &&  !function_exists('redbrick_mce_register_buttons')
+    &&  !function_exists('redbrick_mce_register_plugins_and_buttons')
+) {
+    /**
+     * A function that hooks into the `mce_external_plugins` filter to register
+     * additional plugins in TinyMCE.
+     */
+    function redbrick_mce_register_plugins($external_plugins) {
+        $external_plugins['redbrick_mce_pullquote'] = get_template_directory_uri() . '/scripts/tinymce/pullquote.js';
+        //$external_plugins['redbrick_mce_textbox']   = get_template_directory_uri() . '/scripts/tinymce/textbox.js';
+        //$external_plugins['redbrick_mce_youtube']   = get_template_directory_uri() . '/scripts/tinymce/youtube.js';
+        return $external_plugins;
+    }
+
+    /**
+     * A function that hooks into the `mce_buttons` filter to add additional
+     * buttons to the first row of buttons in the TinyMCE visual editor.
+     */
+    function redbrick_mce_register_buttons($buttons) {
+        array_push($buttons,
+            'separator',
+            'redbrick_mce_pullquote_button' /*,
+            'redbrick_mce_textbox_button',
+            'redbrick_mce_youtube_button'   */
+        );
+        return $buttons;
+    }
+
+    /**
+     * A function that hooks into the `init` action to register custom plugins
+     * and buttons in the TinyMCE editor.
+     */
+    function redbrick_mce_register_plugins_and_buttons() {
+        add_filter('mce_external_plugins', 'redbrick_mce_register_plugins');
+        add_filter('mce_buttons', 'redbrick_mce_register_buttons');
+    }
+}
+add_action('init', 'redbrick_mce_register_plugins_and_buttons');
+
+if (!function_exists('redbrick_shortcode_pullquote')) {
+    function redbrick_shortcode_pullquote($atts, $content) {
+        if ($content) {
+            $atts = shortcode_atts(
+                [
+                    'align'     => 'fullwidth',
+                    'size'      => 'normal',
+                ],
+                $atts,
+                'pullquote'
+            );
+
+            $class_float    = $atts['align'] == 'fullwidth' ? '' : ( ' float-' . $atts['align'] );
+            $class_size     = ' size-'    . $atts['size'];
+            
+            ob_start();
+            ?> 
+            <figure class="wp-block-pullquote<?php echo $class_float . $class_size; ?>">
+                <blockquote>
+                    <p><?php echo $content; ?></p>
+                </blockquote>
+            </figure>
+            <?php
+            return ob_get_clean();
+        } else {
+            return '';
+        }
+    }
+}
+add_shortcode('pullquote', 'redbrick_shortcode_pullquote');
