@@ -20,15 +20,18 @@
         
         <?php if (have_posts()) : ?>
             <ul class="post-list">
-            <?php
-                while(have_posts()) {
-                    the_post();
-                    echo redbrick_get_html_post_item(get_post());
-                }
-            ?>
+                <?php
+                    while(have_posts()) {
+                        the_post();
+                        echo redbrick_get_html_post_item(get_post());
+                    }
+                ?>
             </ul>
+            <div class="pagination">
+                <?php posts_nav_link(); ?>
+            </div>
         <?php else : ?>
-            <p><?php _e('No posts by this author.'); ?></p>
+            <p>This author has not written any articles.</p>
         <?php endif; ?>
     </div>
 </main>

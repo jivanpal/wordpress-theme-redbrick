@@ -22,7 +22,7 @@ if (!function_exists('redbrick_enqueue_styles_and_scripts')) {
             'style',
             get_stylesheet_uri(),
             [],     // dependencies
-            '0.19.06.18.0'    // version number
+            '0.19.06.21.0'    // version number
         );
 
         // Load `comment-reply` script if the page requires it
@@ -328,7 +328,8 @@ if (!function_exists('redbrick_get_cat_ids_from_slug_arr')) {
 if (!function_exists('redbrick_get_latest_posts')) {
     /**
      * Retrieve some of the most recent posts from a given set of categories.
-     * @param int $numberposts The number of most recent posts to retrieve.
+     * @param int $numberposts The number of most recent posts to retrieve. Use
+     *          `-1` to get all posts.
      * @param string[] $categories An array of category slugs. These categories
      *          will be searched.
      * @param int[] $excluded_posts An array of post IDs that should not be

@@ -37,7 +37,8 @@
             </ul>
         </section>
     <?php endif; ?>
-
+    
+<?php /* COMMENTED OUT **
     <div class="constrained">
         <?php $redbrick_posts = redbrick_get_latest_posts(12, [ $redbrick_category_slug ]); ?>
         <?php if (count($redbrick_posts) != 0): ?>
@@ -50,6 +51,27 @@
                     ?>
                 </ul>
             </section>
+        <?php endif; ?>
+    </div>
+** END COMMENT */ ?>
+
+    <div class="constrained">
+        <?php if (have_posts()) : ?>
+            <section class="posts section-<?php echo $redbrick_category_slug; ?>">
+                <ul class="post-list">
+                    <?php
+                        while (have_posts()) {
+                            the_post();
+                            echo redbrick_get_html_post_item(get_post());
+                        }
+                    ?>
+                </ul>
+                <div class="pagination">
+                    <?php posts_nav_link(); ?>
+                </div>
+            </section>
+        <?php else : ?>
+            <p>There are no articles in this category.</p>
         <?php endif; ?>
     </div>
 </main>
