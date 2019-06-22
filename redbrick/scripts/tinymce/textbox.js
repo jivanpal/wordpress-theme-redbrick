@@ -1,6 +1,6 @@
 /**
- * Add the pullquote plugin to TinyMCE, with a button in the TinyMCE editor and
- * a menu entry in the TinyMCE menu to allow the user to insert a pullquote via
+ * Add the textbox plugin to TinyMCE, with a button in the TinyMCE editor and
+ * a menu entry in the TinyMCE menu to allow the user to insert a textbox via
  * a modal dialog.
  * 
  * This code is written for TinyMCE 4, NOT TinyMCE 5.
@@ -15,25 +15,25 @@
  * @see https://stackoverflow.com/questions/24871792/tinymce-api-v4-windowmanager-open-what-widgets-can-i-configure-for-the-body-op
  * @see https://wordpress.stackexchange.com/questions/299617/using-a-dashicon-for-a-custom-button-in-tinymce
  */
-function redbrick_mce_pullquote() {
+function redbrick_mce_textbox() {
     tinymce.PluginManager.add(
-        'redbrick_mce_pullquote',
+        'redbrick_mce_textbox',
         function(editor, url) {
             /**
              * This function opens a modal dialog that asks the user for the
              * required info in order to insert a pullquote (alignment, size,
              * the quote text itself).
              */
-            function redbrick_mce_pullquote_openDialog() {
+            function redbrick_mce_textbox_openDialog() {
                 editor.windowManager.open( {
-                    title:  "Insert pullquote",
+                    title:  "Insert text box",
                     width:  1000,
                     height: 150,
                     body:   [
                         {
                             type:   "listbox",
                             name:   "align",
-                            label:  "Pullquote alignment",
+                            label:  "Text box alignment",
                             values: [
                                 {   text: "Full width of column",   value: "fullwidth", selected: true  },
                                 {   text: "Left aligned",           value: "left"       },
@@ -41,19 +41,15 @@ function redbrick_mce_pullquote() {
                             ]
                         },
                         {
-                            type:   "listbox",
-                            name:   "size",
-                            label:  "Pullquote text size",
-                            values: [
-                                {   text: "Normal",     value: "normal",    selected: true     },
-                                {   text: "Small",      value: "small"      },
-                                {   text: "Smallest",   value: "smallest"   }
-                            ]
+                            type:   "textbox",
+                            name:   "title",
+                            label:  "Text box title"
                         },
                         {
                             type:   "textbox",
-                            name:   "quote",
-                            label:  "Pullquote text"
+                            multiline: true,
+                            name:   "content",
+                            label:  "Text box content"
                         }
                     ],
                     buttons:    [
@@ -68,32 +64,32 @@ function redbrick_mce_pullquote() {
                         }
                     ],
                     onSubmit:   function(result) {
-                        editor.insertContent(`[pullquote align="${result.data.align}" size="${result.data.size}"]${result.data.quote}[/pullquote]`);
+                        editor.insertContent(`[textbox align="${result.data.align}" title="${result.data.title}"]${result.data.content}[/textbox]`);
                     }
                 } );
             }
 
             editor.addButton(
-                'redbrick_mce_pullquote_button',
+                'redbrick_mce_textbox_button',
                 {
-                    tooltip:    "Insert pullquote",
-                    image:      url + "/../../assets/tinymce-button-pullquote.png",
-                    onclick:    redbrick_mce_pullquote_openDialog
+                    tooltip:    "Insert text box",
+                    image:      url + "/../../assets/tinymce-button-textbox.png",
+                    onclick:    redbrick_mce_textbox_openDialog
                 }
             );
             
             editor.addMenuItem(
-                'rebrick_mce_pullquote_menuItem',
+                'rebrick_mce_textbo_menuItem',
                 {
-                    text:       "Insert pullquote",
-                    onclick:    redbrick_mce_pullquote_openDialog
+                    text:       "Insert text box",
+                    onclick:    redbrick_mce_textbox_openDialog
                 }
             );
 
             return {
                 getMetadata:    function() {
                     return {
-                        name:   "Redbrick TinyMCE plugin to insert pullquotes",
+                        name:   "Redbrick TinyMCE plugin to insert text boxes",
                         url:    "https://github.com/jivanpal/redbrick-theme-for-wordpress"
                     }
                 }
@@ -103,4 +99,4 @@ function redbrick_mce_pullquote() {
 }
 
 // Now actually call the function to actually add the button
-redbrick_mce_pullquote();
+redbrick_mce_textbox();

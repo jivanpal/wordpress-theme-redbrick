@@ -218,10 +218,10 @@ if (!function_exists('redbrick_shortcode_do')) {
         if ($atts['action'] == 'box') {
             ob_start();
             ?>
-            <div class="box <?php echo $atts['align']; ?>">
-                <h2><?php echo $atts['title']; ?></h2>
-                <?php echo $atts['text']; ?>
-            </div>'
+            <div class="textbox align-<?php echo $atts['align']; ?>">
+                <h2 class="textbox-title"><?php echo $atts['title']; ?></h2>
+                <div class="textbox-content"><?php echo $atts['text']; ?></div>
+            </div>
             <?php
             return ob_get_clean();
         }
@@ -1153,7 +1153,7 @@ if (
      */
     function redbrick_mce_register_plugins($external_plugins) {
         $external_plugins['redbrick_mce_pullquote'] = get_template_directory_uri() . '/scripts/tinymce/pullquote.js';
-        //$external_plugins['redbrick_mce_textbox']   = get_template_directory_uri() . '/scripts/tinymce/textbox.js';
+        $external_plugins['redbrick_mce_textbox']   = get_template_directory_uri() . '/scripts/tinymce/textbox.js';
         //$external_plugins['redbrick_mce_youtube']   = get_template_directory_uri() . '/scripts/tinymce/youtube.js';
         return $external_plugins;
     }
@@ -1165,8 +1165,8 @@ if (
     function redbrick_mce_register_buttons($buttons) {
         array_push($buttons,
             'separator',
-            'redbrick_mce_pullquote_button' /*,
-            'redbrick_mce_textbox_button',
+            'redbrick_mce_pullquote_button',
+            'redbrick_mce_textbox_button'   /*,
             'redbrick_mce_youtube_button'   */
         );
         return $buttons;
@@ -1213,3 +1213,26 @@ if (!function_exists('redbrick_shortcode_pullquote')) {
     }
 }
 add_shortcode('pullquote', 'redbrick_shortcode_pullquote');
+
+if (!function_exists('redbrick_shortcode_textbox')) {
+    function redbrick_shortcode_textbox($atts, $content) {
+        $atts = shortcode_atts(
+            [
+                'align'     => 'fullwidth',
+                'title'     => '',
+            ],
+            $atts,
+            'textbox'
+        );
+
+        ob_start();
+        ?>
+        <div class="textbox align-<?php echo $atts['align']; ?>">
+            <h2 class="textbox-title"><?php echo $atts['title']; ?></h2>
+            <div class="textbox-content"><?php echo $content; ?></div>
+        </div>
+        <?php
+        return ob_get_clean();
+    }
+}
+add_shortcode('textbox', 'redbrick_shortcode_textbox');
