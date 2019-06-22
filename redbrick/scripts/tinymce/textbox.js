@@ -21,8 +21,8 @@ function redbrick_mce_textbox() {
         function(editor, url) {
             /**
              * This function opens a modal dialog that asks the user for the
-             * required info in order to insert a pullquote (alignment, size,
-             * the quote text itself).
+             * required info in order to insert a text box (alignment, title,
+             * the text box content itself).
              */
             function redbrick_mce_textbox_openDialog() {
                 editor.windowManager.open( {
