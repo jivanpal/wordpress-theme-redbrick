@@ -1154,7 +1154,7 @@ if (
     function redbrick_mce_register_plugins($external_plugins) {
         $external_plugins['redbrick_mce_pullquote'] = get_template_directory_uri() . '/scripts/tinymce/pullquote.js';
         $external_plugins['redbrick_mce_textbox']   = get_template_directory_uri() . '/scripts/tinymce/textbox.js';
-        //$external_plugins['redbrick_mce_youtube']   = get_template_directory_uri() . '/scripts/tinymce/youtube.js';
+        $external_plugins['redbrick_mce_youtube']   = get_template_directory_uri() . '/scripts/tinymce/youtube.js';
         return $external_plugins;
     }
 
@@ -1166,8 +1166,8 @@ if (
         array_push($buttons,
             'separator',
             'redbrick_mce_pullquote_button',
-            'redbrick_mce_textbox_button'   /*,
-            'redbrick_mce_youtube_button'   */
+            'redbrick_mce_textbox_button',
+            'redbrick_mce_youtube_button'
         );
         return $buttons;
     }
@@ -1236,3 +1236,28 @@ if (!function_exists('redbrick_shortcode_textbox')) {
     }
 }
 add_shortcode('textbox', 'redbrick_shortcode_textbox');
+
+if (!function_exists('redbrick_shortcode_youtube')) {
+    function redbrick_shortcode_youtube($atts) {
+        $atts = shortcode_atts( [ 'videoid' => '', ], $atts, 'youtube' );
+
+        ob_start();
+        ?>
+        <figure class="wp-block-embed-youtube wp-block-embed is-type-video is-provider-youtube">
+            <div class="wp-block-embed__wrapper">
+                <span class="embed-youtube" style="text-align: center; display: block;">
+                    <iframe class="youtube-player"
+                            type="text/html" width="500"
+                            height="282"
+                            src="https://www.youtube.com/embed/<?php echo $atts['videoid']; ?>?version=3&amp;rel=1&amp;fs=1&amp;autohide=2&amp;showsearch=0&amp;showinfo=1&amp;iv_load_policy=1&amp;wmode=transparent"
+                            allowfullscreen="true"
+                            style="border: 0;">
+                    </iframe>
+                </span>
+            </div>
+        </figure>
+        <?php
+        return ob_get_clean();
+    }
+}
+add_shortcode('youtube', 'redbrick_shortcode_youtube');
