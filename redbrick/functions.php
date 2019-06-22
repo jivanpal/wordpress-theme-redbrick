@@ -22,7 +22,7 @@ if (!function_exists('redbrick_enqueue_styles_and_scripts')) {
             'style',
             get_stylesheet_uri(),
             [],     // dependencies
-            '0.19.06.21.0'    // version number
+            '0.19.06.22.3'    // version number
         );
 
         // Load `comment-reply` script if the page requires it

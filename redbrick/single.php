@@ -41,6 +41,7 @@
 
                     <div class="post-body">
                         <?php the_content(); ?>
+                        <div class="clearfix"></div>
                     </div>
                 </div>
             </article>

@@ -4,7 +4,7 @@ Theme URI: https://github.com/jivanpal/redbrick-theme-for-wordpress
 Author: Jivan Pal
 Author URI: https://www.jivanpal.com/
 Description: A WordPress theme designed for Redbrick, the official University of Birmingham student newspaper.
-Version: 0.19.06.21.0
+Version: 0.19.06.22.3
 License: GNU GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0-standalone.html
 Text Domain: redbrick
@@ -1095,6 +1095,15 @@ main.post, main.static-page {
     .post-body {
         text-align: justify;
 
+        /**
+         * This prevents pullquote and other floating items from overflowing
+         * past the bottom of `.post-body`, i.e. into `.comments`.
+         */
+        .clearfix {
+            height: 0;
+            clear: both;
+        }
+
         ul {
             list-style: disc inside none;
             > li {
@@ -1108,19 +1117,42 @@ main.post, main.static-page {
             text-align: left;
             margin: #{3 * $spacing-default} 0;
             padding: 0;
+            
+            &, &.size-normal {
+                font-size: 1.8rem;
+            }
+            &.size-small {
+                font-size: 1.5rem;
+            }
+            &.size-smallest {
+                font-size: 1.2rem;
+            }
 
             blockquote {
-                font-size: 1.8rem;
-
-                p {
-                    line-height: normal;
-                }
-                
                 .opening-quotemark {
                     font-size: 3.5em;
-                    margin: -30px $spacing-default -72px 5px;
+                    margin: -0.3em 0 -0.77em 5px;   // Using `em` to keep relative to size of quotemark
                     color: $color-other;
                 }
+
+                p {
+                    font-size: 1em;
+                    line-height: normal;
+                }
+            }
+
+            &.float-left, &.float-right {
+                width: calc(50% - 20px);
+            }
+
+            &.float-left {
+                float: left;
+                margin-right: 20px;
+            }
+
+            &.float-right {
+                float: right;
+                margin-left: 20px;
             }
         }
 
