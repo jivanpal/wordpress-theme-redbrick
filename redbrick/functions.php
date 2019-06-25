@@ -1021,7 +1021,13 @@ if (!function_exists('redbrick_get_section_slug_from_query')) {
         if ($query->is_single) {
             $slug = redbrick_get_topmost_category_of_post($query->queried_object_id)->slug;
         } else if ($query->is_category) {
-            $slug = $query->queried_object->slug;
+            $ancestors_of_queried_category = get_ancestors($query->queried_object->term_id, 'category', 'taxonomy');
+            if (count($ancestors_of_queried_category) == 0) {
+                // No ancestors; queried category is a top-level category.
+                $slug = $query->queried_object->slug;
+            } else {
+                $slug = get_category(end($ancestors_of_queried_category))->slug;
+            }
         }
         
         return $slug;
