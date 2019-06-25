@@ -3,8 +3,8 @@
     <?php
         global $wp_query;
         $author = $wp_query->get_queried_object();
-        $author_profile_picture_url = get_avatar_url($author->ID);
-        $author_has_profile_picture = $author_profile_picture_url !== false;
+        $author_profile_picture_url = redbrick_get_avatar_url($author->ID);
+        $author_has_profile_picture = $author_profile_picture_url !== null;
         $author_name = $author->display_name;
     ?>
     <div class="constrained">
