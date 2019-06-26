@@ -3,7 +3,7 @@
     <?php while (have_posts()) : the_post(); ?>
         <article>
             <div class="featured-image-box">
-                <?php the_post_thumbnail('post-thumbnail', ['class' => 'featured-image']); ?>
+                <?php echo redbrick_get_post_thumbnail(get_the_ID()); ?>
                 <div class="text-overlay">
                     <div class="constrained">
                         <h1 class="title"><?php the_title(); ?></h1>

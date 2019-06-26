@@ -6,7 +6,7 @@
             $redbrick_topmost_category = redbrick_get_topmost_category_of_post($redbrick_post_id);
         ?>
         <div class="featured-image-box">
-            <?php the_post_thumbnail('post-thumbnail', ['class' => 'featured-image']); ?>
+            <?php echo redbrick_get_post_thumbnail($redbrick_post_id); ?>
             <div class="text-overlay">
                 <div class="constrained">
                     <h1 class="title"><?php the_title(); ?></h1>

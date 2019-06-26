@@ -392,7 +392,7 @@ if (!function_exists('redbrick_get_html_post_item')) {
             <div class="featured-image-box">
                 <?php
                 if (has_post_thumbnail($post)) {
-                    echo get_the_post_thumbnail($post, 'post-thumbnail', ['class' => 'featured-image']);
+                    echo redbrick_get_post_thumbnail($post->ID);
                 }
                 ?>
                 <div class="text-overlay">
@@ -424,7 +424,7 @@ if (!function_exists('redbrick_get_html_showcase_item')) {
         ?>
         <li class="showcase-item">
             <a href="<?php echo get_permalink($post_id); ?>">
-                <?php echo get_the_post_thumbnail($post_id, 'post-thumbnail', ['class' => 'featured-image']); ?>
+                <?php echo redbrick_get_post_thumbnail($post_id); ?>
                 <div class="tint section--<?php echo redbrick_get_topmost_category_of_post($post_id)->slug; ?>"></div>
                 <div class="text-overlay">
                     <h1 class="title"><?php echo esc_html(get_the_title($post_id)); ?></h1>
@@ -710,7 +710,7 @@ if (!function_exists('redbrick_get_html_header_submenu_from_item')) {
                         <?php foreach ($slider_posts as $slider_post): ?>
                             <li class="post-item">
                                 <a href="<?php echo get_permalink($slider_post->ID); ?>">
-                                    <?php echo get_the_post_thumbnail($slider_post, 'post-thumbnail', ['class' => 'featured-image']); ?>
+                                    <?php echo redbrick_get_post_thumbnail($slider_post->ID); ?>
                                     <div class="tint section--<?php echo $category_slug; ?>"></div>
                                     <div class="text-overlay">
                                         <h1 class="title"><?php echo esc_html(get_the_title($slider_post)); ?></h1>
@@ -1267,3 +1267,45 @@ if (!function_exists('redbrick_shortcode_youtube')) {
     }
 }
 add_shortcode('youtube', 'redbrick_shortcode_youtube');
+
+if (!function_exists('redbrick_get_post_thumbnail')) {
+    /**
+     * Get the thumbnail/featured image for a given post, with the object
+     * position of the image currently set in an inline CSS style as specified
+     * in the WordPress post via the ACF field "Header Image Position" or
+     * "Header Image Position (custom)"; note that the latter field takes
+     * precendence if both have values set.
+     * 
+     * @param int post_id The ID of the post to get the thumbnail of.
+     * @return string A fully formed HTML `<img>` element, which can be echoed
+     *          directly into the markup/page.
+     */
+    function redbrick_get_post_thumbnail($post_id = 0) {
+        /**
+         * Determine the CSS property `object-position` value to
+         * use; custom position `position_custom` takes precedence
+         * over a position chosen from the dropdown `position`.
+         * Values are determined from an ACF (Advanced Custom
+         * Fields plugin) field.
+         * 
+         * @see https://www.advancedcustomfields.com/resources/displaying-custom-field-values-in-your-theme/
+         */
+        $redbrick_post_thumbnail_position = get_post_meta($post_id, 'position_custom', true);
+        if (!$redbrick_post_thumbnail_position) {
+            $redbrick_post_thumbnail_position = get_post_meta($post_id, 'position', true);
+        }
+
+        /**
+         * Echo the `<img>` tag for the thumbnail with the
+         * appropriate HTML attrbiutes.
+         */
+        return get_the_post_thumbnail(
+            $post_id,
+            'post-thumbnail',
+            [
+                'class' => 'featured-image',
+                'style' => 'object-position: ' . ($redbrick_post_thumbnail_position ? $redbrick_post_thumbnail_position : 'unset') . ';',
+            ]
+        );
+    }
+}
