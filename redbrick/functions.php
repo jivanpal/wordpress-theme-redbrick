@@ -773,9 +773,20 @@ if (!function_exists('redbrick_get_topmost_category_of_post')) {
      * 
      * @param int $post_id The ID of the post.
      * @return WP_Term An object populated with data of the topmost category.
+     *      If the specified post does not belong to any categories, the
+     *      object for the "News" category is returned as a default/fallback.
      */
     function redbrick_get_topmost_category_of_post($post_id) {
-        $primary_category = get_the_category($post_id)[0];
+        $post_categories = get_the_category($post_id);
+        /**
+         * `$primary_category` is the first category returned; if the post does
+         * not belong to any categories, fall back to returning the "News"
+         * category object as if it were the topmost category of the post.
+         */
+        if (count($post_categories) == 0) {
+            return get_category_by_slug('news');
+        }
+        $primary_category = $post_categories[0];
         $ancestors = get_ancestors($primary_category->term_id, 'category');
         return $ancestors ? get_category($ancestors[0]) : $primary_category;
     }
