@@ -919,30 +919,28 @@ if (!function_exists('redbrick_get_html_photographer_credits')) {
      * @return string HTML as described.
      */
     function redbrick_get_html_photographer_credits($post_id) {
-        $photographer_names_string = get_post_meta($post_id, 'photographers_name',    true);
+        $photographer_names_string = get_post_meta($post_id, 'photographers_name', true);
         if (!$photographer_names_string) {
             return '';
         }
         $photographer_names = explode(',', $photographer_names_string);
-        $photographer_urls  = explode(',', get_post_meta($post_id, 'photographers_flickr',  true));
-        
-        $keys = array_keys($photographer_names);
-        $remaining_photographers = count($keys);
+        $photographer_urls  = explode(',', get_post_meta($post_id, 'photographers_flickr', true));        
+        $total_photographers = count($photographer_names);
         
         ob_start();
         ?>
         <div class="photographer-credits">
             <span class="label">Images by</span>
-            <?php while (--$remaining_photographers >= 0) : ?>
-                <a href="<?php echo $photographer_urls[$keys[$remaining_photographers]]; ?>"><?php echo $photographer_names[$keys[$remaining_photographers]]; ?></a><?php
-                
-                if ($remaining_photographers > 1) {
-                    echo ',';
-                } else if ($remaining_photographers == 1) {
+            <?php for ($i = 0; $i < $total_photographers; $i++) : ?>
+                <?php
+                if ($i == $total_photographers) {
                     echo ' and ';
+                } else if ($i > 0) {
+                    echo ', ';
                 }
                 ?>
-            <?php endwhile; ?>
+                <a href="<?php echo $photographer_urls[$i]; ?>"><?php echo $photographer_names[$i]; ?></a>
+            <?php endfor; ?>
         </div>
         <?php
         return ob_get_clean();
