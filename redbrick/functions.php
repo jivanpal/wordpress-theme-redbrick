@@ -925,21 +925,26 @@ if (!function_exists('redbrick_get_html_photographer_credits')) {
         }
         $photographer_names = explode(',', $photographer_names_string);
         $photographer_urls  = explode(',', get_post_meta($post_id, 'photographers_flickr', true));        
-        $total_photographers = count($photographer_names);
+        $total_names = count($photographer_names);
+        $total_urls = count($photographer_urls);
         
         ob_start();
         ?>
         <div class="photographer-credits">
             <span class="label">Images by</span>
-            <?php for ($i = 0; $i < $total_photographers; $i++) : ?>
+            <?php for ($i = 0; $i < $total_names; $i++) : ?>
                 <?php
-                if ($i == $total_photographers) {
+                if ($i == $total_names) {
                     echo ' and ';
                 } else if ($i > 0) {
                     echo ', ';
                 }
                 ?>
-                <a href="<?php echo $photographer_urls[$i]; ?>"><?php echo $photographer_names[$i]; ?></a>
+                <?php if ($i < $total_urls) : ?>
+                    <a href="<?php echo $photographer_urls[$i]; ?>"><?php echo $photographer_names[$i]; ?></a>
+                <?php else : ?>
+                    <?php echo $photographer_names[$i]; ?>
+                <?php endif; ?>
             <?php endfor; ?>
         </div>
         <?php
