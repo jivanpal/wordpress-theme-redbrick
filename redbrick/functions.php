@@ -1016,7 +1016,7 @@ if (!function_exists('redbrick_get_section_slug_from_query')) {
      * @param WP_Query $query Query object.
      */
     function redbrick_get_section_slug_from_query($query) {
-        $slug = news;
+        $slug = 'news';
         
         if ($query->is_single) {
             $slug = redbrick_get_topmost_category_of_post($query->queried_object_id)->slug;
