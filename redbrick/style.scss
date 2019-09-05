@@ -94,20 +94,20 @@ $ad-declaration-fg-color: #111;
 
 $post-excerpt-color: #555;
 
-$color-other:      rgb(200, 200, 200);
-$color-news:       rgb(204,   0,   0);
-$color-comment:    rgb(125,  67, 163);
-$color-culture:    rgb(255, 204,   0);
-$color-music:      rgb(255, 179, 179);
-$color-film:       rgb( 48, 151, 155);
-$color-tv:         rgb(  5, 199, 101);
-$color-gaming:     rgb(255, 51,   51);
-$color-food:       rgb(250, 131,  56);
-$color-travel:     rgb(102, 178, 255);
+$color-other:       rgb(200, 200, 200);
+$color-news:        rgb(204,   0,   0);
+$color-comment:     rgb(125,  67, 163);
+$color-culture:     rgb(255, 204,   0);
+$color-music:       rgb(255, 179, 179);
+$color-film:        rgb( 48, 151, 155);
+$color-tv:          rgb(  5, 199, 101);
+$color-gaming:      rgb(255, 51,   51);
+$color-food:        rgb(250, 131,  56);
+$color-travel:      rgb(102, 178, 255);
 $color-lifestyle:   rgb(147, 151, 203);
-$color-tech:       rgb( 69, 114, 161);
-$color-sport:      rgb( 34, 139,  34);
-$color-features:   rgb(200, 200, 200);
+$color-tech:        rgb( 69, 114, 161);
+$color-sport:       rgb( 34, 139,  34);
+$color-features:    rgb(200, 200, 200);
 
 $header-nav-menu-tint-opacity: 0.35;
 
@@ -921,7 +921,7 @@ main.front-page {
                                 flex-direction: column;
 
                                 .post-item {
-                                    flex-grow: 1;
+                                    flex: 1;
 
                                     .featured-image-box {
                                         height: 100%;

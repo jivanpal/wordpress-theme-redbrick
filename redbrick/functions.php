@@ -48,7 +48,7 @@ if (!function_exists('redbrick_enqueue_styles_and_scripts')) {
             'redbrick_handle-navigation-menus',
             get_template_directory_uri() . '/scripts/handle-navigation-menus.js',
             [ 'redbrick_toggle-hamburger-menu' ],         // dependencies
-            '0.19.06.07.0',   // version number
+            '0.19.09.05.0',   // version number
             true            // enqueue in footer (rather than head)
         );
         
@@ -983,7 +983,7 @@ if (!function_exists('redbrick_filter_use_custom_avatar')) {
     }
 }
 /**
- * TODO: This filter hook is disabled until we can make the function always
+ * TODO: This filter hook is disabled until we can make sure the function always
  * retrieves a valid URL or until invalid URLs can be filtered out by another
  * means. Until then, `redbrick_get_avatar_url()` serves as a replacement;
  * see function definition below.
