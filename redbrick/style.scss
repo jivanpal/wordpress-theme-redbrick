@@ -4,7 +4,7 @@ Theme URI: https://github.com/jivanpal/redbrick-theme-for-wordpress
 Author: Jivan Pal
 Author URI: https://www.jivanpal.com/
 Description: A WordPress theme designed for Redbrick, the official University of Birmingham student newspaper.
-Version: 0.19.06.26.0
+Version: 0.19.09.29.0
 License: GNU GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0-standalone.html
 Text Domain: redbrick
@@ -921,6 +921,17 @@ main.front-page {
                                 flex-direction: column;
 
                                 .post-item {
+                                    /**
+                                     * Setting height to a small constant here
+                                     * results in all post items being of the
+                                     * same height, so that `flex: 1;` results
+                                     * in them all being stretched by the same
+                                     * amount. As a result, all the items end
+                                     * up filling the height of the container
+                                     * `.posts--latest` and being of the same
+                                     * height :-)
+                                     */
+                                    height: 1px;
                                     flex: 1;
 
                                     .featured-image-box {
